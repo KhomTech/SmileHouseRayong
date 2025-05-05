@@ -244,4 +244,24 @@ section p {
 .phone-button:hover {
 
 ::contentReference[oaicite:0]{index=0}
- 
+  
+ /* สไตล์สถานะบ้านเช่า */
+.status {
+  display: inline-block;        /* แสดงเป็นกล่องในบรรทัด */
+  padding: 4px 14px;            /* ช่องว่างภายในป้ายแนวตั้ง 4px แนวนอน 14px */
+  margin-top: 6px;              /* เว้นระยะด้านบนจากข้อความข้างบน */
+  border-radius: 999px;         /* ทำให้ป้ายเป็นวงรีโค้งสุด */
+  font-size: 0.85rem;           /* ขนาดตัวอักษรเล็กกว่าปกติเล็กน้อย */
+  font-weight: 600;             /* ตัวหนากลางๆ */
+  color: #fff;                  /* สีตัวอักษรเป็นสีขาว */
+  line-height: 1.2;             /* ความสูงของบรรทัดให้พอดี */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* เงาเบาๆ ใต้ป้าย */
+}
+
+.status.available {
+  background-color: #28a745;    /* สีเขียวสด */
+}
+
+.status.full {
+  background-color: #dc3545;    /* สีแดงสด */
+}
