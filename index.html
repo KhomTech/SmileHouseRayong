@@ -94,76 +94,31 @@
     </section>
 
         <!-- บ้านเต็ม --> <!-- กรณีบ้านว่าง จะเปลี่ยนเป็น<span class="status available">ว่าง</span>-->
-<section id="rental" class="rental-grid">
-  <h2>🏠 บ้านเดี่ยวให้เช่ารายเดือน</h2>
-  <div class="rental-list">
-    <!-- บ้านแต่ละหลัง -->
-    <div class="rent-card" onclick="openModal('images/rent1.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent1.jpg" alt="บ้านเช่า 1" loading="lazy" />
+<section class="rental-list">
+  <h2>เช่ารายเดือนบ้านเดี่ยว 🏡</h2>
+  <div class="rent-grid">
+    <div class="rent-card available">
+      <img src="house1.jpg" alt="บ้านเดี่ยวให้เช่า">
+      <div class="rent-info">
+        <h3>บ้านเดี่ยว ซอยสุขสบาย</h3>
+        <p>2 ห้องนอน | 1 ห้องน้ำ | แอร์ครบ</p>
+        <p class="price">฿3,800 / เดือน</p>
       </div>
-      <div class="info">
-        <p class="price">3,800 บาท/เดือน</p>
-        <span class="status full">❌ เต็ม</span>
-        <p class="desc">บ้านเดี่ยวพร้อมเฟอร์ฯ แอร์ ทีวี</p>
-      </div>
+      <div class="status">เต็ม</div>
     </div>
 
-    <!-- เพิ่มบ้านหลังที่ 2-6 แบบเดียวกัน -->
-    <div class="rent-card" onclick="openModal('images/rent2.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent2.jpg" alt="บ้านเช่า 2" loading="lazy" />
+    <div class="rent-card full">
+      <img src="house2.jpg" alt="บ้านเต็มแล้ว">
+      <div class="rent-info">
+        <h3>บ้านใหม่หลังมุม</h3>
+        <p>3 ห้องนอน | 3 ห้องน้ำ | จอดรถได้ 2 คัน</p>
+        <p class="price">฿15,000 / เดือน</p>
       </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full">❌ เต็ม</span>
-        <p class="desc">บ้านเดี่ยวพร้อมเฟอร์ฯ แอร์ ทีวี</p>
-      </div>
+      <div class="status">เต็มแล้ว</div>
     </div>
-    
-        <div class="rent-card" onclick="openModal('images/rent3.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent3.jpg" alt="บ้านเช่า 3" loading="lazy" />
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full">❌ เต็ม</span>
-        <p class="desc">บ้านเดี่ยวพร้อมเฟอร์ฯ แอร์ ทีวี</p>
-      </div>
-    </div>
-
-    <div class="rent-card" onclick="openModal('images/rent4.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent4.jpg" alt="บ้านเช่า 4" loading="lazy" />
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full">❌ เต็ม</span>
-        <p class="desc">บ้านเดี่ยวพร้อมเฟอร์ฯ แอร์ ทีวี</p>
-      </div>
-    </div>
-
-        <div class="rent-card" onclick="openModal('images/rent5.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent5.jpg" alt="บ้านเช่า 5" loading="lazy" />
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full">❌ เต็ม</span>
-        <p class="desc">บ้านเดี่ยวพร้อมเฟอร์ฯ แอร์ ทีวี</p>
-      </div>
-    </div>
-
-            <div class="rent-card" onclick="openModal('images/rent6.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent6.jpg" alt="บ้านเช่า 6" loading="lazy" />
-      </div>
-      <div class="info">
-        <p class="price">4,500 บาท/เดือน</p>
-        <span class="status full">❌ เต็ม</span>
-        <p class="desc">บ้านเดี่ยวพร้อมเฟอร์ฯ แอร์ ทีวี</p>
-      </div>
-    </div>
+    <!-- เพิ่มการ์ดอื่น ๆ ได้ที่นี่ -->
+  </div>
+</section>
     
     <!-- บ้านว่างตัวอย่าง 
     <div class="rent-card" onclick="openModal('images/rent6.jpg')">
