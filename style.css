@@ -246,87 +246,90 @@ section p {
 ::contentReference[oaicite:0]{index=0}
 
   /* สไตล์สำหรับบ้านเช่า */
+/* รีเซ็ตพื้นฐาน */
 body {
-  font-family: 'Prompt', sans-serif;
-  background-color: #f3f4f6;
   margin: 0;
   padding: 0;
+  font-family: 'Sarabun', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-.rental-section {
+/* Container หลัก */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
-.section-title {
+/* หัวข้อ */
+h1 {
   font-size: 2.5rem;
+  margin-bottom: 2rem;
   color: #111;
-  margin-bottom: 1.5rem;
 }
 
-.emoji {
-  font-size: 2rem;
-  vertical-align: middle;
-}
-
+/* Grid สินค้า */
 .rental-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
+/* การ์ดบ้าน */
 .rent-card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s;
+  transition: transform 0.2s ease;
 }
 
 .rent-card:hover {
   transform: translateY(-5px);
 }
 
+/* รูปภาพบ้าน */
 .rent-card img {
   width: 100%;
-  height: 160px;
+  height: 200px;
   object-fit: cover;
 }
 
+/* รายละเอียดบ้าน */
 .rent-details {
   padding: 1rem;
   text-align: left;
 }
 
 .rent-details h3 {
-  margin: 0 0 0.5rem;
   font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
   color: #222;
 }
 
 .rent-details p {
-  margin: 0;
   font-size: 1rem;
-  color: #333;
+  margin: 0;
 }
 
-.status {
-  padding: 0.75rem;
+/* ป้ายสถานะ */
+.rent-status {
   font-weight: bold;
-  color: #fff;
+  padding: 0.8rem;
   text-align: center;
   font-size: 1rem;
 }
 
-.status.red {
-  background-color: #e53935;
+.rent-status.full {
+  background-color: #f44336;
+  color: white;
 }
 
-.status.green {
-  background-color: #43a047;
+.rent-status.available {
+  background-color: #4caf50;
+  color: white;
 }
+
 
