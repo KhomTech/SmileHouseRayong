@@ -94,50 +94,33 @@
     </section>
 
         <!-- บ้านเต็ม --> <!-- กรณีบ้านว่าง จะเปลี่ยนเป็น<span class="status available">ว่าง</span>-->
-<section class="rental-list">
-  <h2>เช่ารายเดือนบ้านเดี่ยว 🏡</h2>
-  <div class="rent-grid">
-    <div class="rent-card available">
-      <img src="house1.jpg" alt="บ้านเดี่ยวให้เช่า">
-      <div class="rent-info">
-        <h3>บ้านเดี่ยว ซอยสุขสบาย</h3>
-        <p>2 ห้องนอน | 1 ห้องน้ำ | แอร์ครบ</p>
-        <p class="price">฿3,800 / เดือน</p>
-      </div>
-      <div class="status">เต็ม</div>
-    </div>
-
-    <div class="rent-card full">
-      <img src="house2.jpg" alt="บ้านเต็มแล้ว">
-      <div class="rent-info">
-        <h3>บ้านใหม่หลังมุม</h3>
-        <p>3 ห้องนอน | 3 ห้องน้ำ | จอดรถได้ 2 คัน</p>
-        <p class="price">฿15,000 / เดือน</p>
-      </div>
-      <div class="status">เต็มแล้ว</div>
-    </div>
-    <!-- เพิ่มการ์ดอื่น ๆ ได้ที่นี่ -->
-  </div>
-</section>
+<section class="rental-section">
+  <h1 class="section-title">เช่ารายเดือนบ้านเดี่ยว <span class="emoji">🏡</span></h1>
+  <div class="rental-grid">
     
-    <!-- บ้านว่างตัวอย่าง 
-    <div class="rent-card" onclick="openModal('images/rent6.jpg')">
-      <div class="image-wrapper">
-        <img src="images/rent6.jpg" alt="บ้านเช่า 6" loading="lazy" />
+    <!-- การ์ดบ้านแต่ละหลัง -->
+    <div class="rent-card unavailable">
+      <img src="your-image.jpg" alt="บ้านให้เช่า">
+      <div class="rent-details">
+        <h3>รายละเอียด ย่อๆ</h3>
+        <p>ราคา 15,000 บาท/เดือน</p>
       </div>
-      <div class="info">
-        <p class="price">4,500 บาท/เดือน</p>
-        <span class="status available">✅ ว่าง</span>
-        <p class="desc">บ้านเดี่ยว 2 เตียง แอร์ ทีวี</p>
-      </div>
+      <div class="status red"><i class="fa fa-check-circle"></i> เต็มแล้ว</div>
     </div>
-  </div> -->
 
-  <!-- Modal แสดงภาพขยาย -->
-  <div id="zoomModal" class="zoom-modal" onclick="closeModal()">
-    <img id="zoomImage" src="" alt="บ้านขยาย" />
+    <div class="rent-card available">
+      <img src="your-image.jpg" alt="บ้านให้เช่า">
+      <div class="rent-details">
+        <h3>รายละเอียด ย่อๆ</h3>
+        <p>ราคา 13,500 บาท/เดือน</p>
+      </div>
+      <div class="status green"><i class="fa fa-check-circle"></i> ว่าง</div>
+    </div>
+
+    <!-- เพิ่มการ์ดตามจำนวนบ้าน -->
   </div>
 </section>
+
 
 
     <!-- ส่วนติดต่อ -->
