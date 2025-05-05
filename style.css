@@ -17,7 +17,7 @@ html {
 :root {
   /* Light Theme */
   --main-color: #263238;          /* สีหลักของธีม เช่นพื้นหลัง header/footer */
-  --accent-color: #ffc107;        /* สีเน้น เช่น ปุ่มหรือเมนู */
+  --accent-color: #2e7d32;        /* สีเน้น เช่น ปุ่มหรือเมนู */
   --background-color: #f5f5f5;    /* สีพื้นหลังของ body */
   --card-color: #ffffff;          /* สีพื้นหลังของการ์ดหรือ box ต่างๆ */
   --text-color: #212121;          /* สีตัวอักษรหลัก */
@@ -30,7 +30,7 @@ html {
 
 html[data-theme='dark'] {
   --main-color: #121212;          /* สีหลักในโหมดมืด */
-  --accent-color: #ffb300;        /* สีเน้นในโหมดมืด */
+  --accent-color: #66bb6a;  /* ✅ ใช้ accent เขียวกลางใน dark mode */        /* สีเน้นในโหมดมืด */
   --background-color: #1e1e1e;    /* สีพื้นหลังในโหมดมืด */
   --card-color: #2c2c2c;          /* สีของการ์ดในโหมดมืด */
   --text-color: #eeeeee;          /* สีตัวอักษรในโหมดมืด */
@@ -58,6 +58,7 @@ header {
   color: white;                          /* สีข้อความใน header */
   padding: 40px 20px;                    /* ระยะห่างภายในด้านบน-ล่าง 40px ซ้าย-ขวา 20px */
   text-align: center;                    /* จัดข้อความตรงกลาง */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* ✅ เพิ่มเงาให้ Header ดูลอยนุ่ม */
 }
 
 header h1 {
@@ -77,7 +78,7 @@ nav {
   background-color: #2e7d32; /* เขียวเข้มแบบมือโปร */
   padding: 1rem;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3); /* เพิ่มเงาเขียว */
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3); /* ✅ เงาเขียวมืออาชีพ */
 }
 
 nav a {
@@ -201,6 +202,7 @@ footer {
   text-align: center;                   /* จัดข้อความตรงกลาง */
   padding: 25px 15px;                   /* ระยะห่างรอบๆ */
   font-size: 0.9rem;                    /* ขนาดตัวอักษรเล็กลงเล็กน้อย */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); /* ✅ เพิ่มเงาด้านบนให้ Footer */
 }
 
 /* ----------------------------
@@ -210,7 +212,7 @@ footer {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background-color: #66bb6a; /* เขียวกลาง */
+  background-color: var(--accent-color); /* ✅ ใช้สี accent ตามธีม */
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -223,7 +225,7 @@ footer {
 }
 
 .theme-toggle:hover {
-  background-color: #43a047;
+  background-color: #43a047; /* เขียวเข้มตอน hover */
   box-shadow: 0 6px 18px rgba(76, 175, 80, 0.6);
   transform: translateY(-2px);
 }
