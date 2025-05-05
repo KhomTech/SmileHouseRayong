@@ -19,15 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // -------------------------------
   // ระบบคลิกขยายภาพบ้าน (Zoom Modal)
   // -------------------------------
-function openModal(imageSrc) {
-  const modal = document.getElementById('zoomModal');
-  const modalImg = document.getElementById('zoomImage');
-  modalImg.src = imageSrc;
+// script.js
+
+function openModal(title, imgSrc) {
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalTitle = document.getElementById('modal-title');
+
   modal.style.display = 'flex';
+  modalImg.src = imgSrc;
+  modalTitle.textContent = title;
 }
 
 function closeModal() {
-  document.getElementById('zoomModal').style.display = 'none';
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
 }
-  });
 
