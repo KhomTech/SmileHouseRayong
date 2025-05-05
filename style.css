@@ -74,9 +74,10 @@ header p {
   🧭 Navigation
 ---------------------------- */
 nav {
-  background-color: var(--accent-color); /* สีพื้นหลังของแถบนำทาง */
-  padding: 15px 0;                        /* padding ด้านบน-ล่าง 15px */
-  text-align: center;                     /* จัดรายการเมนูไว้ตรงกลาง */
+  background-color: #2e7d32; /* เขียวเข้มแบบมือโปร */
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3); /* เพิ่มเงาเขียว */
 }
 
 nav a {
@@ -134,22 +135,23 @@ section p {
   🔘 Button
 ---------------------------- */
 .button {
-  display: inline-block;                                      /* ให้ปุ่มแสดงแบบบล็อกในบรรทัด */
-  background-color: var(--accent-color);                      /* สีพื้นหลังของปุ่ม */
-  color: #fff;                                                /* สีข้อความในปุ่ม */
-  padding: 12px 30px;                                         /* ขนาดภายในของปุ่ม */
-  border-radius: var(--radius);                               /* มุมโค้ง */
-  text-decoration: none;                                      /* ไม่มีเส้นใต้ */
-  font-weight: 600;                                           /* ตัวหนาปานกลาง */
-  transition: background-color var(--transition-speed), transform var(--transition-speed); 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);                   /* เงาของปุ่ม */
+  display: inline-block;
+  background-color: #4CAF50; /* สีเขียวธรรมชาติ */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3); /* เงาเขียวหรู */
 }
 
 .button:hover {
-  background-color: var(--main-color);                        /* เมื่อ hover เปลี่ยนสีพื้นหลัง */
-  transform: translateY(-2px);                                /* ยกปุ่มขึ้นเล็กน้อย */
+  background-color: #43a047; /* เขียวเข้มเวลาชี้ */
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.5); /* เงาเขียวลึกขึ้น */
+  transform: translateY(-2px);
 }
-
 /* ----------------------------
   📞 Call To Action
 ---------------------------- */
@@ -205,23 +207,25 @@ footer {
   🎛 Theme Toggle Button
 ---------------------------- */
 .theme-toggle {
-  position: fixed;                            /* ติดตำแหน่งหน้าจอ */
-  top: 20px;                                  /* ห่างจากขอบบน 20px */
-  right: 20px;                                /* ห่างจากขอบขวา 20px */
-  background: var(--accent-color);           /* สีพื้นหลังของปุ่ม */
-  color: #fff;                                /* สีข้อความ */
-  border: none;                               /* ไม่มีขอบ */
-  padding: 10px 18px;                         /* ขนาดภายในปุ่ม */
-  border-radius: 50px;                        /* มุมมนวงรี */
-  font-weight: bold;                          /* ตัวหนา */
-  cursor: pointer;                            /* เปลี่ยนเมาส์เป็น pointer */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* ใส่เงาให้ปุ่ม */
-  transition: background var(--transition-speed); /* เปลี่ยนสีพื้นหลังนุ่มนวล */
-  z-index: 999;                               /* ให้ปุ่มอยู่ด้านหน้าสุด */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #66bb6a; /* เขียวกลาง */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  transition: all 0.3s ease;
+  z-index: 999;
 }
 
 .theme-toggle:hover {
-  background: var(--main-color); /* เมื่อ hover เปลี่ยนสีพื้นหลัง */
+  background-color: #43a047;
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.6);
+  transform: translateY(-2px);
 }
 
 /* ----------------------------
@@ -245,4 +249,24 @@ footer {
   .card {
     padding: 20px;       /* ลด padding ของการ์ดใน mobile */
   }
+}
+/* ----------------------------
+  📞 Phone Button (ใหม่)
+---------------------------- */
+.phone-button {
+  display: inline-block;
+  color: #ffffff;
+  background-color: #4CAF50; /* เขียวธรรมชาติ */
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); /* เงาสีเขียว */
+}
+
+.phone-button:hover {
+  background-color: #43a047; /* เขียวเข้มตอน hover */
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.6); /* เงาเพิ่มตอน hover */
+  transform: translateY(-2px);
 }
