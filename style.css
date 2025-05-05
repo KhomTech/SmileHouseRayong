@@ -245,23 +245,132 @@ section p {
 
 ::contentReference[oaicite:0]{index=0}
   
- /* สไตล์สถานะบ้านเช่า */
-.status {
-  display: inline-block;        /* แสดงเป็นกล่องในบรรทัด */
-  padding: 4px 14px;            /* ช่องว่างภายในป้ายแนวตั้ง 4px แนวนอน 14px */
-  margin-top: 6px;              /* เว้นระยะด้านบนจากข้อความข้างบน */
-  border-radius: 999px;         /* ทำให้ป้ายเป็นวงรีโค้งสุด */
-  font-size: 0.85rem;           /* ขนาดตัวอักษรเล็กกว่าปกติเล็กน้อย */
-  font-weight: 600;             /* ตัวหนากลางๆ */
-  color: #fff;                  /* สีตัวอักษรเป็นสีขาว */
-  line-height: 1.2;             /* ความสูงของบรรทัดให้พอดี */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* เงาเบาๆ ใต้ป้าย */
+/* กล่องหลักของ Section เช่าบ้าน */
+.rental-grid {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
 }
 
-.status.available {
-  background-color: #28a745;    /* สีเขียวสด */
+/* หัวข้อหลัก */
+.rental-grid h2 {
+  font-size: 2.2rem;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+/* กล่องรวมการ์ดบ้านทุกหลัง */
+.rental-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+/* การ์ดบ้านแต่ละหลัง */
+.rent-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rent-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* กล่องภาพ */
+.image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #eee;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image-wrapper img:hover {
+  transform: scale(1.05);
+}
+
+/* กล่องข้อมูลใต้ภาพ */
+.rent-card .info {
+  padding: 20px;
+  text-align: left;
+}
+
+.rent-card .info h4 {
+  font-size: 1.4rem;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.rent-card .info p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* แสดงสถานะ "ว่าง" หรือ "เต็ม" */
+.status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .status.full {
-  background-color: #dc3545;    /* สีแดงสด */
+  background-color: #f8d7da;
+  color: #c82333;
+}
+
+.status.available {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* โมดอลขยายภาพ */
+.zoom-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.zoom-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+/* Responsive เพิ่มเติม */
+@media (max-width: 600px) {
+  .rent-card .info {
+    padding: 15px;
+  }
+
+  .rental-grid h2 {
+    font-size: 1.6rem;
+  }
 }
