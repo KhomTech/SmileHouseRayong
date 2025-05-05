@@ -246,34 +246,45 @@ section p {
 ::contentReference[oaicite:0]{index=0}
 
   /* สไตล์สำหรับบ้านเช่า */
-.rental-list {
+body {
+  font-family: 'Prompt', sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+}
+
+.rental-section {
   padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.rental-list h2 {
-  font-size: 2rem;
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #222;
 }
 
-.rent-grid {
+.section-title {
+  font-size: 2.5rem;
+  color: #111;
+  margin-bottom: 1.5rem;
+}
+
+.emoji {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+.rental-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .rent-card {
-  background: white;
+  background: #fff;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
-  position: relative;
+  transition: transform 0.3s;
 }
 
 .rent-card:hover {
@@ -282,43 +293,40 @@ section p {
 
 .rent-card img {
   width: 100%;
-  height: 180px;
+  height: 160px;
   object-fit: cover;
 }
 
-.rent-info {
+.rent-details {
   padding: 1rem;
-  flex: 1;
+  text-align: left;
 }
 
-.rent-info h3 {
-  font-size: 1.1rem;
+.rent-details h3 {
   margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #222;
 }
 
-.rent-info p {
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.price {
-  color: #d33;
-  font-weight: bold;
+.rent-details p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
 }
 
 .status {
-  padding: 0.5rem;
-  text-align: center;
+  padding: 0.75rem;
   font-weight: bold;
-  font-size: 0.95rem;
-  color: white;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
 }
 
-.available .status {
-  background-color: #28a745;
+.status.red {
+  background-color: #e53935;
 }
 
-.full .status {
-  background-color: #dc3545;
+.status.green {
+  background-color: #43a047;
 }
+
