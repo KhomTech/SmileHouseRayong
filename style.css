@@ -246,94 +246,79 @@ section p {
 ::contentReference[oaicite:0]{index=0}
 
   /* สไตล์สำหรับบ้านเช่า */
-.rental-grid {
-  padding: 2rem;
-  background-color: #f8f9fa;
-  font-family: 'Sarabun', sans-serif;
-}
-
-.rental-grid h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #2c3e50;
-}
-
 .rental-list {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.rental-list h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.rent-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
 .rent-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  background: white;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
   transition: transform 0.3s ease;
-  cursor: pointer;
+  position: relative;
 }
 
 .rent-card:hover {
   transform: translateY(-5px);
 }
 
-.image-wrapper img {
+.rent-card img {
   width: 100%;
-  height: 220px;
+  height: 180px;
   object-fit: cover;
-  display: block;
 }
 
-.info {
+.rent-info {
   padding: 1rem;
-  color: #2f3640;
+  flex: 1;
+}
+
+.rent-info h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.rent-info p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #555;
 }
 
 .price {
+  color: #d33;
   font-weight: bold;
-  font-size: 1.2rem;
-  color: #2980b9;
-  margin-bottom: 0.5rem;
 }
 
 .status {
-  display: inline-block;
-  padding: 0.4em 0.8em;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-}
-
-.status.full {
-  background-color: #e74c3c;
-  color: #fff;
-}
-
-.status.available {
-  background-color: #2ecc71;
-  color: #fff;
-}
-
-.desc {
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
   font-size: 0.95rem;
-  color: #7f8c8d;
+  color: white;
 }
 
-.zoom-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+.available .status {
+  background-color: #28a745;
 }
 
-.zoom-modal img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
+.full .status {
+  background-color: #dc3545;
 }
