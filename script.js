@@ -19,21 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // -------------------------------
   // ระบบคลิกขยายภาพบ้าน (Zoom Modal)
   // -------------------------------
-  const zoomableImages = document.querySelectorAll('.zoomable-img'); // รูปที่คลิกได้
-  const zoomModal = document.getElementById('zoomModal'); // กล่อง modal
-  const zoomImage = document.getElementById('zoomImage'); // รูปที่แสดงตอนขยาย
+function openModal(imageSrc) {
+  const modal = document.getElementById('zoomModal');
+  const modalImg = document.getElementById('zoomImage');
+  modalImg.src = imageSrc;
+  modal.style.display = 'flex';
+}
 
-  // เมื่อคลิกภาพใดๆ
-  zoomableImages.forEach(img => {
-    img.addEventListener('click', () => {
-      zoomImage.src = img.src; // โหลด src ของภาพนั้นลง modal
-      zoomModal.style.display = 'flex'; // แสดง modal แบบ flex
-    });
+function closeModal() {
+  document.getElementById('zoomModal').style.display = 'none';
+}
   });
 
-  // เมื่อคลิกที่ modal ให้ปิดภาพ
-  zoomModal.addEventListener('click', () => {
-    zoomModal.style.display = 'none'; // ซ่อน modal
-    zoomImage.src = ''; // ล้าง src
-  });
-});
