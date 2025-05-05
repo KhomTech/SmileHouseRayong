@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smile House - บ้านพักส่วนตัวระยอง</title>
+
+  <!-- ✅ ปรับ SEO และ Meta แชร์ให้ครอบคลุม -->
+  <meta name="description" content="Smile House บ้านพักระยอง ใกล้ทะเล เงียบสงบ เป็นส่วนตัว พร้อมขายและให้เช่ารายเดือน โทรเลย 063-1862828" />
+  <meta name="keywords" content="บ้านพักระยอง, บ้านเช่ารายเดือน, บ้านขาย, Smile House, บ้านใกล้ทะเล, บ้านสวน" />
+  <meta property="og:title" content="Smile House - บ้านพักระยอง">
+  <meta property="og:description" content="ขายและให้เช่าบ้านเดี่ยวส่วนตัว ที่ระยอง ใกล้ทะเล มีความสงบ ร่มรื่น เหมาะแก่การพักอาศัย">
+  <meta property="og:image" content="images/house1.jpg">
+  <meta property="og:url" content="https://your-domain.com">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ✅ ฟอนต์ที่ใช้ -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- ✅ Favicon สำหรับแท็บเบราว์เซอร์ -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- ✅ ลิงก์ CSS เวอร์ชันที่อัปเกรดใหม่ -->
+  <link rel="stylesheet" href="style-pro.css"> <!-- ← ชื่อใหม่ของ CSS ที่ถูกอัปเกรด -->
+
+</head>
+<body>
+  <!-- ✅ ปุ่มเปลี่ยนธีม พร้อมคลาส CSS -->
+  <button id="toggleTheme" class="theme-toggle" aria-label="เปลี่ยนธีม">🌓 เปลี่ยนธีม</button>
+
+  <!-- ✅ เมนูนำทาง -->
+  <nav class="navbar" aria-label="เมนูนำทาง">
+    <a href="#">หน้าแรก</a>
+    <a href="#houses">ขายบ้าน</a>
+    <a href="#rental">เช่าบ้าน</a>
+    <a href="#contact">ติดต่อ</a>
+  </nav>
+
+  <!-- ✅ Hero Section พร้อมคลาส animation -->
+  <section class="hero zoom-in-3d">
+    <picture>
+      <source media="(max-width: 768px)" srcset="images/hero-mobile.jpg">
+      <img src="images/hero.jpg" alt="ภาพรวมของบ้านพัก Smile House" loading="lazy">
+    </picture>
+    <div class="hero-overlay">
+      <h1>🏡 Smile House</h1>
+      <p>บ้านสวนใกล้ทะเล เงียบสงบ ให้เช่าและขาย</p>
+    </div>
+  </section>
+
+  <!-- ✅ บ้านขาย -->
+  <section id="houses" class="properties">
+    <h2>🔥 บ้านเดี่ยวพร้อมที่ดิน (ขาย)</h2>
+
+    <!-- การ์ดบ้าน 1 -->
+    <div class="property-card">
+      <img src="images/house1.jpg" alt="บ้าน 37 ตร.ว.">
+      <div class="info">
+        <h3>บ้าน 37 ตร.ว. - 980,000 บาท</h3>
+        <p>เหมาะสำหรับครอบครัวเล็ก มีที่จอดรถ</p>
+        <a href="#contact" class="button">📞 สนใจ</a>
+      </div>
+    </div>
+
+    <!-- การ์ดบ้าน 2 -->
+    <div class="property-card">
+      <img src="images/house2.jpg" alt="บ้าน 72 ตร.ว.">
+      <div class="info">
+        <h3>บ้าน 72 ตร.ว. - 1,480,000 บาท</h3>
+        <p>พื้นที่กว้างขวาง ต่อเติมครบ พร้อมอยู่</p>
+        <a href="#contact" class="button">📞 สนใจ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ บ้านเช่า -->
+  <section id="rental" class="rental-grid">
+    <h2>🏠 บ้านเดี่ยวให้เช่ารายเดือน</h2>
+
+    <!-- บ้านเช่า 1 -->
+    <div class="rent-card">
+      <img src="images/rent1.jpg" alt="บ้านเช่า 1" />
+      <div class="info">
+        <h4>3,500 บาท/เดือน</h4>
+        <span class="status available">ว่าง</span>
+        <p>พร้อมเฟอร์นิเจอร์ แอร์ ทีวี</p>
+      </div>
+    </div>
+
+    <!-- บ้านเช่า 2 -->
+    <div class="rent-card">
+      <img src="images/rent2.jpg" alt="บ้านเช่า 2" />
+      <div class="info">
+        <h4>เต็มแล้ว</h4>
+        <span class="status full">เต็ม</span>
+        <p>สามารถจองรอบถัดไปได้</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ ติดต่อ -->
+  <section id="contact" class="contact">
+    <h2>📞 ติดต่อเรา</h2>
+    <p>โทร: <a href="tel:0631862828" class="button">063-186-2828</a></p>
+    <p>
+      <a href="https://lin.ee" target="_blank" class="button">LineOA</a>
+      <a href="https://facebook.com/yourpage" target="_blank" class="button">Facebook</a>
+      <a href="https://maps.app.goo.gl/2Lzx1jWDXQ9YZkxH6" target="_blank" class="button">Google Maps</a>
+    </p>
+  </section>
+
+  <!-- ✅ Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Smile House. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ JavaScript สำหรับเปลี่ยนธีม (เชื่อมกับ .theme-toggle) -->
+  <script src="script.js"></script>
+</body>
+</html>
