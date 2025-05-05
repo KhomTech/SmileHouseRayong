@@ -1,44 +1,28 @@
-// 🌓 สร้างปุ่มสลับธีมแบบ Dynamic พร้อมไอคอน
-function createThemeToggleButton() {
-  if (document.querySelector('.theme-toggle')) return;
+// รอให้หน้าเว็บโหลดเสร็จก่อนจึงค่อยทำงาน
+document.addEventListener('DOMContentLoaded', function () {
+  
+  // เลือกปุ่ม toggle ธีมจากคลาส .theme-toggle
+  const toggleButton = document.querySelector('.theme-toggle');
 
-  const toggleBtn = document.createElement('button');
-  toggleBtn.className = 'theme-toggle';
-  toggleBtn.setAttribute('aria-label', 'สลับโหมดกลางวัน/กลางคืน');
-  toggleBtn.innerHTML = '<span class="icon">🌞</span>'; // ค่าเริ่มต้นเป็นแสง
-  document.body.appendChild(toggleBtn);
-
-  toggleBtn.addEventListener('click', () => toggleTheme(toggleBtn));
-  return toggleBtn;
-}
-
-// 🎯 อัปเดตไอคอนและ label ตามสถานะธีม
-function updateIconAndLabel(button) {
-  const isDark = document.body.classList.contains('dark');
-  const icon = button.querySelector('.icon');
-  icon.textContent = isDark ? '🌙' : '🌞';
-  button.setAttribute('aria-label', isDark ? 'สลับเป็นโหมดกลางวัน' : 'สลับเป็นโหมดกลางคืน');
-}
-
-// 🔁 สลับธีม + บันทึก + เอฟเฟกต์
-function toggleTheme(button) {
-  const isDarkNow = document.body.classList.toggle('dark');
-  localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
-
-  updateIconAndLabel(button);
-
-  // 💫 เพิ่มแอนิเมชันหมุน
-  button.classList.add('rotating');
-  setTimeout(() => button.classList.remove('rotating'), 500);
-}
-
-// 🚀 เริ่มต้น: โหลดธีมจาก localStorage + สร้างปุ่ม
-(function initThemeToggle() {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark');
+  // ตรวจสอบว่าผู้ใช้เคยเลือกธีมไว้ใน Local Storage หรือไม่
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
   }
 
-  const btn = createThemeToggleButton();
-  if (btn) updateIconAndLabel(btn); // ตั้งค่า icon/label ตามธีม
-})();
+  // เมื่อคลิกปุ่ม toggle
+  toggleButton.addEventListener('click', function () {
+    // อ่านธีมปัจจุบันจาก <html data-theme="...">
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+
+    // ถ้าเป็น dark อยู่ ให้เปลี่ยนเป็น light
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light'); // บันทึกธีมไว้
+    } else {
+      // ถ้าเป็น light หรือไม่มีธีมเลย ให้เปลี่ยนเป็น dark
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark'); // บันทึกธีมไว้
+    }
+  });
+});
