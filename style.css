@@ -184,23 +184,68 @@ img:hover {
 
 
 
-/* Hero Section */
+/* ===============================
+   2. Hero Section
+   =============================== */
+
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('hero-image.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  border-radius: 0 0 40px 40px;
+  position: relative; /* ให้สามารถใช้ position ซ้อนทับได้ เช่นใส่ overlay */
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('../images/hero-house.jpg') no-repeat center center; 
+  background-size: cover; /* ให้ภาพเต็มพื้นที่โดยไม่บิดเบี้ยว */
+  color: #fff; /* สีตัวอักษรขาว ตัดกับพื้น */
+  padding: 100px 20px; /* ระยะห่างด้านบนล่าง 100px ซ้ายขวา 20px */
+  text-align: center; /* จัดข้อความให้อยู่กลาง */
 }
 
 .hero h1 {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 48px; /* ขนาดใหญ่ */
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* เงาอ่อนๆ ช่วยให้อ่านง่าย */
 }
 
 .hero p {
   font-size: 20px;
-  margin-top: 10px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  color: #f0f0f0;
+}
+
+.hero .btn-primary {
+  background-color: #e67e22; /* สีส้มโดดเด่น */
+  color: white;
+  font-size: 18px;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero .btn-primary:hover {
+  background-color: #cf711f; /* ส้มเข้มเมื่อ hover */
+  transform: translateY(-3px); /* ขยับขึ้นเบาๆ */
+}
+
+/* 🖥 รองรับหน้าจอเล็ก */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .hero {
+    padding: 80px 15px;
+  }
 }
 
 /* ปุ่ม */
