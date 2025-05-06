@@ -1,13 +1,12 @@
 // scripts.js
 // เทพนักพัฒนาเว็บไซต์: ควบคุม Modal, Dark Mode, และความลื่นไหลทั้งหมด
 
-// JavaScript เลื่อนขึ้นด้านบนอย่างลื่นไหล
-document.querySelector('.logo').addEventListener('click', function (e) {
+// ========================== Smooth Scroll to Top ==========================
+document.querySelector('.logo')?.addEventListener('click', function (e) {
   e.preventDefault(); // ป้องกันการเด้งแบบปกติ
-
   window.scrollTo({
-    top: 0,           // ไปตำแหน่งด้านบนสุด
-    behavior: 'smooth' // เลื่อนแบบนุ่มนวล
+    top: 0,
+    behavior: 'smooth'
   });
 });
 
