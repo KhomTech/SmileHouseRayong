@@ -248,7 +248,7 @@ img:hover {
   }
 }
 
-/* ปุ่ม */
+/* 5.ปุ่ม */
 .btn {
   display: inline-block;
   padding: 12px 24px;
@@ -286,6 +286,23 @@ img:hover {
   background: #f1f1f1;
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+/* ปุ่มลิงก์ติดต่อ */
+.contact-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: #007BFF;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.contact-link-btn:hover {
+  background-color: #0056b3;
 }
 /* ===============================
    6. Cards & Rental List
