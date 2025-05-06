@@ -1,20 +1,16 @@
 // scripts.js
 // เทพนักพัฒนาเว็บไซต์: ควบคุม Modal, Dark Mode, และความลื่นไหลทั้งหมด
 
-// =============== Hamburger Menu (มือถือ) ===============
-const menuToggle = document.getElementById("menuToggle"); // ปุ่ม hamburger
-const mainNav = document.getElementById("mainNav");       // เมนูหลักที่ซ่อนได้
+// JavaScript เลื่อนขึ้นด้านบนอย่างลื่นไหล
+document.querySelector('.logo').addEventListener('click', function (e) {
+  e.preventDefault(); // ป้องกันการเด้งแบบปกติ
 
-// เมื่อผู้ใช้คลิกปุ่ม hamburger
-menuToggle?.addEventListener("click", () => {
-  // สลับ class "open" ให้กับเมนู เพื่อแสดง/ซ่อน (ใช้ใน CSS ควบคุมการแสดงผล)
-  mainNav.classList.toggle("open");
-
-  // สลับ icon ระหว่าง fa-bars กับ fa-times เพื่อให้ดูเปลี่ยนจาก "≡" เป็น "×"
-  const icon = menuToggle.querySelector('i');
-  icon.classList.toggle('fa-bars');
-  icon.classList.toggle('fa-times');
+  window.scrollTo({
+    top: 0,           // ไปตำแหน่งด้านบนสุด
+    behavior: 'smooth' // เลื่อนแบบนุ่มนวล
+  });
 });
+
 
 // =============== เปิด/ปิด Modal ===============
 const modal = document.querySelector('.modal');
@@ -68,19 +64,3 @@ if (localStorage.getItem('theme') === 'dark') {
   document.body.classList.add('dark-mode');
 }
 
-// =============== Smooth Scroll (Optional) ===============
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
-
-document.getElementById('scrollToTop').addEventListener('click', function () {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-});
