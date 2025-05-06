@@ -79,16 +79,20 @@
 </section>
 
 <!-- Section ขายบ้านเดี่ยว: ใช้การ์ดแบบเดียวกัน -->
+<!-- Section ขายบ้านเดี่ยว: ใช้การ์ดแบบเดียวกัน -->
 <section id="sale" class="property-section">
   <h2 class="section-title">ขายบ้านเดี่ยวพร้อมที่ดิน 🏡</h2>
-  
 
-   <div class="property-list-sale">
+  <div class="property-list-sale">
 
     <!-- บ้านหลังที่ 1 -->
     <div class="property-card-sale">
       <div class="property-image">
-        <img src="img/house-sale-72sqw-rayong.webp" alt="บ้าน 72 ตร.วา">
+        <picture>
+          <source srcset="house-sale-72sqw-rayong-desktop.webp" media="(min-width: 769px)" type="image/webp">
+          <source srcset="house-sale-72sqw-rayong-mobile.webp" media="(max-width: 768px)" type="image/webp">
+          <img src="house-sale-72sqw-rayong-desktop.webp" alt="บ้าน 72 ตร.วา" width="100%" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        </picture>
       </div>
       <div class="card-content">
         <h3>บ้านเดี่ยว 72ตร.วา</h3>
@@ -103,23 +107,27 @@
       </div>
     </div>
 
-    <!-- บ้านหลังที่ 2 -->
-    <div class="property-card-sale">
-      <div class="property-image">
-        <img src="img/house-sale-37sqw-rayong.webp" alt="บ้าน 37 ตร.วา">
-      </div>
-      <div class="card-content">
-        <h3>บ้านเดี่ยว 37ตร.วา</h3>
-        <p>บ้านเดี่ยว 37ตร.วา มีที่จอดรถ แอร์ ใกล้ทะเล ระยอง</p>
-      </div>
-      <div class="card-actions">
-        <span class="price">0.98 ล้านบาท</span>
-        <a href="tel:0631862828" title="โทรเลย"><i class="fas fa-phone"></i></a>
-        <a href="#contact" class="contact-link-btn">
-          <i class="fas fa-envelope"></i> ติดต่อสอบถามต่อรอง
-        </a>
-      </div>
-    </div>
+  <!-- บ้านหลังที่ 2 -->
+<div class="property-card-sale">
+  <div class="property-image">
+    <picture>
+      <source srcset="img/house-sale-37sqw-rayong-desktop.webp" media="(min-width: 769px)" type="image/webp">
+      <source srcset="img/house-sale-37sqw-rayong-mobile.webp" media="(max-width: 768px)" type="image/webp">
+      <img src="img/house-sale-37sqw-rayong-desktop.webp" alt="บ้าน 37 ตร.วา" width="100%" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    </picture>
+  </div>
+  <div class="card-content">
+    <h3>บ้านเดี่ยว 37ตร.วา</h3>
+    <p>บ้านเดี่ยว 37ตร.วา มีที่จอดรถ แอร์ ใกล้ทะเล ระยอง</p>
+  </div>
+  <div class="card-actions">
+    <span class="price">0.98 ล้านบาท</span>
+    <a href="tel:0631862828" title="โทรเลย"><i class="fas fa-phone"></i></a>
+    <a href="#contact" class="contact-link-btn">
+      <i class="fas fa-envelope"></i> ติดต่อสอบถามต่อรอง
+    </a>
+  </div>
+</div>
 
   </div>
 </section>
@@ -141,7 +149,11 @@
 <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
 <div class="rent-card full">
   <div class="property-image">
-    <img src="img/house-rent-1-rayong.webp" alt="บ้านเช่าระยอง1">
+    <picture>
+      <source srcset="img/house-rent-1-rayong-mobile.webp" media="(max-width: 768px)">
+      <source srcset="img/house-rent-1-rayong-desktop.webp" media="(min-width: 769px)">
+      <img src="img/house-rent-1-rayong-desktop.webp" alt="บ้านเช่าระยอง1" loading="lazy">
+    </picture>
   </div>
   <div class="card-content">
     <h3>บ้านเดี่ยว1 มีแอร์ ไฟรัฐบาล +โรงรถ</h3>
@@ -149,8 +161,8 @@
   </div>
   <div class="card-actions">
     <div class="status status-full">
-  <i class="fas fa-times"></i> เต็มแล้ว
-</div>
+      <i class="fas fa-times"></i> เต็มแล้ว
+    </div>
     <a href="tel:0631862828" class="contact-link-btn">
       <i class="fas fa-phone"></i> สอบถามติดต่อ
     </a>
@@ -161,17 +173,20 @@
            <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
 <div class="rent-card full">
   <div class="property-image">
-    <img src="img/house-rent-2-rayong.webp" alt="บ้านเช่าระยอง2">
+    <picture>
+      <source srcset="img/house-rent-2-rayong-mobile.webp" media="(max-width: 768px)">
+      <source srcset="img/house-rent-2-rayong-desktop.webp" media="(min-width: 769px)">
+      <img src="img/house-rent-2-rayong-desktop.webp" alt="บ้านเช่าระยอง2">
+    </picture>
   </div>
   <div class="card-content">
-    <h3>บ้านเดี่ยว2 มีแอร์ ไฟรัฐบาล </h3>
+    <h3>บ้านเดี่ยว2 มีแอร์ ไฟรัฐบาล</h3>
     <p>ราคา: 3,500 บาท/เดือน</p>
   </div>
   <div class="card-actions">
     <div class="status status-full">
-  <i class="fas fa-times"></i> เต็มแล้ว
-</div>
-
+      <i class="fas fa-times"></i> เต็มแล้ว
+    </div>
     <a href="tel:0631862828" class="contact-link-btn">
       <i class="fas fa-phone"></i> สอบถามติดต่อ
     </a>
@@ -181,7 +196,11 @@
                  <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
 <div class="rent-card full">
   <div class="property-image">
-    <img src="img/house-rent-3-rayong.webp" alt="บ้านเช่าระยอง3">
+    <picture>
+      <source srcset="img/house-rent-3-rayong-mobile.webp" media="(max-width: 768px)">
+      <source srcset="img/house-rent-3-rayong-desktop.webp" media="(min-width: 769px)">
+      <img src="img/house-rent-3-rayong-desktop.webp" alt="บ้านเช่าระยอง3">
+    </picture>
   </div>
   <div class="card-content">
     <h3>บ้านเดี่ยว3 มีแอร์ ไฟรัฐบาล </h3>
@@ -189,48 +208,55 @@
   </div>
   <div class="card-actions">
     <div class="status status-full">
-  <i class="fas fa-times"></i> เต็มแล้ว
-</div>
-
+      <i class="fas fa-times"></i> เต็มแล้ว
+    </div>
     <a href="tel:0631862828" class="contact-link-btn">
       <i class="fas fa-phone"></i> สอบถามติดต่อ
     </a>
   </div>
 </div>
 
+
                  <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
 <div class="rent-card full">
   <div class="property-image">
-    <img src="img/house-rent-4-rayong.webp" alt="บ้านเช่าระยอง4">
+    <img 
+      src="img/house-rent-4-rayong-mobile.webp"
+      srcset="img/house-rent-4-rayong-mobile.webp 600w, img/house-rent-4-rayong-desktop.webp 1200w"
+      sizes="(max-width: 768px) 100vw, 600px"
+      alt="บ้านเช่าระยอง4">
   </div>
   <div class="card-content">
-    <h3>บ้านเดี่ยว4 มีแอร์ ไฟรัฐบาล </h3>
+    <h3>บ้านเดี่ยว4 มีแอร์ ไฟรัฐบาล</h3>
     <p>ราคา: 3,500 บาท/เดือน</p>
   </div>
   <div class="card-actions">
     <div class="status status-full">
-  <i class="fas fa-times"></i> เต็มแล้ว
-</div>
-
+      <i class="fas fa-times"></i> เต็มแล้ว
+    </div>
     <a href="tel:0631862828" class="contact-link-btn">
       <i class="fas fa-phone"></i> สอบถามติดต่อ
     </a>
   </div>
 </div>
 
+
                  <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
 <div class="rent-card full">
   <div class="property-image">
-    <img src="img/house-rent-5-rayong.webp" alt="บ้านเช่าระยอง5">
+    <picture>
+      <source srcset="img/house-rent-5-rayong-desktop.webp" media="(min-width: 768px)">
+      <img src="img/house-rent-5-rayong-mobile.webp" alt="บ้านเช่าระยอง5">
+    </picture>
   </div>
   <div class="card-content">
-    <h3>บ้านเดี่ยว5 มีแอร์ ไฟรัฐบาล </h3>
+    <h3>บ้านเดี่ยว5 มีแอร์ ไฟรัฐบาล</h3>
     <p>ราคา: 3,500 บาท/เดือน</p>
   </div>
   <div class="card-actions">
     <div class="status status-full">
-  <i class="fas fa-times"></i> เต็มแล้ว
-</div>
+      <i class="fas fa-times"></i> เต็มแล้ว
+    </div>
     <a href="tel:0631862828" class="contact-link-btn">
       <i class="fas fa-phone"></i> สอบถามติดต่อ
     </a>
@@ -240,16 +266,19 @@
                  <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
 <div class="rent-card full">
   <div class="property-image">
-    <img src="img/house-rent-6-rayong.webp" alt="บ้านเช่าระยอง6">
+    <picture>
+      <source srcset="img/house-rent-6-rayong-mobile.webp" media="(max-width: 768px)">
+      <img src="img/house-rent-6-rayong-desktop.webp" alt="บ้านเช่าระยอง6" loading="lazy">
+    </picture>
   </div>
   <div class="card-content">
-    <h3>บ้านเดี่ยว6 ห้องใหญ่ขึ้น ห้องครัว 2เตียง มีแอร์ ไฟรัฐบาล </h3>
+    <h3>บ้านเดี่ยว6 ห้องใหญ่ขึ้น ห้องครัว 2เตียง มีแอร์ ไฟรัฐบาล</h3>
     <p>ราคา: 4,500 บาท/เดือน</p>
   </div>
   <div class="card-actions">
     <div class="status status-full">
-  <i class="fas fa-times"></i> เต็มแล้ว
-</div>
+      <i class="fas fa-times"></i> เต็มแล้ว
+    </div>
     <a href="tel:0631862828" class="contact-link-btn">
       <i class="fas fa-phone"></i> สอบถามติดต่อ
     </a>
