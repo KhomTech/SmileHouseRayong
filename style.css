@@ -382,6 +382,23 @@ img:hover {
   background-color: #2ecc71; /* สีเขียวสดใส */
   color: white; /* ตัวอักษรสีขาว */
 }
+/* ... โค้ดเดิมของ .rental-list, .rent-card, ฯลฯ ... */
+
+/* ส่วนจัดวางหมวดหัวข้อของรายการบ้าน */
+.property-section { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.property-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  display: block;
+  text-align: center;
+}
 /* 💻 คอมพิวเตอร์: แสดง 2 คอลัมน์ เพื่อให้กล่องใหญ่ขึ้น */
 @media (min-width: 1025px) {
   .rental-list {
