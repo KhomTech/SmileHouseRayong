@@ -1,217 +1,115 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smile House - บ้านพักส่วนตัวระยอง</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Smile House บ้านพักระยอง ใกล้ทะเล เงียบสงบ เป็นส่วนตัว พร้อมขายและให้เช่ารายเดือน โทรเลย 063-1862828" />
-  <meta name="keywords" content="บ้านพักระยอง, บ้านเช่ารายเดือน, บ้านขาย, Smile House, บ้านใกล้ทะเล, บ้านสวน" />
-  <meta name="author" content="Khomtech" />
-  <link rel="canonical" href="https://khomtech.github.io/SmileHouseRayong/" />
-
-  <!-- Social Sharing -->
-  <meta property="og:title" content="Smile House - บ้านพักระยอง" />
-  <meta property="og:description" content="ขายและให้เช่าบ้านเดี่ยวส่วนตัว ที่ระยอง ใกล้ทะเล มีความสงบ ร่มรื่น เหมาะแก่การพักอาศัย" />
-  <meta property="og:image" content="images/house1.jpg" />
-  <meta property="og:url" content="https://khomtech.github.io/SmileHouseRayong/" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Theme for Light/Dark Mode -->
-  <meta name="theme-color" content="#263238" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
-
-  <!-- Google Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- Font: Prompt -->
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smile House - บ้านเดี่ยวระยอง</title>
+  <!-- นำเข้า Google Fonts (Prompt) -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- นำเข้า Font Awesome สำหรับใช้ไอคอน -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- ลิงก์ไปยังไฟล์ CSS ภายนอก -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <!-- เมนูนำทาง (ใช้ ul เพื่อความถูกต้องตามโครงสร้าง) -->
-  <nav aria-label="เมนูนำทาง" role="navigation">
-    <ul>
-      <li><a href="#">หน้าแรก</a></li>
-      <li><a href="#houses">ซื้อบ้านเดี่ยว</a></li>
-      <li><a href="#rental">เช่ารายเดือน</a></li>
-      <li><a href="#contact">ติดต่อ</a></li>
-    </ul>
-    <!-- ปุ่มเปลี่ยนธีม (โหมดกลางวัน/กลางคืน) -->
-    <button id="theme-toggle" aria-label="Toggle Dark Mode">🌗</button>
-  </nav>
-
-  <!-- ส่วนหัวของเว็บ -->
-  <header>
-    <h1>🏡 Smile House</h1>
-    <p>บ้านเดี่ยวระยอง บ้านสวนใกล้ทะเล เงียบสงบ ให้เช่าและขาย</p>
+  <!-- ส่วน Header ด้านบนสุดของเว็บ -->
+  <header class="site-header">
+    <div class="logo">
+      <i class="fas fa-home"></i> <!-- ไอคอนรูปบ้าน -->
+      <span>Smile House</span>
+    </div>
+    <nav class="main-nav">
+      <!-- เมนูนำทางหลักของเว็บไซต์ -->
+      <a href="#rent">เช่ารายเดือน</a>
+      <a href="#sale">ขาย บ้านเดี่ยว</a>
+      <a href="#details">รายละเอียด</a>
+      <a href="#contact">ติดต่อ</a>
+      <button id="darkToggle"><i class="fas fa-moon"></i></button> <!-- ปุ่มสลับโหมดกลางคืน -->
+    </nav>
   </header>
 
-  <!-- Hero Section พร้อมภาพ responsive -->
-  <section class="hero zoom-in-3d">
-    <picture>
-      <source media="(max-width: 768px)" srcset="images/hero-mobile.jpg" />
-      <img src="images/hero.jpg" alt="ภาพรวมของบ้านพัก Smile House ใกล้ทะเล บรรยากาศธรรมชาติ" loading="lazy" />
-    </picture>
-    <div class="hero-overlay">
-      <h1>🏡 Smile House</h1>
-      <p>บ้านเดี่ยวพร้อมที่ดิน ระยอง – ใกล้ทะเล มีรั้วล้อมรอบ<br />
-      📍 ที่ตั้ง: บ้านเพ, ต.แกลง, อ.เมืองระยอง<br />
-      🌊 ใกล้ทะเล: ห่างจากหาดสวนสนบ้านเพ 3 กิโลเมตร<br />
-      🚗 การเดินทางสะดวก: ใกล้แยกไฟแดงกะเฉด 800 เมตร<br />
-      🌳 สไตล์บ้านสวน: สงบ เป็นส่วนตัว</p>
+  <!-- Section Hero: ภาพพื้นหลังใหญ่ + ปุ่มนำทาง -->
+  <section class="hero">
+    <h1>Smile House</h1>
+    <div class="hero-buttons">
+      <!-- ปุ่มนำทางแต่ละฟังก์ชัน -->
+      <button><i class="fas fa-house-user"></i> เช่ารายเดือน</button>
+      <button><i class="fas fa-sign"></i> ขาย บ้านเดี่ยว</button>
+      <button><i class="fas fa-info-circle"></i> รายละเอียด</button>
+      <button><i class="fas fa-phone"></i> ติดต่อสอบถาม</button>
     </div>
   </section>
 
-  <!-- เนื้อหาหลักของเว็บไซต์ -->
-  <main id="main-content" role="main">
-
-    <!-- ส่วนแสดงรายการบ้านขาย -->
-    <section id="houses" class="properties">
-      <h2>🔥 ขายบ้านเดี่ยวพร้อมที่ดิน</h2>
-      <div class="property-list">
-        <!-- บ้านหลังที่ 1 -->
-        <article class="property-card">
-          <img src="images/house1.jpg" alt="บ้านเดี่ยว 37 ตร.ว. Smile House ระยอง มีรั้วล้อมรอบ" loading="lazy" />
-          <div class="info">
-            <h3>บ้านพร้อมที่ดิน 37 ตร.ว. - 980,000 บาท</h3>
-            <p>พร้อมอยู่ มีรั้วกันรอบบ้าน มีที่จอดรถ</p>
-            <a href="#contact" class="button">📞 สนใจ</a>
-          </div>
-        </article>
-
-        <!-- บ้านหลังที่ 2 -->
-        <article class="property-card">
-          <img src="images/house2.jpg" alt="บ้านเดี่ยว 72 ตร.ว. Smile House ระยอง มีสนามกว้างขวาง" loading="lazy" />
-          <div class="info">
-            <h3>บ้านพร้อมที่ดิน 72 ตร.ว. - 1,480,000 บาท</h3>
-            <p>พื้นที่สนามหญ้ากว้างขวาง ต่อเติมได้ พร้อมอยู่ มีรั้วกันรอบบ้าน มีที่จอดรถ</p>
-            <a href="#contact" class="button">📞 สนใจ</a>
-          </div>
-        </article>
+  <!-- Section เช่ารายเดือน: รายการบ้านให้เช่าแบบการ์ด -->
+  <section id="rent" class="property-section">
+    <h2>เช่ารายเดือนบ้านเดี่ยว 🏡</h2>
+    <div class="card-container">
+      <!-- การ์ดแต่ละใบแทนบ้าน -->
+      <div class="property-card available">
+        <img src="img/house1.jpg" alt="บ้านให้เช่า">
+        <h3>รายละเอียด ย่อๆ</h3>
+        <p>ราคา: 3,600/เดือน</p>
+        <div class="status green">✔ ว่าง</div> <!-- แสดงสถานะ -->
+        <div class="card-actions">
+          <button class="btn-detail" data-img="img/house1.jpg" data-desc="บ้านพร้อมอยู่ 37 ตร.ว. เช่ารายเดือน 3600 บาท">ดูรายละเอียด</button>
+          <a href="tel:0814169193"><i class="fas fa-phone"></i></a>
+          <a href="#"><i class="fas fa-share-alt"></i></a>
+        </div>
       </div>
-    </section>
+      <!-- เพิ่มการ์ดเพิ่มได้แบบเดียวกัน -->
+    </div>
+  </section>
 
-        <!-- บ้านเต็ม --> <!-- กรณีบ้านว่าง จะเปลี่ยนเป็น<span class="status available">✅ ว่าง</span>
- <!-- บ้านเต็ม --> <!-- กรณีบ้านว่าง จะเปลี่ยนเป็น<span class="status available">ว่าง</span>-->
-  <section id="rental" class="rental-grid">
-  <h2>🏠 บ้านเดี่ยวให้เช่ารายเดือน</h2>
-
-  <div class="rental-list">
-    <!-- บ้านหลังที่ 1 -->
-    <div class="rent-card">
-      <div class="image-wrapper">
-        <img src="images/rent1.jpg" alt="บ้านเช่ารายเดือน Smile House 1" class="zoomable-img" loading="lazy" />
-        <span class="corner-icon"><i class="fas fa-share"></i></span>
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full"><i class="fas fa-times-circle"></i> เต็ม</span>
-        <p class="desc">สามารถจองรอบถัดไปได้ บ้านเดี่ยวพร้อมเฟอร์นิเจอร์ แอร์ ทีวี</p>
+  <!-- Section ขายบ้านเดี่ยว: ใช้การ์ดแบบเดียวกัน -->
+  <section id="sale" class="property-section">
+    <h2>ขายบ้านเดี่ยวพร้อมที่ดิน 🏡</h2>
+    <div class="card-container">
+      <div class="property-card">
+        <img src="img/house2.jpg" alt="บ้านขาย">
+        <h3>บ้าน 72 ตร.วา</h3>
+        <p>ราคา: 1,480,000 บาท</p>
+        <div class="card-actions">
+          <a href="tel:0814169193"><i class="fas fa-phone"></i></a>
+          <a href="https://line.me/ti/p/xxxxxxxx"><i class="fab fa-line"></i></a>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- บ้านหลังที่ 2 -->
-    <div class="rent-card">
-      <div class="image-wrapper">
-        <img src="images/rent2.jpg" alt="บ้านเช่ารายเดือน Smile House 2" class="zoomable-img" loading="lazy" />
-        <span class="corner-icon"><i class="fas fa-share"></i></span>
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full"><i class="fas fa-times-circle"></i> เต็ม</span>
-        <p class="desc">สามารถจองรอบถัดไปได้ บ้านเดี่ยวพร้อมเฟอร์นิเจอร์ แอร์ ทีวี</p>
-      </div>
+  <!-- Section รายละเอียด: ปรับให้ดูดีขึ้นในภายหลัง -->
+  <section id="details" class="info-section">
+    <h2>รายละเอียดเพิ่มเติม</h2>
+    <ul>
+      <li>ใกล้ทะเล หาดสวนสนเพ เพียง 3 กม.</li>
+      <li>สงบ ปลอดภัย มีรั้วล้อมรอบ</li>
+      <li>เดินทางสะดวก ใกล้โลตัส ปั๊มน้ำมัน</li>
+    </ul>
+  </section>
+
+  <!-- Section ช่องทางติดต่อ -->
+  <section id="contact" class="contact-section">
+    <h2>ช่องทางการติดต่อ</h2>
+    <div class="contact-buttons">
+      <a class="btn red" href="tel:0631862828"><i class="fas fa-phone"></i> 063 186 2828</a>
+      <a class="btn blue" href="#"><i class="fab fa-facebook"></i> Smile House</a>
+      <a class="btn orange" href="https://maps.app.goo.gl/2Lzx1jWDXQ9YZkxH6"><i class="fas fa-map-marker-alt"></i> Smile House</a>
+      <a class="btn green" href="https://line.me/ti/p/xxxxxxxx"><i class="fab fa-line"></i> Smile House</a>
     </div>
+  </section>
 
-    <!-- บ้านหลังที่ 3 -->
-    <div class="rent-card">
-      <div class="image-wrapper">
-        <img src="images/rent3.jpg" alt="บ้านเช่ารายเดือน Smile House 3" class="zoomable-img" loading="lazy" />
-        <span class="corner-icon"><i class="fas fa-share"></i></span>
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full"><i class="fas fa-times-circle"></i> เต็ม</span>
-        <p class="desc">สามารถจองรอบถัดไปได้ บ้านเดี่ยวพร้อมเฟอร์นิเจอร์ แอร์ ทีวี</p>
-      </div>
-    </div>
-
-    <!-- บ้านหลังที่ 4 -->
-    <div class="rent-card">
-      <div class="image-wrapper">
-        <img src="images/rent4.jpg" alt="บ้านเช่ารายเดือน Smile House 4" class="zoomable-img" loading="lazy" />
-        <span class="corner-icon"><i class="fas fa-share"></i></span>
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full"><i class="fas fa-times-circle"></i> เต็ม</span>
-        <p class="desc">สามารถจองรอบถัดไปได้ บ้านเดี่ยวพร้อมเฟอร์นิเจอร์ แอร์ ทีวี</p>
-      </div>
-    </div>
-
-    <!-- บ้านหลังที่ 5 -->
-    <div class="rent-card">
-      <div class="image-wrapper">
-        <img src="images/rent5.jpg" alt="บ้านเช่ารายเดือน Smile House 5" class="zoomable-img" loading="lazy" />
-        <span class="corner-icon"><i class="fas fa-share"></i></span>
-      </div>
-      <div class="info">
-        <p class="price">3,500 บาท/เดือน</p>
-        <span class="status full"><i class="fas fa-times-circle"></i> เต็ม</span>
-        <p class="desc">สามารถจองรอบถัดไปได้ บ้านเดี่ยวพร้อมเฟอร์นิเจอร์ แอร์ ทีวี</p>
-      </div>
-    </div>
-
-    <!-- บ้านหลังที่ 6 -->
-    <div class="rent-card">
-      <div class="image-wrapper">
-        <img src="images/rent6.jpg" alt="บ้านเช่ารายเดือน Smile House 6" class="zoomable-img" loading="lazy" />
-        <span class="corner-icon"><i class="fas fa-share"></i></span>
-      </div>
-      <div class="info">
-        <p class="price">4,500 บาท/เดือน</p>
-        <span class="status full"><i class="fas fa-times-circle"></i> เต็ม</span>
-        <p class="desc">สามารถจองรอบถัดไปได้ บ้านเดี่ยวพร้อมเฟอร์นิเจอร์ 2 เตียง แอร์ ทีวี</p>
-      </div>
+  <!-- Modal สำหรับดูรายละเอียดบ้าน (จะเปิดเมื่อกดปุ่มดูรายละเอียด) -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span> <!-- ปุ่มปิด -->
+      <img id="modal-image" src="" alt="รูปบ้าน">
+      <p id="modal-description"></p>
     </div>
   </div>
 
-  <!-- โมดอลแสดงภาพขยาย -->
-  <div class="zoom-modal" id="zoomModal">
-    <img src="" alt="Zoom" id="zoomImage" />
-  </div>
-</section>
-
-
-    <!-- ส่วนติดต่อ -->
-    <section id="contact" class="contact">
-      <h2>📞 ติดต่อเรา</h2>
-      <p>โทร:
-        <a href="tel:0812345678" class="phone-button">
-          <i class="fas fa-phone"></i> โทรเลย
-        </a>
-      </p>
-      <div class="contact-links">
-        <a href="https://lin.ee" target="_blank" class="button">LineOA</a>
-        <a href="https://www.facebook.com/profile.php?id=100051173817249" target="_blank" class="button">Facebook</a>
-        <a href="https://maps.app.goo.gl/2Lzx1jWDXQ9YZkxH6" target="_blank" class="button">Google Maps</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- ท้ายเว็บไซต์ -->
-  <footer class="footer">
-    <p>&copy; 2025 Smile House แยกกะเฉดระยอง. ออกแบบเว็บโดยคมเทค Khomtech สงวนสิทธิ์ทุกประการ.</p>
-  </footer>
-
-  <!-- ไฟล์ JavaScript -->
+  <!-- ลิงก์ไปยัง JavaScript -->
   <script src="script.js"></script>
 </body>
+
 </html>
