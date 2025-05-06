@@ -15,18 +15,22 @@
 
 <body>
   <!-- ส่วน Header ด้านบนสุดของเว็บ -->
- <header class="header-container">
+<header class="header-container">
   <div class="logo">
     <i class="fas fa-home"></i>
     <span>Smile House</span>
   </div>
-
-  <nav class="main-nav">
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <nav class="main-nav" id="mainNav">
     <a href="#rent">เช่ารายเดือน</a>
     <a href="#sale">ขาย บ้านเดี่ยว</a>
     <a href="#details">รายละเอียด</a>
     <a href="#contact">ติดต่อ</a>
-    <button id="darkToggle"><i class="fas fa-moon"></i></button>
+    <button id="darkToggle" aria-label="Dark Mode">
+      <i class="fas fa-moon"></i>
+    </button>
   </nav>
 </header>
 
