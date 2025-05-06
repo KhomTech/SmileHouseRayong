@@ -80,6 +80,25 @@ img:hover {
 }
 
 /* Nav */
+
+/* สำหรับมือถือ - ซ่อนเมนูก่อน */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* เมื่อคลิก Hamburger แล้ว .active จะทำให้เมนูแสดง */
+.nav-menu.active {
+  display: flex;
+}
+
 .main-nav {
   display: flex;
   align-items: center;
