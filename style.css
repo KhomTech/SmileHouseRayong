@@ -405,12 +405,22 @@ img:hover {
    โซน: การ์ดขายบ้าน (Sale Cards)
    -------------------------------------------------- */
 .property-list-sale {
-  display: grid;
+  display: grid;  /* ใช้ Grid Layout เพื่อให้การ์ดเรียงแบบ Responsive */
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-  justify-content: center;
-  align-items: stretch;
+  gap: 2rem;       /* ระยะห่างระหว่างการ์ด */
+  padding: 2rem;   /* เว้นรอบภายใน container ให้ไม่ติดขอบ */
+
+  justify-content: center;   /* จัดเนื้อหาให้อยู่ตรงกลางแนวนอน */
+  align-items: stretch;      /* ให้แต่ละการ์ดสูงเท่ากันโดยยืดเต็มบรรทัด */
+
+  max-width: 1200px;         /* จำกัดความกว้างของกริดไม่ให้กว้างเกินจอใหญ่ */
+  margin: 0 auto;            /* จัด container ให้อยู่ตรงกลางหน้าจอ */
+}
+/* ✅ ใส่ Media Query ถัดจากนี้ทันที */
+@media (max-width: 768px) {
+  .property-list-sale {
+    padding: 1rem; /* ลด padding ในจอมือถือ/แท็บเล็ต */
+  }
 }
 
 .property-card-sale {
