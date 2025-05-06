@@ -10,6 +10,7 @@
   <!-- นำเข้า Font Awesome สำหรับใช้ไอคอน -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- ลิงก์ไปยังไฟล์ CSS ภายนอก -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,10 +23,17 @@
     <span>Smile House</span>
   </div>
 
-  <!-- ปุ่ม Hamburger -->
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+  <!-- ปุ่ม Hamburger สำหรับมือถือ -->
+  <div class="hamburger">
     <i class="fas fa-bars"></i>
-  </button>
+  </div>
+
+  <!-- เมนูมือถือ -->
+  <ul class="nav-menu">
+    <li><a href="#home">หน้าแรก</a></li>
+    <li><a href="#rent">บ้านเช่า</a></li>
+    <li><a href="#contact">ติดต่อเรา</a></li>
+  </ul>
 
   <!-- เมนูหลัก -->
   <nav class="main-nav" id="mainNav">
