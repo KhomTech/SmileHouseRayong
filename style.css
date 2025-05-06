@@ -1,348 +1,225 @@
-/* ----------------------------
-  ✅ 1. นำเข้า modern-normalize.css 
-  เพื่อรีเซ็ตค่าพื้นฐานของ browser ให้เท่ากันทุกแพลตฟอร์ม
----------------------------- */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css');
-/* modern-normalize เป็นเวอร์ชันที่พัฒนาต่อจาก normalize.css 
-   โดยปรับให้เข้ากับ HTML5 และ browser สมัยใหม่มากยิ่งขึ้น 
-   เพื่อให้ layout มีความเสถียรเมื่อแสดงในแต่ละ browser */
+/* ==================================================
+   Smile House - styles.css
+   ออกแบบโดยเทพนักออกแบบเว็บ อันดับ 1 สำหรับขายบ้านเดี่ยว
+   ================================================== */
 
-  
-/* ----------------------------
-  ✅ 2. ลด animation หากผู้ใช้ตั้งค่าระบบให้หลีกเลี่ยง motion
----------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;        /* ปิด animation ทั้งหมด */
-    transition: none !important;       /* ปิด transition ทั้งหมด */
-    scroll-behavior: auto !important;  /* เปลี่ยน scroll จาก smooth เป็นปกติ */
-  }
-}
-/* เหมาะสำหรับผู้ที่มีอาการเวียนหัวหรือไวต่อการเคลื่อนไหว
-   เป็นมาตรฐานตามแนวทาง accessibility (WCAG) */
+/* Google Fonts: Prompt (สำหรับฟอนต์ไทยดูเป็นมิตร หรูหรา) */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
 
-
-/* ----------------------------
-  ✅ 3. เพิ่ม tactile feedback ขณะกดลิงก์
----------------------------- */
-nav a:active {
-  transform: scale(0.98);  /* ขณะกดลิงก์ให้ย่อขนาดเล็กลงเล็กน้อย (เหมือนปุ่มในมือถือ) */
-}
-/* ทำให้รู้สึกว่าลิงก์ "ตอบสนอง" ต่อการคลิกจริง */
-
-
-/* ----------------------------
-  ✅ 5. ปรับปรุงการแสดงผล focus ให้เหมาะสม
----------------------------- */
-.button:focus:not(:focus-visible),
-.phone-button:focus:not(:focus-visible),
-.theme-toggle:focus:not(:focus-visible) {
-  outline: none; /* ซ่อนเส้นขอบเมื่อใช้เมาส์คลิก ไม่กระทบ keyboard accessibility */
-}
-/* :focus-visible จะทำงานเฉพาะเมื่อผู้ใช้ใช้ "Tab" บนคีย์บอร์ด 
-   ทำให้เราเก็บ outline เฉพาะกรณีที่สำคัญต่อการนำทางด้วย keyboard */
-
-
-/* ----------------------------
-  🔁 รีเซ็ตค่าพื้นฐานเพิ่มเติม (เสริมจาก normalize)
----------------------------- */
+/* ตั้งค่าทั่วไป */
 * {
-  margin: 0;              /* ลบ margin ทั้งหมดที่ browser ตั้งค่าไว้ล่วงหน้า */
-  padding: 0;             /* ลบ padding เช่นจาก h1, ul, p */
-  box-sizing: border-box; /* เปลี่ยนจาก content-box ให้รวม padding และ border เข้ามาใน width */
-}
-/* ทำให้การจัด layout คาดเดาได้ง่าย และควบคุมขนาดได้แม่นยำ */
-
-
-html {
-  scroll-behavior: smooth; /* เวลาใช้ anchor link หรือ scroll จะเลื่อนอย่างนุ่มนวล */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Prompt', sans-serif;
 }
 
-
-/* ----------------------------
-  🌗 ตัวแปรธีม (Theme Variables)
----------------------------- */
-:root {
-  /* 🟢 โหมดปกติ (Light Mode) */
-  --main-color: #263238;           /* สีหลัก เช่น header/footer */
-  --accent-color: #2e7d32;         /* สีเน้น เช่น ปุ่ม หัวข้อ */
-  --background-color: #f5f5f5;     /* สีพื้นหลังของ body */
-  --card-color: #ffffff;           /* สีพื้นหลังของ box/card */
-  --text-color: #212121;           /* สีตัวอักษรหลัก */
-  --muted-color: #757575;          /* สีข้อความรอง (secondary text) */
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* ฟอนต์ที่ใช้ทั้งเว็บ */
-  --radius: 8px;                   /* ความโค้งของมุม (border-radius) */
-  --transition-speed: 0.3s;        /* ความเร็วของ animation transition */
-}
-
-/* 🌑 ธีมโหมดมืด (Dark Mode) */
-html[data-theme='dark'] {
-  --main-color: #121212;           /* สีเข้มแทน header/footer */
-  --accent-color: #66bb6a;         /* สีเขียวกลาง เน้นเฉพาะโหมดมืด */
-  --background-color: #1e1e1e;     /* สีพื้นหลังมืด */
-  --card-color: #2c2c2c;           /* การ์ดโหมดมืด */
-  --text-color: #eeeeee;           /* ตัวอักษรสีอ่อน */
-  --muted-color: #aaaaaa;          /* ข้อความรองสีเทาอ่อน */
-}
-
-
-/* ----------------------------
-  🧱 โครงสร้างพื้นฐาน (Base Styles)
----------------------------- */
 body {
-  font-family: var(--font-family);              /* ฟอนต์จากตัวแปรกลาง */
-  background-color: var(--background-color);    /* สีพื้นหลังจากธีม */
-  color: var(--text-color);                     /* สีข้อความหลัก */
-  line-height: 1.6;                              /* ระยะห่างระหว่างบรรทัด */
-  font-size: 1rem;                              /* ขนาดตัวอักษรเริ่มต้น 16px */
-  transition: background-color var(--transition-speed), color var(--transition-speed); 
-  /* เมื่อเปลี่ยนธีม ให้สีเปลี่ยนแบบนุ่มนวล */
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
 
-/* ----------------------------
-  🔝 ส่วนหัว (Header)
----------------------------- */
+img:hover {
+  transform: scale(1.03);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px 0;
+}
+
+/* Header */
 header {
-  background-color: var(--main-color);        /* สีพื้นหลัง header */
-  color: white;                               /* สีตัวอักษรขาว */
-  padding: 40px 20px;                         /* padding บนล่าง 40px, ซ้ายขวา 20px */
-  text-align: center;                         /* จัดข้อความตรงกลาง */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  /* เงาเล็กน้อยให้ดูมีมิติ */
+  background-color: #ffffff;
+  padding: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-header h1 {
-  font-size: clamp(2rem, 4vw, 3rem); /* responsive: 2rem ถึง 3rem ขึ้นกับความกว้างหน้าจอ */
-  margin-bottom: 10px;              /* เว้นด้านล่าง 10px */
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
-header p {
-  color: var(--muted-color);         /* สีข้อความรอง */
-  font-size: 1.1rem;                 /* ใหญ่ขึ้นจาก base font */
-}
-
-
-/* ----------------------------
-  🧭 เมนูนำทาง (Navigation)
----------------------------- */
-
-/* สไตล์สำหรับเมนูนำทาง */
 nav {
-  background-color: var(--accent-color); /* สีพื้นหลังของเมนูนำทาง */
-  padding: 1rem;                         /* ระยะห่างภายในเมนู */
-  text-align: center;                    /* จัดข้อความตรงกลาง */
-  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3); /* เงาเขียวมืออาชีพ */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-/* สไตล์สำหรับลิงก์ในเมนูนำทาง */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
 nav a {
-  color: white;                           /* สีตัวอักษรของลิงก์เมนู */
-  margin: 0 20px;                         /* เว้นช่องห่างด้านซ้าย-ขวาของแต่ละลิงก์ */
-  text-decoration: none;                  /* เอาเส้นใต้ลิงก์ออก */
-  font-weight: 600;                       /* ตัวหนาปานกลาง */
-  font-size: 1rem;                        /* ขนาดตัวอักษรปกติ */
-  position: relative;                     /* ใช้เพื่อวางเส้นใต้เมื่อลาก hover แบบ absolute */
-  transition: color var(--transition-speed), border-bottom var(--transition-speed); 
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
-/* สร้างเส้นใต้ลิงก์เมื่อ hover */
-nav a::after {
-  content: '';                            /* สร้าง element เส้นใต้ */
-  display: block;                         /* ทำให้เป็น block เพื่อระบุขนาด */
-  height: 2px;                            /* ความหนาของเส้น */
-  width: 0;                               /* เริ่มจากความกว้าง 0 (ยังไม่แสดง) */
-  background: white;                      /* สีของเส้น */
-  transition: width var(--transition-speed); /* ให้เส้นแสดงแบบนุ่มนวล */
-  position: absolute;                     /* วางตำแหน่งแบบ absolute */
-  bottom: -5px;                           /* ห่างจากตัวอักษร 5px ด้านล่าง */
-  left: 0;
-}
-
-/* เมื่อ hover แล้วเส้นขยายเต็มลิงก์ */
-nav a:hover::after {
-  width: 100%;
-}
-
-/* เมื่อ hover ลิงก์ เปลี่ยนสีข้อความ */
 nav a:hover {
-  color: var(--main-color);
+  color: #27ae60;
 }
 
-/* เมื่อคลิกลิงก์ ให้มีเอฟเฟกต์ย่อเล็กน้อย */
-nav a:active {
-  transform: scale(0.98); /* ย่อเล็กน้อยขณะคลิก */
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('hero-image.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  border-radius: 0 0 40px 40px;
 }
 
-/* ----------------------------
-  🧱 ส่วนเนื้อหา (Section)
----------------------------- */
-
-/* สไตล์สำหรับ section */
-section {
-  padding: 60px 20px;       /* ระยะห่างรอบเนื้อหาในแต่ละ section */
-  text-align: center;       /* จัดข้อความตรงกลาง */
+.hero h1 {
+  font-size: 48px;
+  font-weight: bold;
 }
 
-/* สไตล์สำหรับหัวเรื่องใน section */
-section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font-size: 1.8 ถึง 2.5rem */
-  color: var(--main-color);             /* ใช้สีหลัก */
-  margin-bottom: 20px;                  /* เว้นช่องว่างด้านล่าง */
+.hero p {
+  font-size: 20px;
+  margin-top: 10px;
 }
 
-/* สไตล์สำหรับข้อความใน section */
-section p {
-  max-width: 700px;                     /* จำกัดความกว้างของข้อความ */
-  margin: 0 auto;                       /* จัดให้อยู่ตรงกลาง */
-  color: var(--muted-color);            /* ใช้สีอ่อนลง */
-  font-size: 1.05rem;                   /* ขนาดเล็กน้อยใหญ่กว่าปกติ */
-}
-
-/* ----------------------------
-  🔘 ปุ่ม (Button)
----------------------------- */
-
-/* สไตล์สำหรับปุ่มทั่วไป */
-.button {
+/* ปุ่ม */
+.btn {
   display: inline-block;
-  background-color: #4CAF50; /* สีเขียวธรรมชาติ */
+  padding: 12px 24px;
+  background-color: #27ae60;
   color: white;
   border: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 30px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3); /* เงาเขียวหรู */
+  font-weight: 500;
+  margin-top: 20px;
+  transition: background 0.3s;
 }
 
-/* สไตล์เมื่อ hover ปุ่ม */
-.button:hover {
-  background-color: #43a047; /* เขียวเข้มเวลาชี้ */
-  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.5); /* เงาเขียวลึกขึ้น */
-  transform: translateY(-2px);
+.btn:hover {
+  background-color: #219150;
 }
 
-/* ----------------------------
-  📞 ปุ่มโทรศัพท์ (Phone Button)
----------------------------- */
-
-/* สไตล์สำหรับปุ่มโทรศัพท์ */
-.phone-button {
-  display: inline-block;
-  color: #ffffff;
-  background-color: #4CAF50; /* เขียวธรรมชาติ */
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); /* เงาสีเขียว */
-}
-
-/* สไตล์เมื่อ hover ปุ่มโทรศัพท์ */
-.phone-button:hover {
-
-::contentReference[oaicite:0]{index=0}
-
-  /* สไตล์สำหรับบ้านเช่า */
-
-.rental-list {
+/* การ์ดบ้าน */
+.card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
 }
 
-.rent-card {
-  background: #fff;
-  border-radius: 1rem;
+.card {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.rent-card:hover {
-  transform: translateY(-5px);
+.card:hover {
+  transform: translateY(-8px);
 }
 
-.image-wrapper {
-  position: relative;
-  overflow: hidden;
+.card .details {
+  padding: 20px;
 }
 
-.image-wrapper img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  cursor: zoom-in;
+.card .details h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
 }
 
-.image-wrapper:hover img {
-  transform: scale(1.05);
-}
-
-.corner-icon {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: #00000088;
-  color: white;
-  border-radius: 50%;
-  padding: 0.4rem;
-  font-size: 0.9rem;
-}
-
-.info {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.price {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #1a1a1a;
+.card .details p {
+  color: #555;
+  font-size: 14px;
 }
 
 .status {
-  display: inline-block;
-  font-size: 0.95rem;
   font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  width: fit-content;
-}
-
-.status.full {
-  background: #dc3545;
-  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 13px;
 }
 
 .status.available {
-  background: #28a745;
-  color: white;
+  background-color: #eafaf1;
+  color: #27ae60;
 }
 
-.zoom-modal {
-  position: fixed;
+.status.full {
+  background-color: #fceeee;
+  color: #c0392b;
+}
+
+/* Modal */
+.modal {
   display: none;
-  justify-content: center;
-  align-items: center;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.8);
-  z-index: 999;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
 }
 
-.zoom-modal img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-} 
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+  .hero p {
+    font-size: 16px;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+  }
+}
