@@ -372,15 +372,20 @@ img:hover {
 }
 
 /* บ้านเต็ม (สีแดง) */
-.rent-card.full .status {
-  background-color: #e74c3c; /* พื้นหลังสีแดงสด */
-  color: white; /* ตัวอักษรสีขาว ตัดกับพื้นหลัง */
+.status-full {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
 }
-
 /* บ้านว่าง (สีเขียว) */
-.rent-card.available .status {
-  background-color: #2ecc71; /* สีเขียวสดใส */
-  color: white; /* ตัวอักษรสีขาว */
+.status-available {
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
 }
 /* ... โค้ดเดิมของ .rental-list, .rent-card, ฯลฯ ... */
 
