@@ -1,6 +1,21 @@
 // scripts.js
 // เทพนักพัฒนาเว็บไซต์: ควบคุม Modal, Dark Mode, และความลื่นไหลทั้งหมด
 
+// =============== Hamburger Menu (มือถือ) ===============
+const menuToggle = document.getElementById("menuToggle"); // ปุ่ม hamburger
+const mainNav = document.getElementById("mainNav");       // เมนูหลักที่ซ่อนได้
+
+// เมื่อผู้ใช้คลิกปุ่ม hamburger
+menuToggle?.addEventListener("click", () => {
+  // สลับ class "open" ให้กับเมนู เพื่อแสดง/ซ่อน (ใช้ใน CSS ควบคุมการแสดงผล)
+  mainNav.classList.toggle("open");
+
+  // สลับ icon ระหว่าง fa-bars กับ fa-times เพื่อให้ดูเปลี่ยนจาก "≡" เป็น "×"
+  const icon = menuToggle.querySelector('i');
+  icon.classList.toggle('fa-bars');
+  icon.classList.toggle('fa-times');
+});
+
 // =============== เปิด/ปิด Modal ===============
 const modal = document.querySelector('.modal');
 const modalContent = document.querySelector('.modal-content');
