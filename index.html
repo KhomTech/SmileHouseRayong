@@ -99,17 +99,28 @@
     <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
     <style>
 .social-icon {
-  width: 28px;
-  height: 28px;
+  width: 10px;        /* เดิมอาจใช้ 60px ใหญ่เกินไป */
+  height: 10px;
   border-radius: 50%;
   padding: 4px;
   background-color: #f0f0f0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.social-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .social-icon:hover {
   transform: scale(1.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
 </style>
 
 <a href="https://facebook.com" target="_blank">
@@ -145,17 +156,28 @@
         <!-- บ้านหลังที่ 2 เพิ่มปุ่มไลนเฟส -->
     <style>
 .social-icon {
-  width: 28px;
-  height: 28px;
+  width: 10px;        /* เดิมอาจใช้ 60px ใหญ่เกินไป */
+  height: 10px;
   border-radius: 50%;
   padding: 4px;
   background-color: #f0f0f0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.social-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .social-icon:hover {
   transform: scale(1.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
 </style>
 
 <a href="https://facebook.com" target="_blank">
