@@ -11,7 +11,7 @@
 /* 3. Header & Navigation */
 /* 4. Hero Section */
 /* 5. Buttons & Links */
-/* 6. Cards & Rental List  ✅ ใส่โค้ดคุณตรงนี้ */
+/* 6. Cards & Rental List  บ้านขายและเช่า */
 /* 7. Modal */
 /* 8. Responsive */
 
@@ -595,6 +595,31 @@ img:hover {
   margin-bottom: 1rem;
   line-height: 1.5;
 }
+
+.social-icon {
+  width: 10px;        /* เดิมอาจใช้ 60px ใหญ่เกินไป */
+  height: 10px;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: #f0f0f0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔼 แล้วค่อยต่อส่วนอื่นๆ ของ Rental Card ต่อ */
 
 /* --------------------------------------------------
    แถบปุ่มและรายละเอียดเพิ่มเติม
