@@ -597,20 +597,21 @@ img:hover {
 }
 
 .social-icon {
-  width: 10px;        /* เดิมอาจใช้ 60px ใหญ่เกินไป */
-  height: 10px;
+  width: 20px;           /* ✅ ขนาดรวมของปุ่ม */
+  height: 20px;
   border-radius: 50%;
-  padding: 4px;
+  padding: 2px;
   background-color: #f0f0f0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-left: 0.4rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .social-icon img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
