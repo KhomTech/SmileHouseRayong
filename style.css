@@ -442,7 +442,7 @@ img:hover {
   line-height: 1.9; /* เพิ่มระยะห่างระหว่างบรรทัดให้อ่านสบายตา */
 }
 
-/* ป้ายแสดงสถานะ */
+/* ป้ายแสดงสถานะ *//* ป้ายแสดงสถานะรวม */
 .status {
   display: inline-block; /* แสดงเป็นกล่องแยกออกมาจากข้อความอื่น */
   padding: 10px 20px; /* เพิ่มขนาดกล่องสถานะให้เด่นขึ้น */
@@ -458,31 +458,26 @@ img:hover {
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
-  font-weight: bold;
 }
+
 /* บ้านว่าง (สีเขียว) */
 .status-available {
   background-color: #2ecc71;
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
-  font-weight: bold;
 }
 
-/* สถานะ "ใกล้ว่าง" */
+/* บ้านใกล้ว่าง (สีเหลืองทอง) */
 .status-soon {
-  background-color: #FFD700; /* สีเหลืองทอง */
-  color: #333;
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-weight: bold;
+  background-color: #FFD700; /* สีทอง */
+  color: #333333;
+  padding: 10px 20px; /* ทำให้สอดคล้องกับขนาดของสถานะอื่น */
+  border-radius: 10px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-}
-.rent-card.soon {
-  border: 2px solid #FFD700;
 }
 /* ... โค้ดเดิมของ .rental-list, .rent-card, ฯลฯ ... */
 
