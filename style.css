@@ -468,6 +468,22 @@ img:hover {
   border-radius: 10px;
   font-weight: bold;
 }
+
+/* สถานะ "ใกล้ว่าง" */
+.status-soon {
+  background-color: #FFD700; /* สีเหลืองทอง */
+  color: #333;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+.rent-card.soon {
+  border: 2px solid #FFD700;
+}
 /* ... โค้ดเดิมของ .rental-list, .rent-card, ฯลฯ ... */
 
 /* ส่วนจัดวางหมวดหัวข้อของรายการบ้าน */
