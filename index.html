@@ -3,406 +3,342 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smile House  - บ้านเดียวระยอง</title>
+  <title>Smile House Exclusive - บ้านเดี่ยวและบ้านพักตากอากาศ</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ตั้งค่าฟอนต์หลัก */
-    body {
-      font-family: 'Prompt', sans-serif;
-    }
+    body { font-family: 'Prompt', sans-serif; }
+    
+    /* ซ่อน Scrollbar แนวนอนแต่ยังเลื่อนได้ */
+    .hide-scroll::-webkit-scrollbar { display: none; }
+    .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* ซ่อน Scrollbar แต่ยังเลื่อนได้ (เพื่อความสวยงามในโซนสถานที่เที่ยว) */
-    .hide-scroll::-webkit-scrollbar {
-      display: none;
-    }
-    .hide-scroll {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    /* Animation สำหรับ Fade In */
-    .fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Gradient Text */
-    .text-gradient {
-      background: linear-gradient(to right, #166534, #15803d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    /* Animation เบาๆ */
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
   </style>
-
+  
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#15803d', /* สีเขียวธรรมชาติ ดูสบายตา */
-            secondary: '#ca8a04', /* สีทอง ดูหรูหรา */
-            dark: '#1e293b',
+            brand: '#1e3a8a', /* สีน้ำเงินเข้ม ดูทางการ น่าเชื่อถือ */
+            gold: '#ca8a04',  /* สีทอง สำหรับของขาย */
+            accent: '#10b981', /* สีเขียว สำหรับบ้านเช่า/ธรรมชาติ */
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased selection:bg-primary selection:text-white">
+<body class="bg-gray-50 text-gray-800">
 
-  <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-          <i class="fa-solid fa-house-chimney text-3xl text-primary"></i>
-          <div>
-            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Smile<span class="text-primary">House</span></h1>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Premium Vacation Home</p>
-          </div>
-        </div>
-
-        <div class="hidden md:flex space-x-8 items-center">
-          <a href="#home" class="text-gray-600 hover:text-primary font-medium transition">หน้าแรก</a>
-          <a href="#properties" class="text-gray-600 hover:text-primary font-medium transition">บ้านพักของเรา</a>
-          <a href="#attractions" class="text-gray-600 hover:text-primary font-medium transition">ที่เที่ยวใกล้เคียง</a>
-          <a href="#location" class="text-gray-600 hover:text-primary font-medium transition">แผนที่</a>
-          <a href="#contact" class="px-5 py-2.5 bg-primary text-white rounded-full hover:bg-green-800 transition shadow-lg shadow-green-700/30 font-medium">
-            จองเลย <i class="fa-solid fa-arrow-right ml-1"></i>
-          </a>
-        </div>
-
-        <button class="md:hidden text-gray-600 text-2xl">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+  <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-house-chimney text-2xl text-brand"></i>
+        <span class="text-xl font-bold text-gray-900">Smile<span class="text-brand">House</span></span>
       </div>
+      <div class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+        <a href="#sale" class="hover:text-brand">ซื้อบ้าน</a>
+        <a href="#rent" class="hover:text-brand">บ้านพักรายวัน</a>
+        <a href="#attractions" class="hover:text-brand">ที่เที่ยว</a>
+        <a href="#contact" class="hover:text-brand">ติดต่อเรา</a>
+      </div>
+      <a href="#contact" class="hidden md:block px-5 py-2 bg-brand text-white rounded-lg text-sm hover:bg-blue-900 transition shadow-lg">จอง / นัดชม</a>
     </div>
   </nav>
 
-  <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1600596542815-2a4fae2d3d80?q=80&w=2070&auto=format&fit=crop" 
-           alt="Luxury House" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-gray-900/90"></div>
-    </div>
+  <header class="relative h-[65vh] flex items-center justify-center overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1600596542815-2a4fae2d3d80?q=80&w=2070&auto=format&fit=crop" 
+         class="absolute inset-0 w-full h-full object-cover">
+    
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-gray-50/90"></div>
 
-    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-up" style="animation-delay: 0.2s;">
-      <span class="inline-block py-1 px-3 rounded-full bg-white/20 text-white backdrop-blur-sm text-sm mb-4 border border-white/30">
-        ที่สุดแห่งการพักผ่อน
+    <div class="relative z-10 text-center px-4 mt-10">
+      <span class="bg-white/20 backdrop-blur border border-white/50 text-white px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-4 inline-block">
+        Real Estate & Vacation Home
       </span>
-      <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
-        ความสุขที่แท้จริง<br>
-        เริ่มต้นที่ <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-500">Smile House</span>
+      <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-4">
+        หาบ้านที่ใช่...ในแบบที่คุณชอบ
       </h1>
-      <p class="text-lg md:text-2xl text-gray-200 mb-10 font-light max-w-2xl mx-auto">
-        บ้านพักตากอากาศส่วนตัว บรรยากาศเงียบสงบ พร้อมสิ่งอำนวยความสะดวกครบครัน ใกล้แหล่งท่องเที่ยวสำคัญ
+      <p class="text-gray-100 text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto drop-shadow">
+        บริการซื้อขายบ้านเดี่ยว และบ้านพักตากอากาศพร้อมเช่า <br>บนทำเลศักยภาพ บรรยากาศส่วนตัว
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#properties" class="px-8 py-4 bg-primary text-white rounded-lg text-lg font-semibold hover:bg-green-800 transition hover:scale-105 shadow-xl">
-          ดูบ้านพักทั้งหมด
+      
+      <div class="flex gap-4 justify-center">
+        <a href="#sale" class="px-6 py-3 bg-gold text-white rounded-lg font-semibold hover:bg-yellow-600 transition shadow-lg border border-yellow-500">
+          <i class="fa-solid fa-key mr-2"></i>ดูบ้านพร้อมขาย
         </a>
-        <a href="#attractions" class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/40 text-white rounded-lg text-lg font-semibold hover:bg-white hover:text-primary transition">
-          ดูสถานที่ท่องเที่ยว
+        <a href="#rent" class="px-6 py-3 bg-white text-brand rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg">
+          <i class="fa-solid fa-suitcase mr-2"></i>จองบ้านพัก
         </a>
       </div>
-    </div>
-    
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
-        <i class="fa-solid fa-chevron-down text-2xl"></i>
     </div>
   </header>
 
-  <section id="properties" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+  <section id="sale" class="py-16 max-w-7xl mx-auto px-4 -mt-10 relative z-20">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-900">Exclusive Sale <span class="text-gold">บ้านหลุดจอง/มือหนึ่ง</span></h2>
+        <p class="text-gray-500 mt-1">โอกาสเป็นเจ้าของบ้านเดี่ยวคุณภาพ ในราคาพิเศษสุด (เหลือเพียง 2 หลัง)</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">บ้านพัก<span class="text-primary">แนะนำ</span></h2>
-        <div class="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
-        <p class="mt-4 text-gray-600 text-lg">คัดสรรความสบาย เพื่อวันหยุดพิเศษของคุณ</p>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gold/30 hover-lift group">
+        <div class="relative h-72 overflow-hidden">
+          <div class="absolute top-4 left-4 bg-gold text-white px-3 py-1 text-sm font-bold rounded shadow z-10">Exclusive Offer</div>
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-2xl font-bold text-gray-800">The Grand Smile Villa</h3>
+            <span class="text-2xl font-bold text-brand">฿5.9 ลบ.</span>
+          </div>
+          <p class="text-gray-500 mb-4"><i class="fa-solid fa-location-dot text-gold mr-1"></i> โซนหน้าสวน วิวภูเขา</p>
+          <div class="flex gap-4 text-sm text-gray-600 mb-6 border-y border-gray-100 py-3">
+            <span><i class="fa-solid fa-bed mr-1"></i> 3 นอน</span>
+            <span><i class="fa-solid fa-bath mr-1"></i> 3 น้ำ</span>
+            <span><i class="fa-solid fa-car mr-1"></i> 2 จอด</span>
+            <span><i class="fa-solid fa-ruler-combined mr-1"></i> 60 ตร.ว.</span>
+          </div>
+          <button class="w-full py-3 bg-brand text-white rounded-lg hover:bg-blue-900 transition font-medium">
+            นัดหมายเข้าชม (แอดไลน์)
+          </button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer">
-          <div class="relative h-64 overflow-hidden">
-            <span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow">
-              <i class="fa-solid fa-check-circle mr-1"></i> ว่างจอง
-            </span>
-            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop" 
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="House 1">
-            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
-               <p class="text-white font-bold text-lg">Smile Villa A1</p>
-            </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gold/30 hover-lift group">
+        <div class="relative h-72 overflow-hidden">
+          <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 text-sm font-bold rounded shadow z-10">Hot Deal 🔥</div>
+          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2070" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-2xl font-bold text-gray-800">Smile Modern Loft</h3>
+            <span class="text-2xl font-bold text-brand">฿4.2 ลบ.</span>
           </div>
-          <div class="p-6">
-            <div class="flex justify-between items-end mb-4">
-              <div>
-                 <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition">บ้านเดี่ยว Modern Loft</h3>
-                 <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot text-primary"></i> โซนภูเขา View 360°</p>
-              </div>
-              <div class="text-right">
-                <p class="text-2xl font-bold text-primary">฿4,500</p>
-                <p class="text-xs text-gray-400">/ คืน</p>
-              </div>
+          <p class="text-gray-500 mb-4"><i class="fa-solid fa-location-dot text-gold mr-1"></i> ใกล้ตลาด เดินทางสะดวก</p>
+          <div class="flex gap-4 text-sm text-gray-600 mb-6 border-y border-gray-100 py-3">
+            <span><i class="fa-solid fa-bed mr-1"></i> 3 นอน</span>
+            <span><i class="fa-solid fa-bath mr-1"></i> 2 น้ำ</span>
+            <span><i class="fa-solid fa-car mr-1"></i> 2 จอด</span>
+            <span><i class="fa-solid fa-ruler-combined mr-1"></i> 52 ตร.ว.</span>
+          </div>
+          <button class="w-full py-3 bg-brand text-white rounded-lg hover:bg-blue-900 transition font-medium">
+            นัดหมายเข้าชม (แอดไลน์)
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="rent" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">บ้านพักตากอากาศ <span class="text-accent">รายวัน</span></h2>
+        <p class="text-gray-500 mt-2">พักผ่อนกับธรรมชาติ ปาร์ตี้ได้ เสียงดังได้</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition group border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                <span class="absolute top-2 right-2 bg-accent/90 text-white text-xs px-2 py-1 rounded">ว่างจอง</span>
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?q=80&w=2074" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             </div>
-            <hr class="border-gray-100 my-4">
-            <div class="flex justify-between text-gray-500 text-sm">
-               <span><i class="fa-solid fa-bed mr-2"></i>3 ห้องนอน</span>
-               <span><i class="fa-solid fa-bath mr-2"></i>2 ห้องน้ำ</span>
-               <span><i class="fa-solid fa-wifi mr-2"></i>Free Wifi</span>
+            <div class="p-4">
+                <h4 class="font-bold text-lg text-gray-800">บ้านพัก A1 (ริมสระ)</h4>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-gray-500 text-sm"><i class="fa-solid fa-user-group"></i> พักได้ 6-8 ท่าน</span>
+                    <span class="text-brand font-bold">฿3,500/คืน</span>
+                </div>
+                <a href="#" class="block mt-4 text-center py-2 border border-gray-300 rounded text-sm hover:bg-gray-800 hover:text-white transition">ดูรายละเอียด</a>
             </div>
-            <button class="w-full mt-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition">
-               ดูรายละเอียด
-            </button>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition group border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                 <span class="absolute top-2 right-2 bg-red-500/90 text-white text-xs px-2 py-1 rounded">เต็ม</span>
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-4">
+                <h4 class="font-bold text-lg text-gray-800">บ้านพัก A2 (วิวสวน)</h4>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-gray-500 text-sm"><i class="fa-solid fa-user-group"></i> พักได้ 4-6 ท่าน</span>
+                    <span class="text-brand font-bold">฿2,900/คืน</span>
+                </div>
+                <a href="#" class="block mt-4 text-center py-2 border border-gray-300 rounded text-sm hover:bg-gray-800 hover:text-white transition">ดูรายละเอียด</a>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition group border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-4">
+                <h4 class="font-bold text-lg text-gray-800">บ้านพัก B1 (หลังใหญ่)</h4>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-gray-500 text-sm"><i class="fa-solid fa-user-group"></i> พักได้ 10-15 ท่าน</span>
+                    <span class="text-brand font-bold">฿5,500/คืน</span>
+                </div>
+                <a href="#" class="block mt-4 text-center py-2 border border-gray-300 rounded text-sm hover:bg-gray-800 hover:text-white transition">ดูรายละเอียด</a>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition group border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-4">
+                <h4 class="font-bold text-lg text-gray-800">บ้านพัก B2 (คาราโอเกะ)</h4>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-gray-500 text-sm"><i class="fa-solid fa-user-group"></i> พักได้ 10 ท่าน</span>
+                    <span class="text-brand font-bold">฿4,900/คืน</span>
+                </div>
+                <a href="#" class="block mt-4 text-center py-2 border border-gray-300 rounded text-sm hover:bg-gray-800 hover:text-white transition">ดูรายละเอียด</a>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition group border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-4">
+                <h4 class="font-bold text-lg text-gray-800">บ้านพัก C1 (มินิมอล)</h4>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-gray-500 text-sm"><i class="fa-solid fa-user-group"></i> พักได้ 2-4 ท่าน</span>
+                    <span class="text-brand font-bold">฿1,900/คืน</span>
+                </div>
+                <a href="#" class="block mt-4 text-center py-2 border border-gray-300 rounded text-sm hover:bg-gray-800 hover:text-white transition">ดูรายละเอียด</a>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition group border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1513584685908-2274653dbf29?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-4">
+                <h4 class="font-bold text-lg text-gray-800">บ้านพัก C2 (ครอบครัว)</h4>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-gray-500 text-sm"><i class="fa-solid fa-user-group"></i> พักได้ 4-5 ท่าน</span>
+                    <span class="text-brand font-bold">฿2,500/คืน</span>
+                </div>
+                <a href="#" class="block mt-4 text-center py-2 border border-gray-300 rounded text-sm hover:bg-gray-800 hover:text-white transition">ดูรายละเอียด</a>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="attractions" class="py-16 bg-gray-900 text-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-end mb-8">
+        <div>
+          <h2 class="text-3xl font-bold">สถานที่ท่องเที่ยว <span class="text-accent">ใกล้เคียง</span></h2>
+          <p class="text-gray-400 mt-2">พักที่นี่ เที่ยวคุ้ม เดินทางไม่เกิน 20 นาที</p>
+        </div>
+        <div class="hidden md:flex gap-2">
+             <button onclick="document.getElementById('scroll-container').scrollBy({left: -300, behavior: 'smooth'})" class="w-10 h-10 border border-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700"><i class="fa-solid fa-chevron-left"></i></button>
+             <button onclick="document.getElementById('scroll-container').scrollBy({left: 300, behavior: 'smooth'})" class="w-10 h-10 border border-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <div id="scroll-container" class="flex gap-6 overflow-x-auto pb-8 hide-scroll snap-x snap-mandatory">
+        
+        <div class="flex-none w-80 snap-center bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-lg font-bold">หาดทรายขาว</h3>
+            <p class="text-gray-400 text-sm mt-1 mb-3"><i class="fa-solid fa-map-pin text-accent"></i> ห่าง 5 กม.</p>
+            <p class="text-sm text-gray-300">น้ำทะเลใส ทรายนุ่ม เหมาะกับการเล่นน้ำและดูพระอาทิตย์ตก</p>
           </div>
         </div>
 
-        <div class="group bg-white rounded-2xl shadow-md grayscale hover:grayscale-0 transition-all duration-300 overflow-hidden border border-gray-100 opacity-80 hover:opacity-100">
-            <div class="relative h-64 overflow-hidden">
-              <span class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow">
-                <i class="fa-solid fa-times-circle mr-1"></i> เต็มแล้ว
-              </span>
-              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop" 
-                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="House 2">
-            </div>
-            <div class="p-6">
-              <div class="flex justify-between items-end mb-4">
-                <div>
-                   <h3 class="text-xl font-bold text-gray-800">Smile Pool Villa B2</h3>
-                   <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot text-primary"></i> ติดสระว่ายน้ำส่วนตัว</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-2xl font-bold text-gray-400 line-through">฿6,900</p>
-                  <p class="text-xs text-gray-400">/ คืน</p>
-                </div>
-              </div>
-              <hr class="border-gray-100 my-4">
-              <div class="flex justify-between text-gray-500 text-sm">
-                 <span><i class="fa-solid fa-bed mr-2"></i>4 ห้องนอน</span>
-                 <span><i class="fa-solid fa-water mr-2"></i>สระส่วนตัว</span>
-                 <span><i class="fa-solid fa-car mr-2"></i>2 จอด</span>
-              </div>
-              <button disabled class="w-full mt-6 py-3 bg-gray-200 text-gray-500 rounded-lg font-semibold cursor-not-allowed">
-                 จองเต็มแล้ว
-              </button>
-            </div>
+        <div class="flex-none w-80 snap-center bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700">
+          <img src="https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2008" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-lg font-bold">คาเฟ่ริมน้ำ (Smile Cafe)</h3>
+            <p class="text-gray-400 text-sm mt-1 mb-3"><i class="fa-solid fa-map-pin text-accent"></i> ห่าง 1 กม.</p>
+            <p class="text-sm text-gray-300">คาเฟ่สไตล์มินิมอล ถ่ายรูปสวย กาแฟดี ขนมอร่อย</p>
           </div>
+        </div>
 
-          <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer">
-            <div class="relative h-64 overflow-hidden">
-              <span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow">
-                <i class="fa-solid fa-check-circle mr-1"></i> ว่างจอง
-              </span>
-              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" 
-                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="House 3">
-            </div>
-            <div class="p-6">
-              <div class="flex justify-between items-end mb-4">
-                <div>
-                   <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition">Smile Cottage C3</h3>
-                   <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot text-primary"></i> โซนสวนดอกไม้</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-2xl font-bold text-primary">฿2,900</p>
-                  <p class="text-xs text-gray-400">/ คืน</p>
-                </div>
-              </div>
-              <hr class="border-gray-100 my-4">
-              <div class="flex justify-between text-gray-500 text-sm">
-                 <span><i class="fa-solid fa-bed mr-2"></i>2 ห้องนอน</span>
-                 <span><i class="fa-solid fa-leaf mr-2"></i>วิวสวน</span>
-                 <span><i class="fa-solid fa-utensils mr-2"></i>ครัว</span>
-              </div>
-              <button class="w-full mt-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition">
-                 ดูรายละเอียด
-              </button>
+        <div class="flex-none w-80 snap-center bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700">
+          <img src="https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?q=80&w=1974" class="w-full h-48 object-cover">
+          <div class="p-5">
+            <h3 class="text-lg font-bold">ตลาดอาหารทะเลสด</h3>
+            <p class="text-gray-400 text-sm mt-1 mb-3"><i class="fa-solid fa-map-pin text-accent"></i> ห่าง 3 กม.</p>
+            <p class="text-sm text-gray-300">แหล่งรวมอาหารทะเลสดๆ ราคาถูก ปิ้งย่างได้เลย</p>
+          </div>
+        </div>
+
+         <div class="flex-none w-80 snap-center bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700">
+            <img src="https://images.unsplash.com/photo-1533929736472-594e69255fcc?q=80&w=2070" class="w-full h-48 object-cover">
+            <div class="p-5">
+              <h3 class="text-lg font-bold">จุดชมวิวเขาแหลม</h3>
+              <p class="text-gray-400 text-sm mt-1 mb-3"><i class="fa-solid fa-map-pin text-accent"></i> ห่าง 10 กม.</p>
+              <p class="text-sm text-gray-300">วิวพาโนราม่า เห็นทะเลสุดลูกหูลูกตา</p>
             </div>
           </div>
 
       </div>
+    </div>
+  </section>
 
-      <div class="text-center mt-12">
-        <a href="#" class="inline-flex items-center text-primary font-semibold hover:underline">
-            ดูบ้านพักทั้งหมด <i class="fa-solid fa-arrow-right ml-2"></i>
+  <section id="contact" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      
+      <div class="flex flex-col justify-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">เดินทางมาหาเรา <span class="text-brand">Smile House</span></h2>
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="bg-blue-100 p-3 rounded-full text-brand"><i class="fa-solid fa-map-location-dot text-xl"></i></div>
+            <div>
+              <h4 class="font-bold text-lg">ที่ตั้งโครงการ</h4>
+              <p class="text-gray-600">123 หมู่ 5 ต.เพ อ.เมือง จ.ระยอง (ใกล้หาดแม่รำพึง)</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="bg-green-100 p-3 rounded-full text-green-700"><i class="fa-brands fa-line text-xl"></i></div>
+            <div>
+              <h4 class="font-bold text-lg">ติดต่อจองบ้าน/สอบถาม</h4>
+              <p class="text-gray-600">Line ID: @smilehouse888</p>
+              <p class="text-gray-600">Tel: 099-888-9999</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://maps.google.com" target="_blank" class="mt-8 inline-block w-fit px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition">
+            <i class="fa-solid fa-diamond-turn-right mr-2"></i>นำทาง Google Map
         </a>
       </div>
-    </div>
-  </section>
 
-  <section id="attractions" class="py-20 bg-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-yellow-50 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
-
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="flex justify-between items-end mb-10 px-2">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">เช็คอิน<span class="text-secondary">ที่เที่ยวใกล้เคียง</span></h2>
-                <p class="mt-2 text-gray-500">รวมจุดแลนด์มาร์คยอดฮิต เดินทางง่ายจากที่พัก</p>
-            </div>
-            <div class="hidden md:flex gap-2">
-                <button onclick="document.getElementById('scroller').scrollBy({left: -300, behavior: 'smooth'})" class="p-3 rounded-full border hover:bg-gray-100"><i class="fa-solid fa-chevron-left"></i></button>
-                <button onclick="document.getElementById('scroller').scrollBy({left: 300, behavior: 'smooth'})" class="p-3 rounded-full border hover:bg-gray-100"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-        </div>
-
-        <div id="scroller" class="flex gap-6 overflow-x-auto pb-10 hide-scroll snap-x snap-mandatory px-2">
-            
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
-                <div class="h-56 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-5">
-                    <div class="flex justify-between items-start">
-                        <h3 class="text-xl font-bold">หาดแสงจันทร์</h3>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">5 กม.</span>
-                    </div>
-                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">ทะเลสวย บรรยากาศดี เหมาะแก่การเดินเล่นชมพระอาทิตย์ตกดิน พร้อมร้านอาหารทะเลสดใหม่มากมาย</p>
-                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
-                </div>
-            </div>
-
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
-                <div class="h-56 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2008&auto=format&fit=crop" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-5">
-                    <div class="flex justify-between items-start">
-                        <h3 class="text-xl font-bold">คาเฟ่ริมน้ำ (Smile Cafe)</h3>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">1.2 กม.</span>
-                    </div>
-                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">จิบกาแฟแลวิวแม่น้ำ มุมถ่ายรูปเพียบ สไตล์มินิมอล ครัวซองต์อร่อยมากต้องมาลอง</p>
-                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
-                </div>
-            </div>
-
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
-                <div class="h-56 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1974&auto=format&fit=crop" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-5">
-                    <div class="flex justify-between items-start">
-                        <h3 class="text-xl font-bold">ตลาดผลไม้ตะพง</h3>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">10 กม.</span>
-                    </div>
-                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">แหล่งรวมผลไม้ขึ้นชื่อ ทุเรียน เงาะ มังคุด สดๆ จากสวน ราคาถูก ของฝากเพียบ</p>
-                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
-                </div>
-            </div>
-
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
-                <div class="h-56 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-5">
-                    <div class="flex justify-between items-start">
-                        <h3 class="text-xl font-bold">จุดชมวิวเขาแหลมหญ้า</h3>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">15 กม.</span>
-                    </div>
-                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">อุทยานแห่งชาติ วิวทะเลสวยตัดกับทุ่งหญ้า สะพานไม้ทอดยาว ถ่ายรูปสวยมาก</p>
-                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-  </section>
-
-  <section id="location" class="py-20 bg-gray-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="h-[400px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg relative">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.595606622342!2d100.8756923148215!3d12.933706390880625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310296115985834f%3A0xc06e33887258380!2sPattaya%20Beach!5e0!3m2!1sen!2sth!4v1677648325456!5m2!1sen!2sth" 
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         
-        <div class="order-2 lg:order-1">
-            <h2 class="text-4xl font-bold mb-6">การเดินทางมาที่<br><span class="text-primary">Smile House</span></h2>
-            <p class="text-gray-300 mb-8 text-lg leading-relaxed">
-                เราตั้งอยู่ใจกลางธรรมชาติ แต่เดินทางสะดวก ติดถนนใหญ่ ใกล้แหล่งชุมชน 
-                สามารถเดินทางมาได้ทั้งรถส่วนตัวและรถตู้โดยสาร 
-            </p>
-            
-            <div class="space-y-6">
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-primary/20 rounded-lg text-primary">
-                        <i class="fa-solid fa-location-dot text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xl">ที่อยู่</h4>
-                        <p class="text-gray-400">123 หมู่ 5 ต.เพ อ.เมือง จ.ระยอง 21160</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-primary/20 rounded-lg text-primary">
-                        <i class="fa-solid fa-phone text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xl">ติดต่อสอบถาม</h4>
-                        <p class="text-gray-400">099-888-9999 (คุณสมายล์)</p>
-                    </div>
-                </div>
-            </div>
-
-            <a href="https://maps.google.com" target="_blank" class="mt-10 inline-flex items-center gap-2 bg-primary hover:bg-green-600 text-white px-8 py-3 rounded-lg font-bold transition">
-                <i class="fa-solid fa-diamond-turn-right"></i> นำทางผ่าน Google Maps
-            </a>
+        <div class="absolute bottom-4 right-4 bg-white px-4 py-2 rounded shadow text-xs font-bold pointer-events-none">
+            📍 พิกัด Smile House
         </div>
-
-        <div class="order-1 lg:order-2 h-[400px] lg:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-700">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124616.48512128715!2d101.21326462662058!3d12.681121899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102d64483750871%3A0xc3f5c78672957102!2sRayong!5e0!3m2!1sen!2sth!4v1709400000000!5m2!1sen!2sth" 
-                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
+      </div>
 
     </div>
   </section>
 
-  <footer class="bg-gray-50 pt-16 pb-8 border-t border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        
-        <div class="flex justify-center items-center gap-2 mb-6">
-            <i class="fa-solid fa-house-chimney text-3xl text-primary"></i>
-            <span class="text-2xl font-bold text-gray-800">Smile<span class="text-primary">House</span></span>
-        </div>
-
-        <div class="flex justify-center gap-6 mb-8">
-            <a href="#" class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center hover:scale-110 transition"><i class="fa-brands fa-line"></i></a>
-            <a href="#" class="w-10 h-10 rounded-full bg-pink-500 text-white flex items-center justify-center hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></a>
-        </div>
-
-        <p class="text-gray-500 text-sm">
-            © 2025 Smile House Real Estate. All rights reserved.<br>
-            Designed by <span class="text-primary font-bold">YourName</span>
-        </p>
-    </div>
+  <footer class="bg-brand text-white py-8 text-center border-t border-white/10">
+    <p class="opacity-80">© 2025 Smile House Real Estate. All Rights Reserved.</p>
+    <p class="text-sm opacity-50 mt-1">Design by เทพเว็บอันดับ 1</p>
   </footer>
-
-  <script>
-    // เปลี่ยนสี Navbar เมื่อเลื่อนลง
-    window.addEventListener('scroll', function() {
-        const nav = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-            nav.classList.add('shadow-lg', 'bg-white/95');
-        } else {
-            nav.classList.remove('shadow-lg');
-        }
-    });
-  </script>
 
 </body>
 </html>
