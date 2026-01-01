@@ -1,388 +1,408 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO และแชร์บนโซเชียล -->
-<meta name="description" content="บ้านเดี่ยวให้เช่าและขาย Smile House ระยอง ใกล้ทะเล เงียบสงบ พร้อมแอร์ ที่จอดรถ บรรยากาศดีเยี่ยม เหมาะสำหรับครอบครัว โทรเลย 063-186-2828">
-<meta name="keywords" content="บ้านเช่ารายเดือน, ขายบ้านเดี่ยว, ระยอง, บ้านใกล้ทะเล, Smile House, บ้านเดี่ยว, บ้านราคาถูก">
-
-<!-- Open Graph (Facebook, LINE ฯลฯ) -->
-<meta property="og:title" content="Smile House - บ้านเดี่ยวระยอง เช่าและขาย">
-<meta property="og:description" content="บริการบ้านเดี่ยวพร้อมอยู่ในระยอง ใกล้ทะเล เงียบสงบ โทร 063-186-2828">
-<meta property="og:image" content="https://yourdomain.com/img/hero-banner-rayong-house.jpg">
-<meta property="og:url" content="https://yourdomain.com">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Smile House - บ้านเดี่ยวระยอง">
-<meta name="twitter:description" content="บ้านเช่าและขาย พร้อมที่จอดรถ แอร์ ใกล้ทะเล โทร 063-186-2828">
-<meta name="twitter:image" content="https://yourdomain.com/img/hero-banner-rayong-house.jpg">
-
+  <title>Smile House Exclusive - บ้านพักตากอากาศระดับพรีเมียม</title>
   
-  <title>Smile House - บ้านเดี่ยวระยอง</title>
-  <!-- นำเข้า Google Fonts (Prompt) -->
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
-  <!-- นำเข้า Font Awesome สำหรับใช้ไอคอน -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- ลิงก์ไปยังไฟล์ CSS ภายนอก -->
-  <link rel="stylesheet" href="style.css">
-    <!-- ไอคอนแท็บเว็บ -->
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="shortcut icon" href="favicon.png" type="image/png">
-  <!-- favicon -->
-<link rel="icon" href="favicon.png?v=2" type="image/png">
-<link rel="shortcut icon" href="favicon.png?v=2" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ตั้งค่าฟอนต์หลัก */
+    body {
+      font-family: 'Prompt', sans-serif;
+    }
+
+    /* ซ่อน Scrollbar แต่ยังเลื่อนได้ (เพื่อความสวยงามในโซนสถานที่เที่ยว) */
+    .hide-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Animation สำหรับ Fade In */
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Gradient Text */
+    .text-gradient {
+      background: linear-gradient(to right, #166534, #15803d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#15803d', /* สีเขียวธรรมชาติ ดูสบายตา */
+            secondary: '#ca8a04', /* สีทอง ดูหรูหรา */
+            dark: '#1e293b',
+          }
+        }
+      }
+    }
+  </script>
 </head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-primary selection:text-white">
 
-<body>
-  <!-- ส่วน Header ด้านบนสุดของเว็บ -->
-  <header class="header-container">
-  <a href="#" class="logo">
-    <i class="fas fa-home"></i>
-    <span>Smile House</span>
-  </a>
+  <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+          <i class="fa-solid fa-house-chimney text-3xl text-primary"></i>
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Smile<span class="text-primary">House</span></h1>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Premium Vacation Home</p>
+          </div>
+        </div>
 
-  <!-- เมนูหลัก -->
-  <nav class="main-nav" id="mainNav">
-    <a href="#rent">เช่ารายเดือน</a>
-    <a href="#sale">ขาย บ้านเดี่ยว</a>
-    <a href="#details">รายละเอียด</a>
-    <a href="#contact">ติดต่อ</a>
+        <div class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-600 hover:text-primary font-medium transition">หน้าแรก</a>
+          <a href="#properties" class="text-gray-600 hover:text-primary font-medium transition">บ้านพักของเรา</a>
+          <a href="#attractions" class="text-gray-600 hover:text-primary font-medium transition">ที่เที่ยวใกล้เคียง</a>
+          <a href="#location" class="text-gray-600 hover:text-primary font-medium transition">แผนที่</a>
+          <a href="#contact" class="px-5 py-2.5 bg-primary text-white rounded-full hover:bg-green-800 transition shadow-lg shadow-green-700/30 font-medium">
+            จองเลย <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+
+        <button class="md:hidden text-gray-600 text-2xl">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
   </nav>
-</header>
 
-<!-- Section Hero: ภาพพื้นหลังใหญ่ + ปุ่มนำทางบนรูปเลย -->
-<section class="hero" id="home">
-  <div class="hero-overlay">
-    <h1>Smile House</h1>
-    <div class="hero-buttons">
-    <!-- ปุ่มนำทางแต่ละฟังก์ชัน -->
-    <a href="#rent" class="menu-button"><i class="fas fa-house-user"></i> เช่ารายเดือน</a>
-    <a href="#sale" class="menu-button"><i class="fas fa-sign"></i> ขาย บ้านเดี่ยว</a>
-    <a href="#details" class="menu-button"><i class="fas fa-info-circle"></i> รายละเอียด</a>
-    <a href="#contact" class="menu-button"><i class="fas fa-phone"></i> ติดต่อสอบถาม</a>
+  <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1600596542815-2a4fae2d3d80?q=80&w=2070&auto=format&fit=crop" 
+           alt="Luxury House" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-gray-900/90"></div>
     </div>
-  </div>
-</section>
 
-<!-- Section ขายบ้านเดี่ยว: ใช้การ์ดแบบเดียวกัน -->
-<section id="sale" class="property-section">
-  <h2 class="section-title">ขายบ้านเดี่ยวพร้อมที่ดิน 🏡</h2>
-
-  <div class="property-list-sale">
-
-<!-- บ้านหลังที่ 1 -->
-<div class="property-card-sale">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-sale-72sqw-rayong-desktop.webp" media="(min-width: 769px)" type="image/webp">
-      <source srcset="img/house-sale-72sqw-rayong-mobile.webp" media="(max-width: 768px)" type="image/webp">
-      <img src="img/house-sale-72sqw-rayong-desktop.webp" alt="บ้าน 72 ตร.วา มีโรงรถและสนามหญ้า" width="100%" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว 72ตร.วา</h3>
-    <p>บ้านเดี่ยว 72ตร.วา มีรั้วรอบ มีโรงรถ+สนามหญ้า สามารถต่อเติมเองได้ ระยอง</p>
-  </div>
-  <div class="card-actions">
-    <span class="price">1,380,000 บาท</span>
-    <a href="tel:0631862828" title="โทรเลย"><i class="fas fa-phone"></i></a>
-    <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-up" style="animation-delay: 0.2s;">
+      <span class="inline-block py-1 px-3 rounded-full bg-white/20 text-white backdrop-blur-sm text-sm mb-4 border border-white/30">
+        ที่สุดแห่งการพักผ่อน
+      </span>
+      <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+        ความสุขที่แท้จริง<br>
+        เริ่มต้นที่ <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-500">Smile House</span>
+      </h1>
+      <p class="text-lg md:text-2xl text-gray-200 mb-10 font-light max-w-2xl mx-auto">
+        บ้านพักตากอากาศส่วนตัว บรรยากาศเงียบสงบ พร้อมสิ่งอำนวยความสะดวกครบครัน ใกล้แหล่งท่องเที่ยวสำคัญ
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#properties" class="px-8 py-4 bg-primary text-white rounded-lg text-lg font-semibold hover:bg-green-800 transition hover:scale-105 shadow-xl">
+          ดูบ้านพักทั้งหมด
+        </a>
+        <a href="#attractions" class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/40 text-white rounded-lg text-lg font-semibold hover:bg-white hover:text-primary transition">
+          ดูสถานที่ท่องเที่ยว
+        </a>
+      </div>
+    </div>
     
-    <a href="#contact" class="contact-link-btn">
-      <i class="fas fa-envelope"></i> สอบถามต่อรอง
-    </a>
-  </div>
-</div>
-
-  <!-- บ้านหลังที่ 2 -->
-<div class="property-card-sale">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-sale-37sqw-rayong-desktop.webp" media="(min-width: 769px)" type="image/webp">
-      <source srcset="img/house-sale-37sqw-rayong-mobile.webp" media="(max-width: 768px)" type="image/webp">
-      <img src="img/house-sale-37sqw-rayong-desktop.webp" alt="บ้าน 37 ตร.วา" width="100%" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว 37ตร.วา</h3>
-    <p>บ้านเดี่ยว 37ตร.วา มีที่จอดรถ แอร์ ใกล้ทะเล ระยอง</p>
-  </div>
-  <div class="card-actions">
-    <span class="price">980,000 บาท</span>
-    <a href="tel:0631862828" title="โทรเลย"><i class="fas fa-phone"></i></a>
-
-        <!-- บ้านหลังที่ 2 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
-    
-    <a href="#contact" class="contact-link-btn">
-      <i class="fas fa-envelope"></i> สอบถามต่อรอง
-    </a>
-  </div>
-</div>
-
-  
-    
-
-  </div>
-</section>
-
-<!-- Section เช่ารายเดือน: รายการบ้านให้เช่าแบบการ์ด กรณีว่างให้แก้ <div class="status status-available">
-  <i class="fas fa-check"></i> ว่าง
-</div>  และแก้ข้อความเป็น "ว่าง" -->
-<!-- Section: รายการเช่ารายเดือน -->
-<section id="rent" class="property-section">
-  <!-- เริ่มกล่องครอบหัวข้อ + รายการทั้งหมด -->
-  <div class="property-container">
-
-    <!-- หัวข้อหลักของหมวดนี้ -->
-    <h2 class="property-title">เช่ารายเดือนบ้านเดี่ยว <span class="emoji-house">🏡</span></h2>
-
-    <!-- รายการบ้านที่ให้เช่า (วางการ์ดบ้านไว้ตรงนี้) -->
-    <div class="property-list-sale">
-      <!-- ตัวอย่างการ์ดบ้าน -->
-<!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
-<div class="rent-card full">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-rent-1-rayong-mobile.webp" media="(max-width: 768px)">
-      <source srcset="img/house-rent-1-rayong-desktop.webp" media="(min-width: 769px)">
-      <img src="img/house-rent-1-rayong-desktop.webp" alt="บ้านเช่าระยอง1">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว1 มีแอร์ เตียง +โรงรถ</h3>
-    <p>ราคา: 3,900 บาท/เดือน 
-      ค่าไฟตามรัฐบาล 4.Xบาท/ยูนิต</p>
-  </div>
-  <div class="card-actions">
-    <div class="status status-full">
-      <i class="fas fa-times"></i> เต็มแล้ว
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
+        <i class="fa-solid fa-chevron-down text-2xl"></i>
     </div>
-    <a href="tel:0631862828" class="contact-link-btn">
-      <i class="fas fa-phone"></i> จอง สอบถาม
-    </a>
-        <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
-  </div>
-</div>
-      <!-- ... การ์ดหลังอื่นๆ ... -->
+  </header>
 
-           <!-- 2 ตัวอย่างบ้านที่ "ใกล้ว่าง" -->
-<div class="rent-card soon">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-rent-2-rayong-mobile.webp" media="(max-width: 768px)">
-      <source srcset="img/house-rent-2-rayong-desktop.webp" media="(min-width: 769px)">
-      <img src="img/house-rent-7-rayong-desktop.webp" alt="บ้านเช่าระยอง2">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว2 มีแอร์ เตียง</h3>
-    <p>ราคา: 3,600 บาท/เดือน  
-      ค่าไฟตามรัฐบาล 4.Xบาท/ยูนิต</p>
-  </div>
-  <div class="card-actions">
-    <div class="status status-soon">
-      <i class="fas fa-clock"></i> จองมัดจำแล้ว
+  <section id="properties" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">บ้านพัก<span class="text-primary">แนะนำ</span></h2>
+        <div class="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
+        <p class="mt-4 text-gray-600 text-lg">คัดสรรความสบาย เพื่อวันหยุดพิเศษของคุณ</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer">
+          <div class="relative h-64 overflow-hidden">
+            <span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow">
+              <i class="fa-solid fa-check-circle mr-1"></i> ว่างจอง
+            </span>
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="House 1">
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+               <p class="text-white font-bold text-lg">Smile Villa A1</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-end mb-4">
+              <div>
+                 <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition">บ้านเดี่ยว Modern Loft</h3>
+                 <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot text-primary"></i> โซนภูเขา View 360°</p>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl font-bold text-primary">฿4,500</p>
+                <p class="text-xs text-gray-400">/ คืน</p>
+              </div>
+            </div>
+            <hr class="border-gray-100 my-4">
+            <div class="flex justify-between text-gray-500 text-sm">
+               <span><i class="fa-solid fa-bed mr-2"></i>3 ห้องนอน</span>
+               <span><i class="fa-solid fa-bath mr-2"></i>2 ห้องน้ำ</span>
+               <span><i class="fa-solid fa-wifi mr-2"></i>Free Wifi</span>
+            </div>
+            <button class="w-full mt-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition">
+               ดูรายละเอียด
+            </button>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-2xl shadow-md grayscale hover:grayscale-0 transition-all duration-300 overflow-hidden border border-gray-100 opacity-80 hover:opacity-100">
+            <div class="relative h-64 overflow-hidden">
+              <span class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow">
+                <i class="fa-solid fa-times-circle mr-1"></i> เต็มแล้ว
+              </span>
+              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop" 
+                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="House 2">
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-end mb-4">
+                <div>
+                   <h3 class="text-xl font-bold text-gray-800">Smile Pool Villa B2</h3>
+                   <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot text-primary"></i> ติดสระว่ายน้ำส่วนตัว</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-2xl font-bold text-gray-400 line-through">฿6,900</p>
+                  <p class="text-xs text-gray-400">/ คืน</p>
+                </div>
+              </div>
+              <hr class="border-gray-100 my-4">
+              <div class="flex justify-between text-gray-500 text-sm">
+                 <span><i class="fa-solid fa-bed mr-2"></i>4 ห้องนอน</span>
+                 <span><i class="fa-solid fa-water mr-2"></i>สระส่วนตัว</span>
+                 <span><i class="fa-solid fa-car mr-2"></i>2 จอด</span>
+              </div>
+              <button disabled class="w-full mt-6 py-3 bg-gray-200 text-gray-500 rounded-lg font-semibold cursor-not-allowed">
+                 จองเต็มแล้ว
+              </button>
+            </div>
+          </div>
+
+          <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer">
+            <div class="relative h-64 overflow-hidden">
+              <span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow">
+                <i class="fa-solid fa-check-circle mr-1"></i> ว่างจอง
+              </span>
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" 
+                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="House 3">
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-end mb-4">
+                <div>
+                   <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition">Smile Cottage C3</h3>
+                   <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot text-primary"></i> โซนสวนดอกไม้</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-2xl font-bold text-primary">฿2,900</p>
+                  <p class="text-xs text-gray-400">/ คืน</p>
+                </div>
+              </div>
+              <hr class="border-gray-100 my-4">
+              <div class="flex justify-between text-gray-500 text-sm">
+                 <span><i class="fa-solid fa-bed mr-2"></i>2 ห้องนอน</span>
+                 <span><i class="fa-solid fa-leaf mr-2"></i>วิวสวน</span>
+                 <span><i class="fa-solid fa-utensils mr-2"></i>ครัว</span>
+              </div>
+              <button class="w-full mt-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition">
+                 ดูรายละเอียด
+              </button>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="#" class="inline-flex items-center text-primary font-semibold hover:underline">
+            ดูบ้านพักทั้งหมด <i class="fa-solid fa-arrow-right ml-2"></i>
+        </a>
+      </div>
     </div>
-    <a href="tel:0631862828" class="contact-link-btn">
-      <i class="fas fa-phone"></i> จอง สอบถาม
-    </a>
-    <a href="https://www.facebook.com/share/..." target="_blank" class="social-icon">
-      <img src="img/Logo-Facebook.svg" alt="Facebook">
-    </a>
-    <a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-      <img src="img/Logo-LINE.svg" alt="LINE">
-    </a>
-  </div>
-</div>
-
-                 <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
-<div class="rent-card full">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-rent-3-rayong-mobile.webp" media="(max-width: 768px)">
-      <source srcset="img/house-rent-3-rayong-desktop.webp" media="(min-width: 769px)">
-      <img src="img/house-rent-3-rayong-desktop.webp" alt="บ้านเช่าระยอง3">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว3 มีแอร์ เตียง</h3>
-    <p>ราคา: 3,600 บาท/เดือน  
-      ค่าไฟตามรัฐบาล 4.Xบาท/ยูนิต</p>
-  </div>
-  <div class="card-actions">
-    <div class="status status-full">
-      <i class="fas fa-times"></i> เต็มแล้ว
-    </div>
-    <a href="#contact" class="contact-link-btn">
-      <i class="fas fa-envelope"></i> สอบถาม,จอง
-    </a>
-        <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
-  </div>
-</div>
-
-
-                 <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
-<div class="rent-card full">
-  <div class="property-image">
-    <img 
-      src="img/house-rent-4-rayong-mobile.webp"
-      srcset="img/house-rent-4-rayong-mobile.webp 600w, img/house-rent-4-rayong-desktop.webp 1200w"
-      sizes="(max-width: 768px) 100vw, 600px"
-      alt="บ้านเช่าระยอง4">
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว4 มีแอร์ เตียง</h3>
-    <p>ราคา: 3,600 บาท/เดือน  
-      ค่าไฟตามรัฐบาล 4.Xบาท/ยูนิต</p>
-  </div>
-  <div class="card-actions">
-    <div class="status status-full">
-      <i class="fas fa-times"></i> เต็มแล้ว
-    </div>
-    <a href="#contact" class="contact-link-btn">
-      <i class="fas fa-envelope"></i> สอบถาม,จอง
-    </a>
-        <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
-  </div>
-</div>
-
-
-                 <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
-<div class="rent-card full">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-rent-5-rayong-desktop.webp" media="(min-width: 768px)">
-      <img src="img/house-rent-5-rayong-mobile.webp" alt="บ้านเช่าระยอง5">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว5 มีแอร์ เตียง</h3>
-    <p>ราคา: 3,600 บาท/เดือน  
-      ค่าไฟตามรัฐบาล 4.Xบาท/ยูนิต</p>
-  </div>
-  <div class="card-actions">
-    <div class="status status-full">
-      <i class="fas fa-times"></i> เต็มแล้ว
-    </div>
-    <a href="#contact" class="contact-link-btn">
-      <i class="fas fa-envelope"></i> สอบถาม,จอง
-    </a>
-        <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
-  </div>
-</div>
-
-                 <!-- ตัวอย่างบ้านที่ "เต็มแล้ว" -->
-<div class="rent-card full">
-  <div class="property-image">
-    <picture>
-      <source srcset="img/house-rent-6-rayong-mobile.webp" media="(max-width: 768px)">
-      <img src="img/house-rent-6-rayong-desktop.webp" alt="บ้านเช่าระยอง6" loading="lazy">
-    </picture>
-  </div>
-  <div class="card-content">
-    <h3>บ้านเดี่ยว6 ห้องใหญ่ขึ้น ห้องครัว 2เตียง มีแอร์</h3>
-    <p>ราคา: 4,400 บาท/เดือน  
-      ค่าไฟตามรัฐบาล 4.Xบาท/ยูนิต</p>
-  </div>
-    <div class="card-actions">
-    <div class="status status-soon">
-      <i class="fas fa-clock"></i> ว่างเดือน9
-    </div>
-    <a href="#contact" class="contact-link-btn">
-      <i class="fas fa-envelope"></i> สอบถาม,จอง
-    </a>
-        <!-- บ้านหลังที่ 1 เพิ่มปุ่มไลนเฟส -->
-<a href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" class="social-icon">
-  <img src="img/Logo-Facebook.svg" alt="Facebook">
-</a>
-<a href="https://lin.ee/OqcbR3t" target="_blank" class="social-icon">
-  <img src="img/Logo-LINE.svg" alt="LINE">
-</a>
-  </div>
-</div>
-
-  </div>
-</section>
-
-
-
-
-  <!-- Section รายละเอียด: ปรับให้ดูดีขึ้นในภายหลัง -->
-  <section id="details" class="info-section">
-    <h2>
-     
-      รายละเอียดเพิ่มเติม</h2>
-    <ul>
-      <li>ใกล้ทะเล หาดสวนสนเพ เพียง 3 กม.</li>
-      <li>สงบ ปลอดภัย มีรั้วล้อมรอบ</li>
-      <li>เดินทางสะดวก ใกล้โลตัสเอ้กเพส ตลาดสด ปั๊มน้ำมัน</li>
-    </ul>
   </section>
 
-  <!-- Section ช่องทางติดต่อ -->
-  <section id="contact" class="contact-section">
-      
-<h2>ช่องทางการติดต่อ</h2> 
-<div class="contact-buttons">
-  <a class="btn red" href="tel:0631862828"><i class="fas fa-phone"></i> 063 186 2828</a>
-  <a class="btn blue" href="https://www.facebook.com/share/19NkhBoipb/?mibextid=wwXIfr" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a>
-  <a class="btn orange" href="https://maps.app.goo.gl/2Lzx1jWDXQ9YZkxH6" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> แผนที่</a>
-  <a class="btn green" href="https://lin.ee/OqcbR3t" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE</a>
-</div>
+  <section id="attractions" class="py-20 bg-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-yellow-50 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
 
-  <!-- Modal สำหรับดูรายละเอียดบ้าน (จะเปิดเมื่อกดปุ่มดูรายละเอียด) -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close-button">&times;</span> <!-- ปุ่มปิด -->
-      <img id="modal-image" src="" alt="รูปบ้าน">
-      <p id="modal-description"></p>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="flex justify-between items-end mb-10 px-2">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">เช็คอิน<span class="text-secondary">ที่เที่ยวใกล้เคียง</span></h2>
+                <p class="mt-2 text-gray-500">รวมจุดแลนด์มาร์คยอดฮิต เดินทางง่ายจากที่พัก</p>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <button onclick="document.getElementById('scroller').scrollBy({left: -300, behavior: 'smooth'})" class="p-3 rounded-full border hover:bg-gray-100"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="document.getElementById('scroller').scrollBy({left: 300, behavior: 'smooth'})" class="p-3 rounded-full border hover:bg-gray-100"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div id="scroller" class="flex gap-6 overflow-x-auto pb-10 hide-scroll snap-x snap-mandatory px-2">
+            
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold">หาดแสงจันทร์</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">5 กม.</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">ทะเลสวย บรรยากาศดี เหมาะแก่การเดินเล่นชมพระอาทิตย์ตกดิน พร้อมร้านอาหารทะเลสดใหม่มากมาย</p>
+                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
+                </div>
+            </div>
+
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2008&auto=format&fit=crop" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold">คาเฟ่ริมน้ำ (Smile Cafe)</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">1.2 กม.</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">จิบกาแฟแลวิวแม่น้ำ มุมถ่ายรูปเพียบ สไตล์มินิมอล ครัวซองต์อร่อยมากต้องมาลอง</p>
+                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
+                </div>
+            </div>
+
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1974&auto=format&fit=crop" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold">ตลาดผลไม้ตะพง</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">10 กม.</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">แหล่งรวมผลไม้ขึ้นชื่อ ทุเรียน เงาะ มังคุด สดๆ จากสวน ราคาถูก ของฝากเพียบ</p>
+                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
+                </div>
+            </div>
+
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold">จุดชมวิวเขาแหลมหญ้า</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">15 กม.</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2 line-clamp-2">อุทยานแห่งชาติ วิวทะเลสวยตัดกับทุ่งหญ้า สะพานไม้ทอดยาว ถ่ายรูปสวยมาก</p>
+                    <a href="#" class="mt-4 block text-primary font-semibold text-sm hover:underline">ขอเส้นทาง <i class="fa-solid fa-map-pin"></i></a>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ลิงก์ไปยัง JavaScript -->
-  <script src="script.js"></script>
-  </body>
+  <section id="location" class="py-20 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <div class="order-2 lg:order-1">
+            <h2 class="text-4xl font-bold mb-6">การเดินทางมาที่<br><span class="text-primary">Smile House</span></h2>
+            <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+                เราตั้งอยู่ใจกลางธรรมชาติ แต่เดินทางสะดวก ติดถนนใหญ่ ใกล้แหล่งชุมชน 
+                สามารถเดินทางมาได้ทั้งรถส่วนตัวและรถตู้โดยสาร 
+            </p>
+            
+            <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-primary/20 rounded-lg text-primary">
+                        <i class="fa-solid fa-location-dot text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl">ที่อยู่</h4>
+                        <p class="text-gray-400">123 หมู่ 5 ต.เพ อ.เมือง จ.ระยอง 21160</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-primary/20 rounded-lg text-primary">
+                        <i class="fa-solid fa-phone text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl">ติดต่อสอบถาม</h4>
+                        <p class="text-gray-400">099-888-9999 (คุณสมายล์)</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://maps.google.com" target="_blank" class="mt-10 inline-flex items-center gap-2 bg-primary hover:bg-green-600 text-white px-8 py-3 rounded-lg font-bold transition">
+                <i class="fa-solid fa-diamond-turn-right"></i> นำทางผ่าน Google Maps
+            </a>
+        </div>
+
+        <div class="order-1 lg:order-2 h-[400px] lg:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-700">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124616.48512128715!2d101.21326462662058!3d12.681121899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102d64483750871%3A0xc3f5c78672957102!2sRayong!5e0!3m2!1sen!2sth!4v1709400000000!5m2!1sen!2sth" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-gray-50 pt-16 pb-8 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        
+        <div class="flex justify-center items-center gap-2 mb-6">
+            <i class="fa-solid fa-house-chimney text-3xl text-primary"></i>
+            <span class="text-2xl font-bold text-gray-800">Smile<span class="text-primary">House</span></span>
+        </div>
+
+        <div class="flex justify-center gap-6 mb-8">
+            <a href="#" class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center hover:scale-110 transition"><i class="fa-brands fa-line"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-pink-500 text-white flex items-center justify-center hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+        <p class="text-gray-500 text-sm">
+            © 2025 Smile House Real Estate. All rights reserved.<br>
+            Designed by <span class="text-primary font-bold">YourName</span>
+        </p>
+    </div>
+  </footer>
+
+  <script>
+    // เปลี่ยนสี Navbar เมื่อเลื่อนลง
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            nav.classList.add('shadow-lg', 'bg-white/95');
+        } else {
+            nav.classList.remove('shadow-lg');
+        }
+    });
+  </script>
+
+</body>
 </html>
