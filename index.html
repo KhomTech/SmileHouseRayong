@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>บ้านเดี่ยวระยอง - Smile House Rayong</title>
+    <title>Smile House Rayong - บ้านเดี่ยวระยอง</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -14,12 +14,29 @@
 
     <style>
         body { font-family: 'Prompt', sans-serif; }
-        /* ซ่อนแถบเลื่อนแนวนอนแต่ยังใช้นิ้วปัดได้ */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-        /* เอฟเฟกต์โผล่ขึ้นมา */
-        .fade-in { animation: fadeIn 0.8s ease-in-out; }
+        
+        /* Animation สำหรับ Fade In */
+        .fade-in { animation: fadeIn 1s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Animation สำหรับ Infinite Scroll (เลื่อนอัตโนมัติ) */
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* เลื่อนไปครึ่งนึงแล้ววนกลับ */
+        }
+        
+        .infinite-scroll-track {
+            display: flex;
+            width: max-content; /* กว้างเท่าเนื้อหาข้างใน */
+            animation: scrollLeft 40s linear infinite; /* วนลูปตลอดกาล */
+        }
+        
+        /* Pause on Hover: เอาเมาส์ชี้แล้วหยุดเลื่อน */
+        .infinite-scroll-container:hover .infinite-scroll-track {
+            animation-play-state: paused;
+        }
     </style>
 
     <script>
@@ -27,51 +44,91 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#047857', /* สีเขียวเข้มหรู (Emerald) */
-                        secondary: '#334155', /* สีเทาเข้ม (Slate) */
-                        gold: '#ca8a04', /* สีทอง */
+                        primary: '#047857', /* Emerald */
+                        secondary: '#334155', /* Slate */
+                        gold: '#ca8a04',
                     }
                 }
             }
         }
 
-        // --- ส่วนสมองของเว็บ (Logic) ---
+        // --- ระบบสมองกลของเว็บ (Alpine Data) ---
         function siteData() {
             return {
-                lang: 'th', // ภาษาเริ่มต้น
-                currency: 'THB', // สกุลเงินเริ่มต้น
-                rate: { THB: 1, USD: 0.028, CNY: 0.20 }, // อัตราแลกเปลี่ยน (แก้ตรงนี้ได้)
+                lang: 'th',
+                currency: 'THB',
+                rate: { THB: 1, USD: 0.028, CNY: 0.20 },
                 
-                // ฟังก์ชันเปลี่ยนภาษา
+                // รูปภาพสำหรับ Slider บ้านขาย (แก้ชื่อไฟล์ตรงนี้)
+                houseImages: {
+                    1: ['img/house1.jpg', 'img/house1_2.jpg', 'img/house1_3.jpg'], // บ้านหลังที่ 1
+                    2: ['img/house2.jpg', 'img/house2_2.jpg', 'img/house2_3.jpg']  // บ้านหลังที่ 2
+                },
+                currentSlide: { 1: 0, 2: 0 }, // ตัวนับสไลด์
+
                 setLang(l) {
                     this.lang = l;
-                    if(l === 'th') this.currency = 'THB';
-                    if(l === 'en') this.currency = 'USD';
-                    if(l === 'cn') this.currency = 'CNY';
+                    this.currency = (l === 'th') ? 'THB' : (l === 'en' ? 'USD' : 'CNY');
                 },
 
-                // ฟังก์ชันแปลงตัวเลขเงิน
                 formatPrice(priceTHB) {
                     let price = priceTHB * this.rate[this.currency];
                     let symbol = this.currency === 'THB' ? '฿' : (this.currency === 'USD' ? '$' : '¥');
-                    // ใส่ลูกน้ำคั่นหลักพัน
                     return symbol + price.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
                 },
 
-                // *** ดิกชันนารีคำแปล (แก้คำพูดตรงนี้) ***
+                // ฟังก์ชันเปลี่ยนรูปสไลด์บ้านขาย
+                nextSlide(id) {
+                    let total = this.houseImages[id].length;
+                    this.currentSlide[id] = (this.currentSlide[id] + 1) % total;
+                },
+                prevSlide(id) {
+                    let total = this.houseImages[id].length;
+                    this.currentSlide[id] = (this.currentSlide[id] - 1 + total) % total;
+                },
+
+                // *** คลังคำศัพท์ (แปลทุกจุดตามสั่ง) ***
                 txt: {
+                    // Nav & General
                     nav_sale: { th: 'บ้านขาย', en: 'Sale', cn: '出售' },
-                    nav_rent: { th: 'บ้านเช่า', en: 'Rent', cn: '出租' },
+                    nav_map: { th: 'ทำเลที่ตั้ง', en: 'Location', cn: '位置' },
                     nav_contact: { th: 'ติดต่อเรา', en: 'Contact', cn: '联系' },
-                    hero_title: { th: 'บ้านเดี่ยวระยอง บรรยากาศรีสอร์ท', en: 'Exclusive Vacation Home Rayong', cn: '罗勇府独家度假屋' },
-                    hero_sub: { th: 'ใกล้หาดสวนสน เงียบสงบ เป็นส่วนตัว', en: 'Near Suan Son Beach, Private & Peaceful', cn: '靠近Suan Son海滩，私密宁静' },
-                    btn_detail: { th: 'ดูรายละเอียด', en: 'View Details', cn: '查看详情' },
-                    header_sale: { th: 'บ้านเดี่ยวพร้อมอยู่ (เจ้าของขายเอง)', en: 'Houses for Sale (Owner)', cn: '独家出售房屋' },
-                    header_rent: { th: 'บ้านพักตากอากาศรายเดือน', en: 'Monthly Rental', cn: '月租度假屋' },
-                    header_travel: { th: 'สถานที่ท่องเที่ยวใกล้เคียง', en: 'Nearby Attractions', cn: '附近景点' },
-                    header_comm: { th: 'แหล่งชุมชน & สิ่งอำนวยความสะดวก', en: 'Community & Amenities', cn: '社区与设施' },
+                    btn_detail: { th: 'ดูรายละเอียดเพิ่มเติม', en: 'View More Details', cn: '查看更多详情' },
+                    btn_close: { th: 'ปิดหน้าต่าง', en: 'Close', cn: '关闭' },
                     unit: { th: 'ตร.ว.', en: 'sq.w.', cn: '平方哇' },
-                    status_empty: { th: 'ว่าง', en: 'Available', cn: '空房' }
+                    
+                    // Hero Buttons
+                    btn_call: { th: 'โทรสอบถาม', en: 'Call Now', cn: '致电' },
+                    btn_line: { th: 'แอดไลน์', en: 'Line Chat', cn: 'Line聊天' },
+                    btn_map: { th: 'นำทาง', en: 'Navigate', cn: '导航' },
+
+                    // Headers
+                    head_sale: { th: 'บ้านเดี่ยวระยอง (เจ้าของขายเอง)', en: 'Exclusive Houses for Sale', cn: '罗勇府独家出售房屋' },
+                    head_rent: { th: 'บ้านพักตากอากาศ (รายเดือน)', en: 'Vacation Rentals (Monthly)', cn: '度假屋出租（月租）' },
+                    head_travel: { th: 'สถานที่ท่องเที่ยวใกล้เคียง', en: 'Nearby Attractions', cn: '附近景点' },
+                    head_comm: { th: 'แหล่งชุมชน & สิ่งอำนวยความสะดวก', en: 'Community & Amenities', cn: '社区与设施' },
+                    head_video: { th: 'รีวิวบ้านพัก (Video)', en: 'House Video Review', cn: '房屋视频评论' },
+
+                    // Sale House Details (แปลละเอียด)
+                    h1_title: { th: 'บ้านเดี่ยวชั้นเดียว 37 ตร.ว.', en: 'Single House 37 sq.w.', cn: '单层房屋 37 平方哇' },
+                    h1_desc: { th: 'บ้านกะทัดรัด ทำเลดี เหมาะสำหรับครอบครัวเริ่มต้น', en: 'Compact house, good location, suitable for starters.', cn: '紧凑型房屋，位置优越，适合初创家庭。' },
+                    
+                    h2_title: { th: 'บ้านเดี่ยวหลังใหญ่ 72 ตร.ว. (ใกล้ทะเล)', en: 'Large House 72 sq.w. (Near Sea)', cn: '大房子 72 平方哇（近海）' },
+                    h2_feat1: { th: 'เนื้อที่ 72 ตร.ว. กว้างมาก ต่อเติมได้', en: '72 sq.w. area, very wide, expandable.', cn: '72 平方哇，非常宽敞，可扩展。' },
+                    h2_feat2: { th: 'รีโนเวทใหม่! ทำรั้วรอบขอบชิด ทาสีใหม่', en: 'Newly renovated! Fenced, repainted.', cn: '全新装修！围栏，重新粉刷。' },
+                    h2_feat3: { th: 'บรรยากาศบ้านสวน เงียบสงบ ส่วนตัว', en: 'Garden atmosphere, quiet, private.', cn: '花园氛围，安静，私密。' },
+                    h2_feat4: { th: 'อยู่ในซอย ไม่พลุกพล่าน ไม่มีเสียงรบกวน', en: 'In alley, not crowded, no noise.', cn: '在巷子里，不拥挤，没有噪音。' },
+                    
+                    finance_title: { th: 'เงื่อนไขการเงิน', en: 'Financial Terms', cn: '财务条款' },
+                    fin_1: { th: 'กู้แบงค์ผ่อนเริ่มต้น 8,xxx', en: 'Bank loan installment starts 8,xxx', cn: '银行贷款分期付款 8,xxx 起' },
+                    fin_2: { th: 'กู้ไม่ผ่าน ผ่อนตรงเจ้าของได้!', en: 'Owner financing available!', cn: '业主融资可用！' },
+                    fin_free: { th: 'ฟรี! แอร์ 1 เครื่อง + ฟรีค่าโอน', en: 'Free! 1 AC + Free Transfer Fee', cn: '免费！1 台空调 + 免费过户费' },
+
+                    // Rent Status
+                    full: { th: 'เต็ม (FULL)', en: 'FULL', cn: '已满' },
+                    
+                    // Contact
+                    contact_title: { th: 'สนใจนัดดูบ้าน (เจ้าของขายเอง)', en: 'Contact Owner', cn: '联系业主' },
                 }
             }
         }
@@ -79,320 +136,345 @@
 </head>
 <body class="bg-slate-50 text-slate-800" x-data="siteData()">
 
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-md transition-all">
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-lg transition-all border-b border-primary/10">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg">
+            <div class="flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary to-green-600 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition">
                     <i class="fa-solid fa-house-chimney text-xl"></i>
                 </div>
                 <div>
                     <h1 class="text-xl font-bold text-slate-800 leading-none">Smile<span class="text-primary">House</span></h1>
-                    <p class="text-[10px] text-slate-500 uppercase tracking-widest">Rayong Real Estate</p>
+                    <p class="text-[10px] text-slate-500 uppercase tracking-widest">Rayong</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-4 md:gap-8">
-                <div class="flex gap-1 bg-slate-100 rounded-full px-2 py-1">
-                    <button @click="setLang('th')" :class="lang === 'th' ? 'bg-white shadow text-primary' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition hover:bg-white">🇹🇭</button>
-                    <button @click="setLang('en')" :class="lang === 'en' ? 'bg-white shadow text-primary' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition hover:bg-white">🇬🇧</button>
-                    <button @click="setLang('cn')" :class="lang === 'cn' ? 'bg-white shadow text-primary' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition hover:bg-white">🇨🇳</button>
+            <div class="flex items-center gap-2 md:gap-6">
+                <div class="hidden md:flex gap-6 font-medium text-slate-600 text-sm">
+                    <a href="#sale" class="hover:text-primary transition" x-text="txt.nav_sale[lang]"></a>
+                    <a href="#location" class="hover:text-primary transition" x-text="txt.nav_map[lang]"></a>
                 </div>
 
-                <a href="#contact" class="hidden md:flex bg-primary hover:bg-green-800 text-white px-5 py-2 rounded-lg shadow-lg shadow-green-700/30 transition items-center gap-2">
-                    <i class="fa-brands fa-line"></i> <span x-text="txt.nav_contact[lang]"></span>
+                <div class="flex gap-1 bg-slate-100 rounded-full px-2 py-1 border border-slate-200">
+                    <button @click="setLang('th')" :class="lang === 'th' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition">🇹🇭</button>
+                    <button @click="setLang('en')" :class="lang === 'en' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition">🇺🇸</button>
+                    <button @click="setLang('cn')" :class="lang === 'cn' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition">🇨🇳</button>
+                </div>
+
+                <a href="#contact" class="hidden md:flex bg-primary hover:bg-green-800 text-white px-5 py-2 rounded-full shadow-lg shadow-green-700/30 transition items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> <span x-text="txt.nav_contact[lang]"></span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <header class="relative h-[65vh] flex flex-col items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="house2.jpg" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+            <img src="img/house2.jpg" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
         </div>
 
-        <div class="relative z-10 text-center px-4 mt-10 fade-in">
-            <span class="bg-white/20 backdrop-blur border border-white/30 text-white px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-4 inline-block shadow-lg">
-                Rayong Exclusive
-            </span>
-            <h1 class="text-3xl md:text-5xl font-bold text-white drop-shadow-lg mb-4 leading-tight" x-text="txt.hero_title[lang]"></h1>
-            <p class="text-slate-200 text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto drop-shadow" x-text="txt.hero_sub[lang]"></p>
+        <div class="relative z-10 text-center px-4 mt-8 fade-in w-full max-w-4xl">
+            <div class="inline-block bg-white/10 backdrop-blur border border-white/20 text-white px-4 py-1 rounded-full text-xs uppercase mb-4 shadow">
+                Smile House Rayong
+            </div>
+            <h1 class="text-3xl md:text-6xl font-bold text-white drop-shadow-2xl mb-4 leading-tight" x-text="txt.hero_title[lang]"></h1>
+            <p class="text-slate-200 text-lg md:text-xl font-light mb-10 drop-shadow" x-text="txt.hero_sub[lang]"></p>
             
-            <a href="#sale" class="inline-block px-8 py-3 bg-gold text-white rounded-lg font-bold shadow-xl shadow-yellow-900/30 hover:scale-105 transition border border-yellow-500">
-                <i class="fa-solid fa-key mr-2"></i> <span x-text="txt.btn_detail[lang]"></span>
-            </a>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-3xl mx-auto">
+                <a href="tel:0631862828" target="_blank" class="bg-green-600 text-white py-3 rounded-xl shadow-lg hover:scale-105 transition flex flex-col items-center justify-center gap-1">
+                    <i class="fa-solid fa-phone text-xl"></i> <span class="text-sm font-bold" x-text="txt.btn_call[lang]"></span>
+                </a>
+                <a href="https://line.me/ti/p/~@jop3391x" target="_blank" class="bg-[#06C755] text-white py-3 rounded-xl shadow-lg hover:scale-105 transition flex flex-col items-center justify-center gap-1">
+                    <i class="fa-brands fa-line text-2xl"></i> <span class="text-sm font-bold" x-text="txt.btn_line[lang]"></span>
+                </a>
+                <a href="https://www.facebook.com/" target="_blank" class="bg-[#1877F2] text-white py-3 rounded-xl shadow-lg hover:scale-105 transition flex flex-col items-center justify-center gap-1">
+                    <i class="fa-brands fa-facebook text-xl"></i> <span class="text-sm font-bold">Facebook</span>
+                </a>
+                <a href="https://www.tiktok.com/" target="_blank" class="bg-black text-white py-3 rounded-xl shadow-lg hover:scale-105 transition flex flex-col items-center justify-center gap-1">
+                    <i class="fa-brands fa-tiktok text-xl"></i> <span class="text-sm font-bold">TikTok</span>
+                </a>
+                <a href="#location" class="col-span-2 md:col-span-1 bg-gold text-white py-3 rounded-xl shadow-lg hover:scale-105 transition flex flex-col items-center justify-center gap-1">
+                    <i class="fa-solid fa-location-dot text-xl"></i> <span class="text-sm font-bold" x-text="txt.btn_map[lang]"></span>
+                </a>
+            </div>
         </div>
     </header>
 
-    <section id="sale" class="py-16 -mt-24 relative z-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-end gap-4 mb-6">
-                <div class="w-2 h-10 bg-gold rounded-full shadow-lg"></div>
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white drop-shadow-md" x-text="txt.header_sale[lang]"></h2>
+    <section class="bg-slate-900 py-10 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-white text-2xl font-bold mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-video text-red-500"></i> <span x-text="txt.head_video[lang]"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="aspect-[9/16] md:aspect-video bg-black rounded-xl overflow-hidden shadow-lg border border-slate-700 relative group">
+                    <iframe src="https://www.tiktok.com/embed/placeholder" class="w-full h-full opacity-50 group-hover:opacity-100 transition"></iframe>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none text-white font-bold">TikTok (ใส่ลิงค์จริง)</div>
+                </div>
+                <div class="aspect-[9/16] md:aspect-video bg-black rounded-xl overflow-hidden shadow-lg border border-slate-700 relative group">
+                    <iframe src="https://www.youtube.com/embed/placeholder" class="w-full h-full opacity-50 group-hover:opacity-100 transition"></iframe>
+                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none text-white font-bold">Shorts (ใส่ลิงค์จริง)</div>
+                </div>
+                <div class="aspect-video bg-black rounded-xl overflow-hidden shadow-lg border border-slate-700 relative">
+                    <video class="w-full h-full object-cover" controls muted loop poster="img/house2.jpg">
+                        <source src="img/video.mp4" type="video/mp4">
+                        Your browser does not support video.
+                    </video>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" x-data="{ openModal: null }">
+    <section id="sale" class="py-16 bg-white relative z-20 px-4">
+        <div class="max-w-6xl mx-auto" x-data="{ openModal: null }">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800" x-text="txt.head_sale[lang]"></h2>
+                <div class="h-1.5 w-24 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="bg-white rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/20 hover:shadow-green-900/20 transition transform hover:-translate-y-2 group border border-slate-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="house1.jpg" onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2070'" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                        <div class="absolute top-4 right-4 bg-slate-800 text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg">Standard</div>
+                <div class="bg-slate-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-slate-200">
+                    <div class="relative h-72 group">
+                        <template x-for="(img, index) in houseImages[1]">
+                            <img :src="img" x-show="currentSlide[1] === index" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2070'">
+                        </template>
+                        <button @click="prevSlide(1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full hover:bg-black transition"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button @click="nextSlide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full hover:bg-black transition"><i class="fa-solid fa-chevron-right"></i></button>
+                        <span class="absolute top-4 right-4 bg-slate-800 text-white px-3 py-1 rounded text-sm font-bold shadow">Standard</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-slate-800">บ้านเดี่ยว37 (รีโนเวทใหม่</h3>
-                            <span class="text-2xl font-bold text-primary" x-text="formatPrice(980000)"></span>
-                        </div>
-                        <p class="text-slate-500 text-sm mb-4"><i class="fa-solid fa-ruler-combined text-gold"></i> 37 <span x-text="txt.unit[lang]"></span> | ระยอง</p>
-                        <button @click="openModal = 1" class="w-full py-3 border border-primary text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition">
+                        <h3 class="text-xl font-bold text-slate-800" x-text="txt.h1_title[lang]"></h3>
+                        <p class="text-2xl font-bold text-primary mt-2" x-text="formatPrice(980000)"></p>
+                        <button @click="openModal = 1" class="w-full mt-4 py-3 border-2 border-primary text-primary rounded-xl font-bold hover:bg-primary hover:text-white transition">
                             <span x-text="txt.btn_detail[lang]"></span>
                         </button>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/20 hover:shadow-green-900/20 transition transform hover:-translate-y-2 group relative border-2 border-primary/30">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="house2.jpg" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                        <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg">Recommended</div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition border-2 border-gold relative transform hover:-translate-y-2 duration-300">
+                    <div class="relative h-72 group">
+                         <template x-for="(img, index) in houseImages[2]">
+                            <img :src="img" x-show="currentSlide[2] === index" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'">
+                        </template>
+                        <button @click="prevSlide(2)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full hover:bg-black transition"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button @click="nextSlide(2)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full hover:bg-black transition"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg animate-pulse">Recommended</div>
                     </div>
                     <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-slate-800">บ้านเดี่ยว72 (รีโนเวทใหม่)</h3>
-                            <span class="text-2xl font-bold text-primary" x-text="formatPrice(1380000)"></span>
-                        </div>
-                        <p class="text-slate-500 text-sm mb-4"><i class="fa-solid fa-ruler-combined text-gold"></i> 72 <span x-text="txt.unit[lang]"></span> | ใกล้ทะเล</p>
-                        
-                        <div class="flex gap-2 mb-4 text-xs text-slate-500 font-medium">
-                             <span class="bg-green-50 text-green-700 px-2 py-1 rounded border border-green-100">กู้แบงค์ได้</span>
-                             <span class="bg-green-50 text-green-700 px-2 py-1 rounded border border-green-100">ผ่อนตรงเจ้าของได้</span>
-                        </div>
-
-                        <button @click="openModal = 2" class="w-full py-3 bg-primary text-white rounded-xl font-semibold hover:bg-green-800 transition shadow-lg shadow-green-700/20">
+                        <h3 class="text-xl font-bold text-slate-800" x-text="txt.h2_title[lang]"></h3>
+                        <p class="text-3xl font-bold text-primary mt-2" x-text="formatPrice(1380000)"></p>
+                        <button @click="openModal = 2" class="w-full mt-4 py-3 bg-gradient-to-r from-primary to-green-600 text-white rounded-xl font-bold hover:shadow-lg transition">
                             <span x-text="txt.btn_detail[lang]"></span>
                         </button>
                     </div>
                 </div>
 
-                <div x-show="openModal === 2" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm" x-transition style="display: none;">
-                    <div @click.away="openModal = null" class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto relative shadow-2xl">
-                        <button @click="openModal = null" class="absolute top-4 right-4 bg-slate-100 w-10 h-10 rounded-full hover:bg-red-100 hover:text-red-500 transition z-10 font-bold text-xl">×</button>
-                        
-                        <div class="h-64 md:h-80 overflow-hidden relative">
-                             <img src="house2.jpg" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'" class="w-full h-full object-cover">
-                             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
-                                 <h2 class="text-white text-2xl font-bold">บ้านเดี่ยวหลังใหญ่ 72 ตร.ว.</h2>
-                             </div>
-                        </div>
-                        
-                        <div class="p-8">
-                            <div class="flex justify-between items-center mb-6">
-                                <span class="bg-primary/10 text-primary px-3 py-1 rounded-lg text-sm font-bold">Hot Sale</span>
-                                <p class="text-3xl font-bold text-primary" x-text="formatPrice(1380000)"></p>
-                            </div>
+                <div x-show="openModal === 2" class="fixed inset-0 z-[100] bg-slate-900/95 overflow-y-auto" x-transition style="display: none;">
+                    <div class="min-h-screen px-4 py-10 flex items-center justify-center">
+                        <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden relative shadow-2xl">
+                            <button @click="openModal = null" class="absolute top-4 right-4 z-20 bg-white/80 w-10 h-10 rounded-full hover:bg-red-500 hover:text-white transition font-bold text-xl">✕</button>
                             
-                            <div class="space-y-6 text-slate-600">
-                                <div>
-                                    <h3 class="font-bold text-lg text-slate-800 border-l-4 border-gold pl-3 mb-3">รายละเอียดบ้าน</h3>
-                                    <ul class="list-disc pl-5 space-y-2">
-                                        <li>เนื้อที่ 72 ตร.ว. กว้างมาก ต่อเติมเพิ่มห้องได้สบาย</li>
-                                        <li>รีโนเวทใหม่! ทำรั้วรอบขอบชิด ทาสีใหม่ พร้อมเข้าอยู่</li>
-                                        <li>บรรยากาศบ้านสวน เงียบสงบ เป็นส่วนตัว</li>
-                                        <li>อยู่ในซอย ไม่พลุกพล่าน ไม่มีเสียงรถรบกวน</li>
-                                    </ul>
+                            <div class="grid grid-cols-1 md:grid-cols-2">
+                                <div class="h-64 md:h-auto relative">
+                                    <img src="img/house2.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'">
                                 </div>
-                                
-                                <div>
-                                    <h3 class="font-bold text-lg text-slate-800 border-l-4 border-gold pl-3 mb-3">เงื่อนไขการเงิน</h3>
-                                    <div class="bg-green-50 p-4 rounded-xl border border-green-100 space-y-2">
-                                        <p class="text-green-800 font-medium">✅ กู้แบงค์ผ่อนเริ่มต้น 8,xxx (ขึ้นอยู่กับเครดิต)</p>
-                                        <p class="text-green-800 font-medium">✅ กู้ไม่ผ่าน ผ่อนตรงกับเจ้าของได้! (คุยเงื่อนไขกัน)</p>
-                                        <p class="text-red-600 font-bold mt-2">🔥 ฟรี! แอร์ 1 เครื่อง + ฟรีค่าโอน</p>
+                                <div class="p-8 md:p-12 overflow-y-auto max-h-[80vh]">
+                                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-2" x-text="txt.h2_title[lang]"></h2>
+                                    <p class="text-4xl font-bold text-primary mb-6" x-text="formatPrice(1380000)"></p>
+                                    
+                                    <div class="space-y-6">
+                                        <ul class="space-y-2 text-slate-600">
+                                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-1"></i> <span x-text="txt.h2_feat1[lang]"></span></li>
+                                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-1"></i> <span x-text="txt.h2_feat2[lang]"></span></li>
+                                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-1"></i> <span x-text="txt.h2_feat3[lang]"></span></li>
+                                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-1"></i> <span x-text="txt.h2_feat4[lang]"></span></li>
+                                        </ul>
+                                        
+                                        <div class="bg-green-50 p-5 rounded-2xl border border-green-100">
+                                            <h4 class="font-bold text-green-800 mb-2" x-text="txt.finance_title[lang]"></h4>
+                                            <p class="text-sm text-green-700">✅ <span x-text="txt.fin_1[lang]"></span></p>
+                                            <p class="text-sm text-green-700">✅ <span x-text="txt.fin_2[lang]"></span></p>
+                                            <p class="text-sm text-red-600 font-bold mt-2">🔥 <span x-text="txt.fin_free[lang]"></span></p>
+                                        </div>
+
+                                        <div class="flex gap-4">
+                                            <a href="tel:0631862828" target="_blank" class="flex-1 bg-primary text-white py-3 rounded-xl text-center font-bold hover:bg-green-800 transition">
+                                                <i class="fa-solid fa-phone"></i> Call
+                                            </a>
+                                            <a href="https://line.me/ti/p/~@jop3391x" target="_blank" class="flex-1 bg-[#06C755] text-white py-3 rounded-xl text-center font-bold hover:opacity-90 transition">
+                                                <i class="fa-brands fa-line"></i> Line
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="bg-slate-100 p-4 rounded-xl text-center">
-                                    <h3 class="font-bold text-slate-800 mb-2">สนใจนัดดูบ้าน (เจ้าของขายเอง)</h3>
-                                    <p class="text-xl font-bold text-primary mb-1">063-186-2828</p>
-                                    <p class="text-green-600 font-medium">Line: @jop3391x</p>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div x-show="openModal === 1" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm" x-transition style="display: none;">
-                    <div @click.away="openModal = null" class="bg-white rounded-2xl w-full max-w-lg relative p-8 text-center">
-                         <button @click="openModal = null" class="absolute top-4 right-4 bg-slate-100 w-8 h-8 rounded-full">×</button>
-                         <img src="house1.jpg" onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2070'" class="w-full h-48 object-cover rounded-lg mb-4">
-                         <h3 class="text-xl font-bold">บ้านขายหลังที่ 1</h3>
-                         <p class="text-primary text-3xl font-bold my-4" x-text="formatPrice(980000)"></p>
-                         <p class="text-slate-500">37 ตร.ว. เหมาะสำหรับครอบครัวขนาดเล็ก</p>
-                         <div class="mt-6">
-                            <a href="tel:0631862828" class="bg-primary text-white px-6 py-2 rounded-lg shadow hover:bg-green-800">โทรสอบถาม</a>
-                         </div>
-                    </div>
+                
+                 <div x-show="openModal === 1" class="fixed inset-0 z-[100] bg-slate-900/95 flex items-center justify-center p-4" x-transition style="display: none;">
+                     <div class="bg-white w-full max-w-lg rounded-2xl p-8 relative text-center">
+                        <button @click="openModal = null" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 text-xl">✕</button>
+                        <img src="img/house1.jpg" class="w-full h-48 object-cover rounded-xl mb-4" onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2070'">
+                        <h2 class="text-xl font-bold" x-text="txt.h1_title[lang]"></h2>
+                        <p class="text-3xl font-bold text-primary my-2" x-text="formatPrice(980000)"></p>
+                        <p class="text-slate-500 mb-6" x-text="txt.h1_desc[lang]"></p>
+                        <a href="tel:0631862828" target="_blank" class="block w-full bg-primary text-white py-3 rounded-xl font-bold">ติดต่อเจ้าของ</a>
+                     </div>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section id="rent" class="py-16 bg-white">
+    <section class="py-16 bg-slate-50 border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-slate-800" x-text="txt.header_rent[lang]"></h2>
-                <div class="h-1 w-24 bg-primary mx-auto mt-4 rounded-full"></div>
-            </div>
-
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-10" x-text="txt.head_rent[lang]"></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <template x-for="i in 5">
-                    <div class="bg-slate-50 rounded-xl overflow-hidden shadow border border-slate-200 hover:shadow-lg transition group hover:-translate-y-1">
-                        <div class="h-48 overflow-hidden relative">
-                            <img :src="`rent${i}.jpg`" onerror="this.src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            <span class="absolute bottom-2 right-2 bg-primary/90 text-white text-xs px-2 py-1 rounded backdrop-blur" x-text="txt.status_empty[lang]"></span>
+                <template x-for="i in 6">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm relative group grayscale hover:grayscale-0 transition duration-500">
+                        <div class="absolute inset-0 bg-black/50 z-10 flex items-center justify-center">
+                            <span class="bg-red-600 text-white text-xl font-bold px-6 py-2 rounded-full border-2 border-white transform -rotate-12 shadow-xl" x-text="txt.full[lang]"></span>
                         </div>
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg text-slate-700" x-text="`House Rent #${i}`"></h4>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-slate-500 text-sm"><i class="fa-solid fa-couch text-gold"></i> เฟอร์ฯ ครบ</span>
-                                <span class="text-primary font-bold text-lg" x-text="formatPrice(3600) + '/mo'"></span>
-                            </div>
+                        <img :src="`img/rent${i}.jpg`" class="w-full h-56 object-cover" onerror="this.src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070'">
+                        <div class="p-4 opacity-50">
+                            <h4 class="font-bold text-lg text-slate-700" x-text="`House #${i}`"></h4>
+                            <p class="text-slate-500" x-text="i === 6 ? formatPrice(4400) : formatPrice(3600)"></p>
                         </div>
                     </div>
                 </template>
-
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg border-2 border-primary/20 hover:shadow-xl transition group hover:-translate-y-1">
-                    <div class="h-48 overflow-hidden relative">
-                        <img src="rent6.jpg" onerror="this.src='https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=2070'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        <span class="absolute bottom-2 right-2 bg-gold text-white text-xs px-2 py-1 rounded shadow">Special</span>
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-bold text-lg text-slate-800">House Rent #6 (ห้องใหญ่)</h4>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-slate-500 text-sm"><i class="fa-solid fa-star text-gold"></i> ห้องมุม</span>
-                            <span class="text-primary font-bold text-lg" x-text="formatPrice(4400) + '/mo'"></span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-slate-900 text-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-umbrella-beach text-gold"></i> <span x-text="txt.header_travel[lang]"></span>
-                <span class="text-sm font-normal text-slate-400 ml-auto flex items-center gap-1">เลื่อน <i class="fa-solid fa-arrow-right-long animate-pulse"></i></span>
+    <section class="py-20 bg-slate-900 text-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 mb-10">
+            <h2 class="text-2xl font-bold flex items-center gap-2">
+                <i class="fa-solid fa-umbrella-beach text-gold"></i> <span x-text="txt.head_travel[lang]"></span>
             </h2>
+        </div>
 
-            <div class="flex gap-5 overflow-x-auto pb-8 hide-scroll snap-x snap-mandatory">
-                
-                <div class="flex-none w-72 snap-center group cursor-pointer">
-                    
+        <div class="infinite-scroll-container overflow-hidden w-full relative">
+            <div class="infinite-scroll-track gap-6 px-4">
+                <div class="w-80 flex-shrink-0 group">
                     <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="img/travel1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
                     </div>
                     <h3 class="font-bold text-lg">หาดสวนสน / บ้านเพ</h3>
-                    <p class="text-slate-400 text-sm"><i class="fa-solid fa-location-dot text-gold"></i> 3 กม. | ท่าเรือข้ามไปเสม็ด</p>
+                    <p class="text-slate-400 text-sm">3 กม.</p>
                 </div>
-
-                <div class="flex-none w-72 snap-center group cursor-pointer">
-                    
-                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700">
-                        <img src="https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2008" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="w-80 flex-shrink-0 group">
+                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative">
+                        <img src="img/travel2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2073'">
                     </div>
                     <h3 class="font-bold text-lg">เกาะเสม็ด</h3>
-                    <p class="text-slate-400 text-sm">น้ำใส ทรายขาว รีสอร์ทสวย</p>
+                    <p class="text-slate-400 text-sm">ข้ามเรือ 15 นาที</p>
                 </div>
-
-                <div class="flex-none w-72 snap-center group cursor-pointer">
-                    
-                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700">
-                        <img src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1974" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="w-80 flex-shrink-0 group">
+                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative">
+                        <img src="img/travel3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=2073'">
                     </div>
-                    <h3 class="font-bold text-lg">สวนพฤกษศาสตร์ระยอง</h3>
-                    <p class="text-slate-400 text-sm">พายคายัค ป่าเสม็ดพันปี</p>
+                    <h3 class="font-bold text-lg">สวนพฤกษศาสตร์</h3>
+                    <p class="text-slate-400 text-sm">ธรรมชาติ 100%</p>
                 </div>
-
-                <div class="flex-none w-72 snap-center group cursor-pointer">
-                    
-                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700">
-                        <img src="https://images.unsplash.com/photo-1533929736472-594e69255fcc?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="w-80 flex-shrink-0 group">
+                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative">
+                        <img src="img/travel4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1533929736472-594e69255fcc?q=80&w=2073'">
                     </div>
-                    <h3 class="font-bold text-lg">อุทยานเขาแหลมหญ้า</h3>
-                    <p class="text-slate-400 text-sm">จุดชมวิวถ่ายรูปสุดฮิต</p>
+                    <h3 class="font-bold text-lg">เขาแหลมหญ้า</h3>
+                    <p class="text-slate-400 text-sm">จุดถ่ายรูปยอดฮิต</p>
                 </div>
-                
-                <div class="flex-none w-72 snap-center group cursor-pointer">
-                    
-                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700">
-                        <img src="https://images.unsplash.com/photo-1621257322792-628d6895311e?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="w-80 flex-shrink-0 group">
+                    <div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative">
+                        <img src="img/travel5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1621257322792-628d6895311e?q=80&w=2073'">
                     </div>
                     <h3 class="font-bold text-lg">หาดลับ ปากคลองแกลง</h3>
-                    <p class="text-slate-400 text-sm">ธรรมชาติสมบูรณ์ เงียบสงบ</p>
+                    <p class="text-slate-400 text-sm">สงบ ส่วนตัว</p>
                 </div>
 
+                <div class="w-80 flex-shrink-0 group"><div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative"><img src="img/travel1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'"></div><h3 class="font-bold text-lg">หาดสวนสน / บ้านเพ</h3></div>
+                <div class="w-80 flex-shrink-0 group"><div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative"><img src="img/travel2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2073'"></div><h3 class="font-bold text-lg">เกาะเสม็ด</h3></div>
+                <div class="w-80 flex-shrink-0 group"><div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative"><img src="img/travel3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=2073'"></div><h3 class="font-bold text-lg">สวนพฤกษศาสตร์</h3></div>
+                <div class="w-80 flex-shrink-0 group"><div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative"><img src="img/travel4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1533929736472-594e69255fcc?q=80&w=2073'"></div><h3 class="font-bold text-lg">เขาแหลมหญ้า</h3></div>
+                <div class="w-80 flex-shrink-0 group"><div class="h-48 rounded-xl overflow-hidden mb-3 border border-slate-700 relative"><img src="img/travel5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" onerror="this.src='https://images.unsplash.com/photo-1621257322792-628d6895311e?q=80&w=2073'"></div><h3 class="font-bold text-lg">หาดลับ ปากคลองแกลง</h3></div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-16 bg-white">
+    <section id="location" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             
             <div class="mb-12">
                  <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
-                    <i class="fa-solid fa-shop text-primary"></i> <span x-text="txt.header_comm[lang]"></span>
+                    <i class="fa-solid fa-shop text-primary"></i> <span x-text="txt.head_comm[lang]"></span>
                 </h2>
-                <div class="flex gap-4 overflow-x-auto pb-4 hide-scroll snap-x">
-                    <span class="flex-none bg-slate-100 text-slate-600 px-5 py-3 rounded-full border border-slate-200 snap-center whitespace-nowrap shadow-sm"><i class="fa-solid fa-basket-shopping mr-2 text-green-600"></i> ตลาดท่าเรือแกลง</span>
-                    <span class="flex-none bg-slate-100 text-slate-600 px-5 py-3 rounded-full border border-slate-200 snap-center whitespace-nowrap shadow-sm"><i class="fa-solid fa-gas-pump mr-2 text-blue-600"></i> ปั๊ม PTT / PT</span>
-                    <span class="flex-none bg-slate-100 text-slate-600 px-5 py-3 rounded-full border border-slate-200 snap-center whitespace-nowrap shadow-sm"><i class="fa-solid fa-store mr-2 text-orange-500"></i> Lotus Express</span>
-                    <span class="flex-none bg-slate-100 text-slate-600 px-5 py-3 rounded-full border border-slate-200 snap-center whitespace-nowrap shadow-sm"><i class="fa-solid fa-sun mr-2 text-yellow-500"></i> ตลาดเช้ากะเฉด</span>
-                    <span class="flex-none bg-slate-100 text-slate-600 px-5 py-3 rounded-full border border-slate-200 snap-center whitespace-nowrap shadow-sm"><i class="fa-solid fa-utensils mr-2 text-red-500"></i> ร้านอาหารทะเล</span>
+                <div class="infinite-scroll-container overflow-hidden w-full relative">
+                     <div class="infinite-scroll-track gap-6 px-4" style="animation-duration: 30s;">
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap">
+                             <img src="img/comm_market.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
+                             <span class="font-bold text-slate-700">ตลาดท่าเรือแกลง</span>
+                         </div>
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap">
+                             <img src="img/comm_ptt.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2990/2990141.png'">
+                             <span class="font-bold text-slate-700">ปั๊ม PTT / PT</span>
+                         </div>
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap">
+                             <img src="img/comm_lotus.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891462.png'">
+                             <span class="font-bold text-slate-700">Lotus Express</span>
+                         </div>
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap">
+                             <img src="img/comm_711.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
+                             <span class="font-bold text-slate-700">7-Eleven</span>
+                         </div>
+                          <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap">
+                             <img src="img/comm_bus.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3448/3448339.png'">
+                             <span class="font-bold text-slate-700">รถโดยสารสุขุมวิท</span>
+                         </div>
+                         
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap"><img src="img/comm_market.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'"><span class="font-bold text-slate-700">ตลาดท่าเรือแกลง</span></div>
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap"><img src="img/comm_ptt.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2990/2990141.png'"><span class="font-bold text-slate-700">ปั๊ม PTT / PT</span></div>
+                         <div class="flex items-center gap-3 bg-slate-100 px-5 py-3 rounded-2xl border border-slate-200 whitespace-nowrap"><img src="img/comm_lotus.jpg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891462.png'"><span class="font-bold text-slate-700">Lotus Express</span></div>
+                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 shadow-2xl rounded-3xl overflow-hidden bg-slate-50 border border-slate-200">
-                <div class="p-8 md:p-12 flex flex-col justify-center bg-white">
+            <div id="contact" class="grid grid-cols-1 lg:grid-cols-2 gap-0 shadow-2xl rounded-3xl overflow-hidden bg-slate-50 border border-slate-200">
+                <div class="p-8 md:p-12 flex flex-col justify-center bg-white relative">
                     <h2 class="text-3xl font-bold text-primary mb-6">Smile House Rayong</h2>
                     <p class="text-slate-600 mb-8 leading-relaxed">
-                        MG44+XF4 Unnamed Road <br>
+                        <i class="fa-solid fa-map-pin text-gold mr-2"></i> MG44+XF4 Unnamed Road <br>
                         ตำบลแกลง อำเภอเมืองระยอง จังหวัดระยอง 21160
                     </p>
                     
                     <div class="space-y-4">
-                        <a href="tel:0631862828" class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl shadow-sm hover:shadow-md transition group border border-slate-100">
-                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition">
+                        <a href="tel:0631862828" target="_blank" class="flex items-center gap-4 bg-green-50 p-4 rounded-xl shadow-sm hover:shadow-md hover:scale-105 transition border border-green-100">
+                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white text-xl">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div>
-                                <p class="text-xs text-slate-400">โทรสอบถาม / นัดดูบ้าน</p>
+                                <p class="text-xs text-slate-500">กดเพื่อโทรหาเจ้าของ</p>
                                 <p class="text-xl font-bold text-slate-800">063-186-2828</p>
                             </div>
                         </a>
                         
-                        <a href="https://line.me/ti/p/~@jop3391x" target="_blank" class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl shadow-sm hover:shadow-md transition group border border-slate-100">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 group-hover:bg-green-600 group-hover:text-white transition">
-                                <i class="fa-brands fa-line text-xl"></i>
+                        <a href="https://line.me/ti/p/~@jop3391x" target="_blank" class="flex items-center gap-4 bg-[#06C755]/10 p-4 rounded-xl shadow-sm hover:shadow-md hover:scale-105 transition border border-[#06C755]/20">
+                            <div class="w-12 h-12 bg-[#06C755] rounded-full flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-line"></i>
                             </div>
                             <div>
-                                <p class="text-xs text-slate-400">แอดไลน์คุยเงื่อนไข</p>
-                                <p class="text-lg font-bold text-slate-800">@jop3391x</p>
+                                <p class="text-xs text-slate-500">แอดไลน์สอบถาม</p>
+                                <p class="text-xl font-bold text-slate-800">@jop3391x</p>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                <div class="h-[400px] lg:h-auto bg-slate-200 relative">
-                     <iframe src="https://www.google.com/maps/place/Smile+House/@12.6573923,101.5036168,17z/data=!3m1!4b1!4m6!3m5!1s0x310305e62321228d:0x81b68b62ba986f45!8m2!3d12.6573871!4d101.5061917!16s%2Fg%2F11f5h3d3qm?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" 
-                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="h-[450px] lg:h-auto bg-slate-200 relative">
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.0000000000005!2d101.4646!3d12.8466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDUwJzQ3LjgiTiAxMDHCsDI3JzUyLjYiRQ!5e0!3m2!1sen!2sth!4v1600000000000!5m2!1sen!2sth" 
+                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                      
-                     <div class="absolu te bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-lg text-xs font-bold pointer-events-none text-slate-800">
-                        📍 พิกัด: สุขุมวิทซอย8 ไฟแดงสี่แยกแกลงกะเฉด เข้าซอย800 ม.
+                     <div class="absolute bottom-6 right-6 bg-white px-5 py-3 rounded-xl shadow-2xl text-sm font-bold pointer-events-none text-slate-800 border-2 border-primary">
+                        📍 Smile House Rayong (MG44+XF)
                      </div>
                 </div>
             </div>
@@ -400,8 +482,9 @@
         </div>
     </section>
 
-    <footer class="bg-primary text-white py-6 text-center text-sm mt-12">
-        <p>© 2025 Smile House Rayong. All rights reserved.</p>
+    <footer class="bg-primary text-white py-8 text-center text-sm mt-12">
+        <p class="opacity-80">© 2025 Smile House Rayong. All rights reserved.</p>
+        <p class="mt-2 text-xs opacity-50">Designed by Programmer No.1</p>
     </footer>
 
 </body>
