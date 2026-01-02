@@ -117,10 +117,12 @@
                     else container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 },
 
-                // ฟังก์ชันนำทาง (Google Maps Direction) ไปยังพิกัดบ้านจริง
+// *** ฟังก์ชันนำทาง (แก้ใหม่ ตรงเป๊ะ!) ***
                 navigate() {
-                    window.open('https://www.google.com/maps/dir/?api=1&destination=12.6517182,101.4468652', '_blank'); // พิกัด MG44+XF4
+                    // ลิงก์นี้จะเปิด Google Maps ในโหมด "นำทาง" ไปยังพิกัดบ้านท่านทันที
+                    window.open('https://www.google.com/maps/dir/?api=1&destination=Smile+House+Rayong&destination_place_id=ChIJjSIhI-YFAzERRW-YumKLtoE', '_blank');
                 },
+                
 
                 // *** คลังคำศัพท์ (แปลทุกจุดที่นี่ ทีเดียวจบ) ***
                 txt: {
