@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smile House Rayong - บ้านเดี่ยวและที่พักระดับพรีเมียม</title>
+    <title>Smile House Rayong - บ้านเดี่ยวระยอง</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body { font-family: 'Prompt', sans-serif; }
         
-        /* ซ่อนแถบเลื่อน (Scrollbar) แต่ยังใช้นิ้วปัดได้ */
+        /* ซ่อนแถบเลื่อน (Scrollbar) แต่ยังใช้นิ้วปัดได้ เพื่อความสวยงาม */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -23,7 +21,7 @@
         .fade-in { animation: fadeIn 1s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Animation: Infinite Scroll (เลื่อนวนลูป) */
+        /* Animation: Infinite Scroll (เลื่อนวนลูปซ้ายไปขวา) */
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); } /* เลื่อนไปครึ่งทางแล้ววนกลับ */
@@ -32,7 +30,7 @@
         .infinite-scroll-track {
             display: flex;
             width: max-content;
-            /* ปรับความเร็วตรงนี้ (เลขน้อย = ไว) */
+            /* ปรับความเร็วตรงนี้ (เลขน้อย = ไว, เลขมาก = ช้า) ตั้งไว้ 40s กำลังดี */
             animation: scrollLeft 40s linear infinite; 
         }
         
@@ -41,7 +39,7 @@
             animation-play-state: paused;
         }
 
-        /* ปุ่มกระจก (Glassmorphism) สำหรับหน้าแรก */
+        /* ปุ่มกระจก (Glassmorphism) สำหรับหน้าแรก ให้ดูหรูหรา โปร่งใส */
         .glass-btn {
             background: rgba(0, 0, 0, 0.4); 
             backdrop-filter: blur(8px); 
@@ -56,14 +54,14 @@
     </style>
 
     <script>
-        // ตั้งค่าสีหลักของเว็บ (แก้โค้ดสีตรงนี้)
+        // ตั้งค่าสีหลักของเว็บ (แก้โค้ดสีตรงนี้ได้เลย)
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#047857', /* Emerald (เขียวหรู) */
-                        secondary: '#334155', /* Slate (เทาเข้ม) */
-                        gold: '#ca8a04', /* Gold (ทอง) */
+                        primary: '#047857', /* สีเขียวเข้มหรู (Emerald) */
+                        secondary: '#334155', /* สีเทาเข้ม (Slate) */
+                        gold: '#ca8a04', /* สีทอง (Gold) */
                     }
                 }
             }
@@ -74,36 +72,34 @@
         // ==============================================
         function siteData() {
             return {
-                lang: 'th', // ภาษาเริ่มต้น
+                lang: 'th', // ภาษาเริ่มต้น (th=ไทย, en=อังกฤษ, cn=จีน)
                 
-                // --- ข้อมูลรูปภาพ ---
-                // บ้านขาย 1 (37 ตร.ว.)
+                // --- ข้อมูลรูปภาพ (ชื่อไฟล์ตามที่บอกข้างต้น) ---
                 house1_imgs: ['img/house1_1.jpg', 'img/house1_2.jpg', 'img/house1_3.jpg'], 
-                // บ้านขาย 2 (72 ตร.ว.)
                 house2_imgs: ['img/house2_1.jpg', 'img/house2_2.jpg', 'img/house2_3.jpg'],
                 
                 // สถานะการดูรูป (false=รูปจริง, true=ผังบ้าน)
                 showPlan1: false,
                 showPlan2: false,
 
-                // ตัวนับสไลด์
+                // ตัวนับสไลด์รูปภาพ
                 currentSlide1: 0,
                 currentSlide2: 0,
 
                 // ฟังก์ชันเปลี่ยนภาษา
                 setLang(l) { this.lang = l; },
 
-                // ฟังก์ชันคำนวณเงิน (บาท -> ดอลลาร์ -> หยวน)
+                // ฟังก์ชันคำนวณเงิน (แปลง บาท -> ดอลลาร์ -> หยวน อัตโนมัติ)
                 formatPrice(priceTHB) {
                     let rate = { THB: 1, USD: 0.028, CNY: 0.20 }; // อัตราแลกเปลี่ยน
                     let currency = (this.lang === 'th') ? 'THB' : (this.lang === 'en' ? 'USD' : 'CNY');
                     let price = priceTHB * rate[currency];
                     let symbol = currency === 'THB' ? '฿' : (currency === 'USD' ? '$' : '¥');
-                    // ใส่ลูกน้ำคั่นหลักพัน
+                    // ใส่ลูกน้ำคั่นหลักพันให้สวยงาม
                     return symbol + price.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
                 },
 
-                // ฟังก์ชันเปลี่ยนรูปสไลด์ (ซ้าย-ขวา)
+                // ฟังก์ชันเปลี่ยนรูปสไลด์ (กดลูกศร ซ้าย-ขวา)
                 nextSlide(houseId, total) {
                     if(houseId === 1) this.currentSlide1 = (this.currentSlide1 + 1) % total;
                     if(houseId === 2) this.currentSlide2 = (this.currentSlide2 + 1) % total;
@@ -113,7 +109,7 @@
                     if(houseId === 2) this.currentSlide2 = (this.currentSlide2 - 1 + total) % total;
                 },
 
-                // ฟังก์ชันเลื่อนที่เที่ยวเอง
+                // ฟังก์ชันเลื่อนที่เที่ยวเอง (กดปุ่มลูกศร)
                 scrollTravel(direction) {
                     const container = document.getElementById('travelContainer');
                     const scrollAmount = 300; 
@@ -121,13 +117,12 @@
                     else container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 },
 
-                // ฟังก์ชันนำทาง (Google Maps Direction)
+                // ฟังก์ชันนำทาง (Google Maps Direction) ไปยังพิกัดบ้านจริง
                 navigate() {
-                    // ลิงก์นี้จะเปิดแอป Google Maps นำทางไปที่พิกัดบ้านทันที
-                    window.open('https://www.google.com/maps/dir/?api=1&destination=MG44+XF4+Unnamed+Road+Mueang+Rayong+District,+Rayong+21160,+Thailand', '_blank');
+                    window.open('https://www.google.com/maps/dir/?api=1&destination=12.6517182,101.4468652', '_blank'); // พิกัด MG44+XF4
                 },
 
-                // --- คลังคำศัพท์ (แปลทุกจุดที่นี่) ---
+                // *** คลังคำศัพท์ (แปลทุกจุดที่นี่ ทีเดียวจบ) ***
                 txt: {
                     // ปุ่มต่างๆ
                     btn_detail: { th: 'ดูรายละเอียด', en: 'Details', cn: '详情' },
@@ -157,12 +152,12 @@
                     h2_feat3: { th: 'บรรยากาศสวน สงบ ส่วนตัว', en: 'Garden vibe, quiet, private.', cn: '花园氛围，安静，私密。' },
                     
                     // การเงิน
-                    fin_title: { th: 'เงื่อนไขการเงิน', en: 'Financial Terms', cn: '财务条款' },
-                    fin_1: { th: 'กู้แบงค์ผ่อนเริ่ม 8,xxx', en: 'Loan starts 8,xxx', cn: '贷款 8,xxx 起' },
+                    fin_title: { th: 'ซื้อเงินสด / ผ่อนได้', en: 'Financial Terms', cn: '财务条款' },
+                    fin_1: { th: 'ผ่อนธนคารเริ่ม 8,xxx', en: 'Loan starts 8,xxx', cn: '贷款 8,xxx 起' },
                     fin_2: { th: 'กู้ไม่ผ่าน ผ่อนตรงเจ้าของได้!', en: 'Owner financing avail!', cn: '业主融资可用！' },
                     fin_free: { th: 'ฟรี! แอร์ + ค่าโอน', en: 'Free! AC + Transfer Fee', cn: '免费！空调 + 过户费' },
 
-                    // สถานะ
+                    // สถานะบ้านเช่า
                     status_full: { th: 'เต็ม', en: 'FULL', cn: '已满' },
                     status_empty: { th: 'ว่าง', en: 'Empty', cn: '空' },
                     status_soon: { th: 'เร็วๆนี้', en: 'Soon', cn: '快了' },
@@ -186,9 +181,9 @@
             </div>
 
             <div class="flex gap-1 bg-slate-100 rounded-full px-2 py-1 border border-slate-200">
-                <button @click="setLang('th')" :class="lang === 'th' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition text-xl">🇹🇭</button>
-                <button @click="setLang('en')" :class="lang === 'en' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition text-xl">🇬🇧</button>
-                <button @click="setLang('cn')" :class="lang === 'cn' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition text-xl">🇨🇳</button>
+                <button @click="setLang('th')" :class="lang === 'th' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition text-xl" title="ไทย">🇹🇭</button>
+                <button @click="setLang('en')" :class="lang === 'en' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition text-xl" title="English">🇬🇧</button>
+                <button @click="setLang('cn')" :class="lang === 'cn' ? 'bg-white shadow text-primary scale-110' : 'text-slate-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition text-xl" title="Chinese">🇨🇳</button>
             </div>
         </div>
     </nav>
@@ -211,10 +206,10 @@
                 <a href="https://line.me/ti/p/~@jop3391x" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
                     <i class="fa-brands fa-line text-2xl md:text-3xl mb-1"></i> <span class="text-[10px] md:text-xs font-bold">Line</span>
                 </a>
-                <a href="https://m.facebook.com/story.php?story_fbid=pfbid02i4N32YuevwsPkapX9ZSdNYs2wmcXMADnoA6oS9iuRFN7tG2iKouKrdGJnaRvwMSYl&id=100051173817249" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
+                <a href="https://www.facebook.com/share/r/1DFzX9BCRb/" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
                     <i class="fa-brands fa-facebook text-xl md:text-2xl mb-1"></i> <span class="text-[10px] md:text-xs font-bold">FB</span>
                 </a>
-                <a href="https://vt.tiktok.com/ZS5k4nB8F/" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
+                <a href="https://vt.tiktok.com/ZS5kX7e8B/" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
                     <i class="fa-brands fa-tiktok text-xl md:text-2xl mb-1"></i> <span class="text-[10px] md:text-xs font-bold">TikTok</span>
                 </a>
                 <a href="javascript:void(0)" @click="navigate()" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
@@ -284,7 +279,7 @@
                 </div>
 
                 <div x-show="openModal === 2" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4" x-transition style="display: none;">
-                    <div class="bg-white w-[95%] md:w-[80%] max-w-5xl rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row max-h-[85vh]">
+                    <div class="bg-white w-[95%] md:w-[90%] max-w-6xl rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row max-h-[85vh]">
                         <button @click="openModal = null" class="absolute top-4 right-4 z-20 bg-slate-200 text-slate-800 w-10 h-10 rounded-full hover:bg-red-500 hover:text-white transition font-bold text-xl flex items-center justify-center shadow">✕</button>
                         
                         <div class="w-full md:w-1/2 h-[40vh] md:h-auto relative bg-black group flex items-center justify-center">
@@ -307,7 +302,7 @@
                             <h2 class="text-2xl font-bold text-slate-800 mb-2" x-text="txt.h2_title[lang]"></h2>
                             <p class="text-3xl font-bold text-primary mb-6" x-text="formatPrice(1380000)"></p>
                             
-                            <ul class="space-y-3 text-slate-600 mb-6 text-sm">
+                            <ul class="space-y-3 text-slate-600 mb-6 text-sm md:text-base">
                                 <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span x-text="txt.h2_feat1[lang]"></span></li>
                                 <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span x-text="txt.h2_feat2[lang]"></span></li>
                                 <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span x-text="txt.h2_feat3[lang]"></span></li>
@@ -333,7 +328,7 @@
                 </div>
 
                 <div x-show="openModal === 1" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4" x-transition style="display: none;">
-                    <div class="bg-white w-[95%] md:w-[80%] max-w-5xl rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row max-h-[85vh]">
+                    <div class="bg-white w-[95%] md:w-[90%] max-w-6xl rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row max-h-[85vh]">
                         <button @click="openModal = null" class="absolute top-4 right-4 z-20 bg-slate-200 text-slate-800 w-10 h-10 rounded-full hover:bg-red-500 hover:text-white transition font-bold text-xl flex items-center justify-center shadow">✕</button>
                         
                         <div class="w-full md:w-1/2 h-[40vh] md:h-auto relative bg-black group flex items-center justify-center">
@@ -411,7 +406,7 @@
         </div>
 
         <div id="travelContainer" class="infinite-scroll-container overflow-x-auto w-full relative hide-scroll">
-            <div class="infinite-scroll-track gap-4 px-4" style="animation-duration: 25s;"> 
+            <div class="infinite-scroll-track gap-4 px-4" style="animation-duration: 40s;"> 
                 
                 <div class="w-64 flex-shrink-0 relative">
                     <div class="h-40 rounded-xl overflow-hidden mb-2 relative"><img src="img/travel1.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'"></div>
@@ -475,7 +470,7 @@
                 
                 <div class="h-[350px] relative bg-slate-200 group">
                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60014.87779191405!2d101.42997354269028!3d12.65738356254791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310305e62321228d%3A0x81b68b62ba986f45!2sSmile%20House!5e1!3m2!1sen!2sus!4v1767345257368!5m2!1sen!2sus" 
-                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                      
                      <a href="javascript:void(0)" @click="navigate()" class="absolute bottom-4 right-4 bg-primary text-white px-6 py-2 rounded-full shadow-xl font-bold flex items-center gap-2 hover:bg-green-700 hover:scale-105 transition z-10">
                         <i class="fa-solid fa-diamond-turn-right"></i> <span x-text="txt.btn_map[lang]"></span>
@@ -525,7 +520,7 @@
                 </div>
 
                 <div class="aspect-[9/16] md:aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-700 group cursor-pointer">
-                    <a href="https://m.facebook.com/story.php?story_fbid=pfbid02i4N32YuevwsPkapX9ZSdNYs2wmcXMADnoA6oS9iuRFN7tG2iKouKrdGJnaRvwMSYl&id=100051173817249" target="_blank" class="block w-full h-full relative">
+                    <a href="https://www.facebook.com/share/r/1DFzX9BCRb/" target="_blank" class="block w-full h-full relative">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-800 group-hover:bg-slate-700 transition">
                             <i class="fa-brands fa-facebook text-4xl text-blue-500 mb-2"></i>
                             <span class="text-white text-sm">Review Facebook</span>
@@ -543,8 +538,9 @@
 
     <footer class="bg-primary text-white py-6 text-center text-sm">
         <p class="opacity-80">© 2025 Smile House Rayong. All rights reserved.</p>
-        <p class="mt-2 text-xs opacity-50">Designed by อัครพนธ์ </p>
+        <p class="mt-2 text-xs opacity-50">Designed by อัครพนธ์</p>
     </footer>
 
+    <script async src="https://www.tiktok.com/embed.js"></script>
 </body>
 </html>
