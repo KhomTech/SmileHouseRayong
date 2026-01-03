@@ -74,9 +74,11 @@
             return {
                 lang: 'th', // ภาษาเริ่มต้น (th=ไทย, en=อังกฤษ, cn=จีน)
                 
-                // --- ข้อมูลรูปภาพ (ชื่อไฟล์ตามที่บอกข้างต้น) ---
-                house1_imgs: ['img/house1_1.jpg', 'img/house1_2.jpg', 'img/house1_3.jpg'], 
-                house2_imgs: ['img/house2_1.jpg', 'img/house2_2.jpg', 'img/house2_3.jpg'],
+                // -------------------------------------------------------------
+                // 👉 1. แก้รูปบ้านตรงนี้ครับ (ใส่ชื่อไฟล์ที่อยู่ในโฟลเดอร์ img)
+                // -------------------------------------------------------------
+                house1_imgs: ['img/house1_1.jpg', 'img/house1_2.jpg', 'img/house1_3.jpg'], // รูปบ้านหลังที่ 1
+                house2_imgs: ['img/house2_1.jpg', 'img/house2_2.jpg', 'img/house2_3.jpg'], // รูปบ้านหลังที่ 2
                 
                 // สถานะการดูรูป (false=รูปจริง, true=ผังบ้าน)
                 showPlan1: false,
@@ -117,7 +119,7 @@
                     else container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 },
 
-// *** ฟังก์ชันนำทาง (แก้ใหม่ ตรงเป๊ะ!) ***
+                // *** ฟังก์ชันนำทาง (แก้ใหม่ ตรงเป๊ะ!) ***
                 navigate() {
                     // ลิงก์นี้จะเปิด Google Maps ในโหมด "นำทาง" ไปยังพิกัดบ้านท่านทันที
                     window.open('https://www.google.com/maps/dir/?api=1&destination=Smile+House+Rayong&destination_place_id=ChIJjSIhI-YFAzERRW-YumKLtoE', '_blank');
@@ -443,28 +445,28 @@
                     <i class="fa-solid fa-shop text-primary"></i> <span x-text="txt.head_comm[lang]"></span>
                 </h2>
                 <div class="overflow-x-auto pb-4 hide-scroll">
-                     <div class="flex gap-3">
-                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                             <img src="img/comm_711.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
-                             <span class="font-bold text-xs text-slate-700">7-Eleven</span>
-                         </div>
-                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                             <img src="img/comm_lotus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891462.png'">
-                             <span class="font-bold text-xs text-slate-700">Lotus Express</span>
-                         </div>
-                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                             <img src="img/comm_market.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
-                             <span class="font-bold text-xs text-slate-700">ตลาดท่าเรือ</span>
-                         </div>
-                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                             <img src="img/comm_ptt.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2990/2990141.png'">
-                             <span class="font-bold text-xs text-slate-700">ปั๊ม PTT / PT</span>
-                         </div>
-                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                             <img src="img/comm_bus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3448/3448339.png'">
-                             <span class="font-bold text-xs text-slate-700">รถสองแถวสุขุมวิท</span>
-                         </div>
-                     </div>
+                      <div class="flex gap-3">
+                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                              <img src="img/comm_711.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
+                              <span class="font-bold text-xs text-slate-700">7-Eleven</span>
+                          </div>
+                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                              <img src="img/comm_lotus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891462.png'">
+                              <span class="font-bold text-xs text-slate-700">Lotus Express</span>
+                          </div>
+                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                              <img src="img/comm_market.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
+                              <span class="font-bold text-xs text-slate-700">ตลาดท่าเรือ</span>
+                          </div>
+                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                              <img src="img/comm_ptt.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2990/2990141.png'">
+                              <span class="font-bold text-xs text-slate-700">ปั๊ม PTT / PT</span>
+                          </div>
+                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                              <img src="img/comm_bus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3448/3448339.png'">
+                              <span class="font-bold text-xs text-slate-700">รถสองแถวสุขุมวิท</span>
+                          </div>
+                      </div>
                 </div>
             </div>
 
