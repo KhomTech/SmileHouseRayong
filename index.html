@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smile House Rayong - บ้านเดี่ยวระยอง</title>
+    <title>Smile House Rayong - บ้านเดี่ยวและที่พักระดับพรีเมียม</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -17,91 +17,97 @@
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Animation: Fade In (ค่อยๆ โผล่ขึ้นมาตอนโหลด) */
+        /* เอฟเฟกต์โผล่ขึ้นมาตอนโหลด (Fade In) */
         .fade-in { animation: fadeIn 1s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Animation: Infinite Scroll (เลื่อนวนลูปซ้ายไปขวา) */
+        /* เอฟเฟกต์เลื่อนอัตโนมัติ (Infinite Scroll) - ใช้กับที่เที่ยวและชุมชน */
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* เลื่อนไปครึ่งทางแล้ววนกลับ */
+            100% { transform: translateX(-50%); } /* เลื่อนไปครึ่งทางแล้ววนกลับเริ่มใหม่แบบเนียนๆ */
         }
         
         .infinite-scroll-track {
             display: flex;
             width: max-content;
-            /* ปรับความเร็วตรงนี้ (เลขน้อย = ไว, เลขมาก = ช้า) ตั้งไว้ 40s กำลังดี */
-            animation: scrollLeft 40s linear infinite; 
+            /* ความเร็วการเลื่อน (30s = 30 วินาทีต่อรอบ อยากให้ไวลดเลขลง อยากให้ช้าเพิ่มเลขขึ้น) */
+            animation: scrollLeft 30s linear infinite; 
         }
         
-        /* หยุดเลื่อนเมื่อเอาเมาส์ชี้ */
+        /* เอาเมาส์ชี้แล้วหยุดเลื่อน เพื่อให้อ่านทัน */
         .infinite-scroll-container:hover .infinite-scroll-track {
             animation-play-state: paused;
         }
 
-        /* ปุ่มกระจก (Glassmorphism) สำหรับหน้าแรก ให้ดูหรูหรา โปร่งใส */
+        /* ปุ่มกระจกใสๆ (Glassmorphism) สำหรับหน้าแรก */
         .glass-btn {
-            background: rgba(0, 0, 0, 0.4); 
-            backdrop-filter: blur(8px); 
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.4); /* สีพื้นหลังดำจางๆ */
+            backdrop-filter: blur(8px); /* เบลอฉากหลัง */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* ขอบสีขาวจางๆ */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เงา */
         }
         .glass-btn:hover {
-            background: rgba(0, 0, 0, 0.6);
-            transform: translateY(-2px);
-            border-color: #ca8a04; /* สีทอง */
+            background: rgba(0, 0, 0, 0.6); /* เอาเมาส์ชี้แล้วสีเข้มขึ้น */
+            transform: translateY(-2px); /* ขยับขึ้นนิดนึง */
+            border-color: #ca8a04; /* ขอบเปลี่ยนเป็นสีทอง */
         }
     </style>
 
     <script>
-        // ตั้งค่าสีหลักของเว็บ (แก้โค้ดสีตรงนี้ได้เลย)
+        // ตั้งค่าสีหลักของเว็บ (อยากเปลี่ยนสีธีมแก้ตรงนี้)
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#047857', /* สีเขียวเข้มหรู (Emerald) */
-                        secondary: '#334155', /* สีเทาเข้ม (Slate) */
-                        gold: '#ca8a04', /* สีทอง (Gold) */
+                        primary: '#047857', /* สีเขียวเข้มหรู (Emerald) - สีหลัก */
+                        secondary: '#334155', /* สีเทาเข้ม (Slate) - สีตัวหนังสือ */
+                        gold: '#ca8a04', /* สีทอง (Gold) - สีตัดขอบ/เน้น */
                     }
                 }
             }
         }
 
         // ==============================================
-        //  3. Logic (สมองของเว็บ) - แก้ไขข้อมูลตรงนี้
+        //  3. สมองของเว็บ (Database & Logic) - แก้ไขข้อมูลต่างๆ ตรงนี้
         // ==============================================
         function siteData() {
             return {
                 lang: 'th', // ภาษาเริ่มต้น (th=ไทย, en=อังกฤษ, cn=จีน)
                 
-                // -------------------------------------------------------------
-                // 👉 1. แก้รูปบ้านตรงนี้ครับ (ใส่ชื่อไฟล์ที่อยู่ในโฟลเดอร์ img)
-                // -------------------------------------------------------------
-                house1_imgs: ['img/house1_1.jpg', 'img/house1_2.jpg', 'img/house1_3.jpg'], // รูปบ้านหลังที่ 1
-                house2_imgs: ['img/house2_1.jpg', 'img/house2_2.jpg', 'img/house2_3.jpg'], // รูปบ้านหลังที่ 2
+                // --- ส่วนจัดการรูปภาพ (สำคัญมาก!) ---
+                // สร้างโฟลเดอร์ชื่อ 'img' แล้วเอารูปไปใส่ตามชื่อนี้เป๊ะๆ:
+                // 1. บ้านขายหลังที่ 1 (37 ตร.ว.): house1_1.jpg, house1_2.jpg, ... และ house1_plan.jpg (รูปผังบ้าน)
+                // 2. บ้านขายหลังที่ 2 (72 ตร.ว.): house2_1.jpg, house2_2.jpg, ... และ house2_plan.jpg (รูปผังบ้าน)
+                // 3. บ้านเช่า: rent1.jpg ถึง rent6.jpg
+                // 4. ที่เที่ยว: travel1.jpg ถึง travel10.jpg
+                // 5. ชุมชน: comm_711.jpg, comm_lotus.jpg, etc.
                 
-                // สถานะการดูรูป (false=รูปจริง, true=ผังบ้าน)
+                // รายชื่อรูปภาพบ้านขาย (ถ้าจะเปลี่ยนรูปวิดีโอ/GIF ให้แก้ชื่อไฟล์ตรงนี้ได้เลย เช่น 'img/house1.gif')
+                house1_imgs: ['img/house1_1.jpg', 'img/house1_2.jpg', 'img/house1_3.jpg'], 
+                house2_imgs: ['img/house2_1.jpg', 'img/house2_2.jpg', 'img/house2_3.jpg'],
+                
+                // ตัวแปรสำหรับสลับดูรูป/ผังบ้าน (ห้ามแก้)
                 showPlan1: false,
                 showPlan2: false,
 
-                // ตัวนับสไลด์รูปภาพ
+                // ตัวนับสไลด์รูปภาพ (ห้ามแก้)
                 currentSlide1: 0,
                 currentSlide2: 0,
 
-                // ฟังก์ชันเปลี่ยนภาษา
+                // ฟังก์ชันเปลี่ยนภาษา (ห้ามแก้)
                 setLang(l) { this.lang = l; },
 
                 // ฟังก์ชันคำนวณเงิน (แปลง บาท -> ดอลลาร์ -> หยวน อัตโนมัติ)
                 formatPrice(priceTHB) {
-                    let rate = { THB: 1, USD: 0.028, CNY: 0.20 }; // อัตราแลกเปลี่ยน
+                    let rate = { THB: 1, USD: 0.028, CNY: 0.20 }; // อัตราแลกเปลี่ยน (ปรับปรุงได้ตามจริง)
                     let currency = (this.lang === 'th') ? 'THB' : (this.lang === 'en' ? 'USD' : 'CNY');
                     let price = priceTHB * rate[currency];
                     let symbol = currency === 'THB' ? '฿' : (currency === 'USD' ? '$' : '¥');
-                    // ใส่ลูกน้ำคั่นหลักพันให้สวยงาม
+                    // ใส่ลูกน้ำคั่นหลักพันให้สวยงาม เช่น 1,000,000
                     return symbol + price.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
                 },
 
-                // ฟังก์ชันเปลี่ยนรูปสไลด์ (กดลูกศร ซ้าย-ขวา)
+                // ฟังก์ชันเปลี่ยนรูปสไลด์บ้านขาย (กดลูกศร ซ้าย-ขวา)
                 nextSlide(houseId, total) {
                     if(houseId === 1) this.currentSlide1 = (this.currentSlide1 + 1) % total;
                     if(houseId === 2) this.currentSlide2 = (this.currentSlide2 + 1) % total;
@@ -114,19 +120,18 @@
                 // ฟังก์ชันเลื่อนที่เที่ยวเอง (กดปุ่มลูกศร)
                 scrollTravel(direction) {
                     const container = document.getElementById('travelContainer');
-                    const scrollAmount = 300; 
+                    const scrollAmount = 300; // ระยะทางที่เลื่อนแต่ละที
                     if (direction === 'left') container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
                     else container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 },
 
-                // *** ฟังก์ชันนำทาง (แก้ใหม่ ตรงเป๊ะ!) ***
+                // ฟังก์ชันนำทาง (Google Maps Direction) ไปยังพิกัดบ้านจริง (MG44+XF4)
                 navigate() {
-                    // ลิงก์นี้จะเปิด Google Maps ในโหมด "นำทาง" ไปยังพิกัดบ้านท่านทันที
-                    window.open('https://www.google.com/maps/dir/?api=1&destination=Smile+House+Rayong&destination_place_id=ChIJjSIhI-YFAzERRW-YumKLtoE', '_blank');
+                    // ลิงก์นี้จะเปิดแอป Google Maps นำทางไปที่พิกัดบ้านทันที
+                    window.open('https://www.google.com/maps/dir/?api=1&destination=12.6517182,101.4468652', '_blank'); 
                 },
-                
 
-                // *** คลังคำศัพท์ (แปลทุกจุดที่นี่ ทีเดียวจบ) ***
+                // *** คลังคำศัพท์ (แปลทุกจุดที่นี่ ทีเดียวจบ อยากแก้คำไหนแก้ตรงนี้) ***
                 txt: {
                     // ปุ่มต่างๆ
                     btn_detail: { th: 'ดูรายละเอียด', en: 'Details', cn: '详情' },
@@ -141,23 +146,26 @@
                     // หัวข้อ
                     head_sale: { th: 'บ้านเดี่ยวระยอง (เจ้าของขายเอง)', en: 'Exclusive Houses for Sale', cn: '罗勇府独家出售房屋' },
                     head_rent: { th: 'บ้านพักรายเดือน', en: 'Monthly Rental', cn: '月租度假屋' },
-                    head_travel: { th: 'ที่เที่ยวใกล้เคียง', en: 'Nearby Attractions', cn: '附近景点' },
-                    head_comm: { th: 'แหล่งชุมชน', en: 'Community', cn: '社区' },
+                    head_travel: { th: 'ใกล้แหล่งท่องเที่ยว', en: 'Nearby Attractions', cn: '附近景点' },
+                    head_comm: { th: 'ใกล้แหล่งชุมชน', en: 'Community', cn: '社区' },
                     head_video: { th: 'รีวิวบ้านพัก', en: 'Video Review', cn: '视频评论' },
 
                     // รายละเอียดบ้าน 1 (37 ตร.ว.)
-                    h1_title: { th: 'บ้านเดี่ยว 37 ตร.ว.', en: 'House 37 sq.w.', cn: '房屋 37 平方哇' },
-                    h1_desc: { th: 'กะทัดรัด ทำเลดี เดินทางสะดวก', en: 'Compact, good location', cn: '紧凑，位置优越' },
+                    h1_title: { th: 'บ้านเดี่ยว (37 ตร.ว.)', en: 'House 37 sq.w.', cn: '房屋 37 平方哇' },
+                    h1_feat1: { th: 'เนื้อที่ 148 ตารางเมตร (37 ตร.ว.) กว้างมาก ต่อเติมได้', en: '72 square meter, very spacious.', cn: '148 square meter，非常宽敞。' },
+                    h1_feat2: { th: 'บ้านรีโนเวทใหม่! รั้วรอบขอบชิด ติดถนนสาธารณะ', en: 'Newly renovated! Fenced.', cn: '全新装修！围栏。' },
+                    h1_feat3: { th: 'บรรยากาศสวน สงบ ส่วนตัว', en: 'Garden vibe, quiet, private.', cn: '花园氛围，安静，私密。' },
+                    
 
                     // รายละเอียดบ้าน 2 (72 ตร.ว.)
-                    h2_title: { th: 'บ้านหลังใหญ่ 72 ตร.ว. (ใกล้ทะเล)', en: 'Large House 72 sq.w. (Near Sea)', cn: '大房子 72 平方哇（近海）' },
-                    h2_feat1: { th: 'เนื้อที่ 72 ตร.ว. กว้างมาก ต่อเติมได้', en: '72 sq.w., very spacious.', cn: '72 平方哇，非常宽敞。' },
-                    h2_feat2: { th: 'รีโนเวทใหม่! รั้วรอบขอบชิด', en: 'Newly renovated! Fenced.', cn: '全新装修！围栏。' },
+                    h2_title: { th: 'บ้บ้านเดี่ยว (72 ตร.ว.) (ใกล้ทะเล)', en: 'Large House 72 sq.w. (Near Sea)', cn: '大房子 72 平方哇（近海）' },
+                    h2_feat1: { th: 'เนื้อที่ 288 ตร.ว. กว้างมาก ต่อเติมได้', en: '72 square meter, very spacious.', cn: '288 square meter，非常宽敞。' },
+                    h2_feat2: { th: 'บ้านรีโนเวทใหม่! รั้วรอบขอบชิด ติดถนนสาธารณะ', en: 'Newly renovated! Fenced.', cn: '全新装修！围栏。' },
                     h2_feat3: { th: 'บรรยากาศสวน สงบ ส่วนตัว', en: 'Garden vibe, quiet, private.', cn: '花园氛围，安静，私密。' },
                     
-                    // การเงิน
-                    fin_title: { th: 'ซื้อเงินสด / ผ่อนได้', en: 'Financial Terms', cn: '财务条款' },
-                    fin_1: { th: 'ผ่อนธนคารเริ่ม 8,xxx', en: 'Loan starts 8,xxx', cn: '贷款 8,xxx 起' },
+                    // เงื่อนไขการเงิน
+                    fin_title: { th: 'เงื่อนไขการเงิน', en: 'Financial Terms', cn: '财务条款' },
+                    fin_1: { th: 'กู้แบงค์ผ่อนเริ่ม 8,xxx', en: 'Loan starts 8,xxx', cn: '贷款 8,xxx 起' },
                     fin_2: { th: 'กู้ไม่ผ่าน ผ่อนตรงเจ้าของได้!', en: 'Owner financing avail!', cn: '业主融资可用！' },
                     fin_free: { th: 'ฟรี! แอร์ + ค่าโอน', en: 'Free! AC + Transfer Fee', cn: '免费！空调 + 过户费' },
 
@@ -210,10 +218,10 @@
                 <a href="https://line.me/ti/p/~@jop3391x" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
                     <i class="fa-brands fa-line text-2xl md:text-3xl mb-1"></i> <span class="text-[10px] md:text-xs font-bold">Line</span>
                 </a>
-                <a href="https://www.facebook.com/share/r/1DFzX9BCRb/" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
+                <a href="https://m.facebook.com/story.php?story_fbid=pfbid02i4N32YuevwsPkapX9ZSdNYs2wmcXMADnoA6oS9iuRFN7tG2iKouKrdGJnaRvwMSYl&id=100051173817249" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
                     <i class="fa-brands fa-facebook text-xl md:text-2xl mb-1"></i> <span class="text-[10px] md:text-xs font-bold">FB</span>
                 </a>
-                <a href="https://vt.tiktok.com/ZS5kX7e8B/" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
+                <a href="https://vt.tiktok.com/ZS5k4nB8F/" target="_blank" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
                     <i class="fa-brands fa-tiktok text-xl md:text-2xl mb-1"></i> <span class="text-[10px] md:text-xs font-bold">TikTok</span>
                 </a>
                 <a href="javascript:void(0)" @click="navigate()" class="glass-btn py-3 rounded-xl text-white flex flex-col items-center justify-center transition">
@@ -445,28 +453,28 @@
                     <i class="fa-solid fa-shop text-primary"></i> <span x-text="txt.head_comm[lang]"></span>
                 </h2>
                 <div class="overflow-x-auto pb-4 hide-scroll">
-                      <div class="flex gap-3">
-                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                              <img src="img/comm_711.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
-                              <span class="font-bold text-xs text-slate-700">7-Eleven</span>
-                          </div>
-                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                              <img src="img/comm_lotus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891462.png'">
-                              <span class="font-bold text-xs text-slate-700">Lotus Express</span>
-                          </div>
-                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                              <img src="img/comm_market.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
-                              <span class="font-bold text-xs text-slate-700">ตลาดท่าเรือ</span>
-                          </div>
-                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                              <img src="img/comm_ptt.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2990/2990141.png'">
-                              <span class="font-bold text-xs text-slate-700">ปั๊ม PTT / PT</span>
-                          </div>
-                          <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
-                              <img src="img/comm_bus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3448/3448339.png'">
-                              <span class="font-bold text-xs text-slate-700">รถสองแถวสุขุมวิท</span>
-                          </div>
-                      </div>
+                     <div class="flex gap-3">
+                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                             <img src="img/comm_711.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
+                             <span class="font-bold text-xs text-slate-700">7-Eleven</span>
+                         </div>
+                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                             <img src="img/comm_lotus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891462.png'">
+                             <span class="font-bold text-xs text-slate-700">Lotus Express</span>
+                         </div>
+                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                             <img src="img/comm_market.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081559.png'">
+                             <span class="font-bold text-xs text-slate-700">ตลาดท่าเรือ</span>
+                         </div>
+                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                             <img src="img/comm_ptt.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2990/2990141.png'">
+                             <span class="font-bold text-xs text-slate-700">ปั๊ม PTT / PT</span>
+                         </div>
+                         <div class="flex items-center gap-2 bg-slate-100 px-3 py-2 rounded-xl border min-w-[160px]">
+                             <img src="img/comm_bus.jpg" class="w-8 h-8 rounded object-cover bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3448/3448339.png'">
+                             <span class="font-bold text-xs text-slate-700">รถสองแถวสุขุมวิท</span>
+                         </div>
+                     </div>
                 </div>
             </div>
 
@@ -524,7 +532,7 @@
                 </div>
 
                 <div class="aspect-[9/16] md:aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-700 group cursor-pointer">
-                    <a href="https://www.facebook.com/share/r/1DFzX9BCRb/" target="_blank" class="block w-full h-full relative">
+                    <a href="https://m.facebook.com/story.php?story_fbid=pfbid02i4N32YuevwsPkapX9ZSdNYs2wmcXMADnoA6oS9iuRFN7tG2iKouKrdGJnaRvwMSYl&id=100051173817249" target="_blank" class="block w-full h-full relative">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-800 group-hover:bg-slate-700 transition">
                             <i class="fa-brands fa-facebook text-4xl text-blue-500 mb-2"></i>
                             <span class="text-white text-sm">Review Facebook</span>
@@ -542,7 +550,7 @@
 
     <footer class="bg-primary text-white py-6 text-center text-sm">
         <p class="opacity-80">© 2025 Smile House Rayong. All rights reserved.</p>
-        <p class="mt-2 text-xs opacity-50">Designed by อัครพนธ์</p>
+        <p class="mt-2 text-xs opacity-50">Designed by อัครพนธ์ </p>
     </footer>
 
     <script async src="https://www.tiktok.com/embed.js"></script>
