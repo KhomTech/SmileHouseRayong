@@ -231,7 +231,7 @@
         </div>
     </header>
 
-    <section id="sale" class="py-12 bg-white relative z-20 px-4">
+   <section id="sale" class="py-12 bg-white relative z-20 px-4">
         <div class="max-w-6xl mx-auto" x-data="{ openModal: null }">
             <div class="flex items-center gap-4 mb-8 border-l-4 border-gold pl-4">
                 <h2 class="text-2xl md:text-3xl font-bold text-slate-800" x-text="txt.head_sale[lang]"></h2>
@@ -240,13 +240,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <div class="bg-slate-50 rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-2xl transition group">
-                    <div class="relative h-64 overflow-hidden">
-                        <template x-for="(img, index) in house1_imgs">
-                            <img :src="img" x-show="currentSlide1 === index" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2070'">
-                        </template>
-                        <button @click="prevSlide(1, house1_imgs.length)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button @click="nextSlide(1, house1_imgs.length)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="relative h-64 overflow-hidden bg-black">
+                        <video class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                               autoplay loop muted playsinline 
+                               poster="img/house1_1.jpg"> <source src="img/house1_video.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                     </div>
+
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-slate-800" x-text="txt.h1_title[lang]"></h3>
                         <p class="text-2xl font-bold text-primary mt-2" x-text="formatPrice(980000)"></p>
@@ -266,13 +267,16 @@
 
                 <div class="bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gold hover:shadow-2xl transition relative group">
                     <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg z-10 animate-pulse">Recommended</div>
-                    <div class="relative h-64 overflow-hidden">
-                         <template x-for="(img, index) in house2_imgs">
-                            <img :src="img" x-show="currentSlide2 === index" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'">
-                        </template>
-                        <button @click="prevSlide(2, house2_imgs.length)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button @click="nextSlide(2, house2_imgs.length)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+                    
+                    <div class="relative h-64 overflow-hidden bg-black">
+                        <video class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                               autoplay loop muted playsinline 
+                               poster="img/house2_1.jpg">
+                            <source src="img/house2_video.mp4" type="video/mp4">
+                        </video>
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                     </div>
+
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-slate-800" x-text="txt.h2_title[lang]"></h3>
                         <p class="text-3xl font-bold text-primary mt-2" x-text="formatPrice(1380000)"></p>
@@ -291,12 +295,11 @@
                 </div>
 
                 <div x-show="openModal === 2" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4" x-transition style="display: none;">
-                    <div class="bg-white w-[95%] md:w-[90%] max-w-6xl rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row max-h-[85vh]">
+                    <div class="bg-white w-[95%] md:w-[80%] max-w-5xl rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row max-h-[85vh]">
                         <button @click="openModal = null" class="absolute top-4 right-4 z-20 bg-slate-200 text-slate-800 w-10 h-10 rounded-full hover:bg-red-500 hover:text-white transition font-bold text-xl flex items-center justify-center shadow">✕</button>
                         
                         <div class="w-full md:w-1/2 h-[40vh] md:h-auto relative bg-black group flex items-center justify-center">
                             <img x-show="showPlan2" src="img/house2_plan.jpg" class="absolute inset-0 w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/800x600?text=Floor+Plan'">
-                            
                             <div x-show="!showPlan2" class="w-full h-full relative">
                                 <template x-for="(img, index) in house2_imgs">
                                     <img :src="img" x-show="currentSlide2 === index" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'">
@@ -304,7 +307,6 @@
                                 <button @click="prevSlide(2, house2_imgs.length)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 text-white w-10 h-10 rounded-full hover:bg-white/40 flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
                                 <button @click="nextSlide(2, house2_imgs.length)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 text-white w-10 h-10 rounded-full hover:bg-white/40 flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
                             </div>
-                            
                             <button @click="showPlan2 = !showPlan2" class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 text-slate-900 px-4 py-2 rounded-full text-sm font-bold shadow hover:bg-white transition flex items-center gap-2">
                                 <i class="fa-solid fa-map"></i> <span x-text="showPlan2 ? txt.btn_photo[lang] : txt.btn_plan[lang]"></span>
                             </button>
@@ -313,20 +315,17 @@
                         <div class="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto bg-white">
                             <h2 class="text-2xl font-bold text-slate-800 mb-2" x-text="txt.h2_title[lang]"></h2>
                             <p class="text-3xl font-bold text-primary mb-6" x-text="formatPrice(1380000)"></p>
-                            
                             <ul class="space-y-3 text-slate-600 mb-6 text-sm md:text-base">
                                 <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span x-text="txt.h2_feat1[lang]"></span></li>
                                 <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span x-text="txt.h2_feat2[lang]"></span></li>
                                 <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span x-text="txt.h2_feat3[lang]"></span></li>
                             </ul>
-                            
                             <div class="bg-green-50 p-4 rounded-xl border border-green-100 mb-6">
                                 <h4 class="font-bold text-green-800 mb-2" x-text="txt.fin_title[lang]"></h4>
                                 <p class="text-sm text-green-700 mb-1">✅ <span x-text="txt.fin_1[lang]"></span></p>
                                 <p class="text-sm text-green-700 mb-1">✅ <span x-text="txt.fin_2[lang]"></span></p>
                                 <p class="text-sm text-red-600 font-bold mt-2">🔥 <span x-text="txt.fin_free[lang]"></span></p>
                             </div>
-
                             <div class="flex gap-3 mt-auto">
                                 <a href="tel:0631862828" target="_blank" class="flex-1 bg-green-600 text-white py-3 rounded-xl text-center font-bold hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
                                     <i class="fa-solid fa-phone"></i> <span x-text="txt.btn_call[lang]"></span>
