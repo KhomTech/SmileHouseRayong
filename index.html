@@ -376,34 +376,127 @@
         </div>
     </section>
 
-    <section class="py-12 bg-slate-50 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-xl md:text-3xl font-bold text-center text-slate-800 mb-8" x-text="txt.head_rent[lang]"></h2>
-            
-            <div class="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6">
-                <template x-for="i in 6">
-                    <div class="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm relative group">
-                        <div class="absolute top-2 left-2 z-10">
-                            <span x-show="i===1" class="bg-green-500 text-white text-[10px] md:text-sm font-bold px-2 py-1 rounded shadow" x-text="txt.status_full[lang]"></span>
-                            <span x-show="i===2" class="bg-green-500 text-white text-[10px] md:text-sm font-bold px-2 py-1 rounded shadow" x-text="txt.status_full[lang]"></span>
-                            <span x-show="i>2" class="bg-red-600 text-white text-[10px] md:text-sm font-bold px-2 py-1 rounded shadow" x-text="txt.status_full[lang]"></span>
-                        </div>
-                        
-                        <div class="relative">
-                            <img :src="`img/rent${i}.jpg`" class="w-full h-24 md:h-56 object-cover" onerror="this.src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070'">
-                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition"></div>
-                        </div>
-                        
-                        <div class="p-1 md:p-3 text-center">
-                            <p class="text-[10px] md:text-sm text-slate-600 font-bold" x-text="`House ${i}`"></p>
-                            <p class="text-[10px] md:text-sm text-primary font-bold" 
-                               x-text="i === 1 ? formatPrice(3900) : (i === 6 ? formatPrice(4400) : formatPrice(3600))"></p>
-                        </div>
-                    </div>
-                </template>
-            </div>
+<section class="py-12 bg-slate-50 border-y border-slate-200" id="rental-houses">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-slate-800">บ้านเช่าของเรา</h2>
+      <p class="text-slate-600 mt-2">ทำเลดี เดินทางสะดวก เต็มไวมาก!</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
+
+      <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group hover:shadow-md transition">
+        <div class="relative h-32 md:h-48 bg-slate-200">
+          <img src="https://placehold.co/400x300/e2e8f0/64748b?text=House+1" alt="House 1" class="w-full h-full object-cover">
+          
+          <div class="absolute top-2 right-2">
+            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700 border border-red-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1.5"></span>
+              เต็ม / จองแล้ว
+            </span>
+          </div>
         </div>
-    </section>
+        <div class="p-3">
+          <h3 class="font-bold text-slate-800 text-sm md:text-lg truncate">บ้านหลังที่ 1 (โซน A)</h3>
+          <p class="text-xs text-slate-500 mt-1">บ้านเดี่ยว มีรั้วล้อมรอบ</p>
+          <div class="mt-2 text-blue-600 font-bold text-sm">฿3,900 <span class="text-xs font-normal text-slate-400">/เดือน</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group hover:shadow-md transition">
+        <div class="relative h-32 md:h-48 bg-slate-200">
+          <img src="https://placehold.co/400x300/e2e8f0/64748b?text=House+2" alt="House 2" class="w-full h-full object-cover">
+          
+          <div class="absolute top-2 right-2">
+            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700 border border-red-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1.5"></span>
+              เต็ม / จองแล้ว
+            </span>
+          </div>
+        </div>
+        <div class="p-3">
+          <h3 class="font-bold text-slate-800 text-sm md:text-lg truncate">บ้านหลังที่ 2 </h3>
+          <p class="text-xs text-slate-500 mt-1">บ้านเดี่ยว บรรยากาศร่มรื่น สไตล์บ้านสวน</p>
+          <div class="mt-2 text-blue-600 font-bold text-sm">฿3,600 <span class="text-xs font-normal text-slate-400">/เดือน</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group hover:shadow-md transition">
+        <div class="relative h-32 md:h-48 bg-slate-200">
+          <img src="https://placehold.co/400x300/e2e8f0/64748b?text=House+3" alt="House 3" class="w-full h-full object-cover">
+          
+          <div class="absolute top-2 right-2">
+            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700 border border-red-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1.5"></span>
+              เต็ม / จองแล้ว
+            </span>
+          </div>
+        </div>
+        <div class="p-3">
+          <h3 class="font-bold text-slate-800 text-sm md:text-lg truncate">บ้านหลังที่ 3 </h3>
+          <p class="text-xs text-slate-500 mt-1">บ้านเดี่ยว บรรยากาศร่มรื่น สไตล์บ้านสวนำ</p>
+          <div class="mt-2 text-blue-600 font-bold text-sm">฿3,600 <span class="text-xs font-normal text-slate-400">/เดือน</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group hover:shadow-md transition">
+        <div class="relative h-32 md:h-48 bg-slate-200">
+          <img src="https://placehold.co/400x300/e2e8f0/64748b?text=House+4" alt="House 4" class="w-full h-full object-cover">
+          
+          <div class="absolute top-2 right-2">
+            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700 border border-red-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1.5"></span>
+              เต็ม / จองแล้ว
+            </span>
+          </div>
+        </div>
+        <div class="p-3">
+          <h3 class="font-bold text-slate-800 text-sm md:text-lg truncate">บ้านหลังที่ 4 </h3>
+          <p class="text-xs text-slate-500 mt-1">บ้านเดี่ยว บรรยากาศร่มรื่น สไตล์บ้านสวน</p>
+          <div class="mt-2 text-blue-600 font-bold text-sm">฿3,600 <span class="text-xs font-normal text-slate-400">/เดือน</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group hover:shadow-md transition">
+        <div class="relative h-32 md:h-48 bg-slate-200">
+          <img src="https://placehold.co/400x300/e2e8f0/64748b?text=House+5" alt="House 5" class="w-full h-full object-cover">
+          
+          <div class="absolute top-2 right-2">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-orange-100 text-orange-700 border border-orange-200">
+  <span class="w-1.5 h-1.5 rounded-full bg-orange-500 mr-1.5"></span>
+  ใกล้ว่าง (ทักด่วน)
+</span>
+          </div>
+        </div>
+        <div class="p-3">
+          <h3 class="font-bold text-slate-800 text-sm md:text-lg truncate">บ้านหลังที่ 5 </h3>
+          <p class="text-xs text-slate-500 mt-1">บ้านเดี่ยว บรรยากาศร่มรื่น สไตล์บ้านสวน</p>
+          <div class="mt-2 text-blue-600 font-bold text-sm">฿3,600 <span class="text-xs font-normal text-slate-400">/เดือน</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden group hover:shadow-md transition">
+        <div class="relative h-32 md:h-48 bg-slate-200">
+          <img src="https://placehold.co/400x300/e2e8f0/64748b?text=House+6" alt="House 6" class="w-full h-full object-cover">
+          
+          <div class="absolute top-2 right-2">
+            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700 border border-red-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1.5"></span>
+              เต็ม / จองแล้ว
+            </span>
+          </div>
+        </div>
+        <div class="p-3">
+          <h3 class="font-bold text-slate-800 text-sm md:text-lg truncate">บ้านหลังที่ 6 หลังใหญ่ขึ้น</h3>
+          <p class="text-xs text-slate-500 mt-1">บ้านเดี่ยว หลังใหญ่ขึ้นสวนตัว บรรยากาศร่มรื่น สไตล์บ้านสวน</p>
+          <div class="mt-2 text-blue-600 font-bold text-sm">฿4,400 <span class="text-xs font-normal text-slate-400">/เดือน</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+    
 
 <section class="py-16 bg-slate-900 text-white overflow-hidden relative group">
         <div class="max-w-7xl mx-auto px-4 mb-4 flex justify-between items-center">
