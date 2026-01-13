@@ -453,112 +453,122 @@
     
 
 <section class="py-16 bg-slate-900 text-white overflow-hidden relative group">
-        <div class="max-w-7xl mx-auto px-4 mb-4 flex justify-between items-center">
-            <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
-                <i class="fa-solid fa-umbrella-beach text-gold"></i> <span x-text="txt.head_travel[lang]"></span>
-            </h2>
-            <div class="flex gap-2">
-                <button @click="scrollTravel('left')" class="bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gold transition"><i class="fa-solid fa-chevron-left"></i></button>
-                <button @click="scrollTravel('right')" class="bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gold transition"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="max-w-7xl mx-auto px-4 mb-4 flex justify-between items-center">
+        <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+            <i class="fa-solid fa-umbrella-beach text-gold"></i> <span x-text="txt.head_travel[lang]"></span>
+        </h2>
+        <div class="flex gap-2">
+            <button @click="scrollTravel('left')" class="bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gold transition"><i class="fa-solid fa-chevron-left"></i></button>
+            <button @click="scrollTravel('right')" class="bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gold transition"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="travelContainer" class="infinite-scroll-container overflow-x-auto w-full relative hide-scroll">
+        <div class="infinite-scroll-track gap-4 px-4" style="animation-duration: 40s;"> 
+            
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/12987937294538396480_0" class="w-full h-full object-cover" alt="หาดลับปากคลองแกลง">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </div>
+                <h3 class="font-bold text-sm">หาดลับปากคลองแกลง 3กม.</h3>
             </div>
-        </div>
 
-        <div id="travelContainer" class="infinite-scroll-container overflow-x-auto w-full relative hide-scroll">
-            <div class="infinite-scroll-track gap-4 px-4" style="animation-duration: 40s;"> 
-                
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel1.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">หาดลับปากคลองแกลง 3กม.</h3>
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/6502645344933491543_0" class="w-full h-full object-cover" alt="สวนพฤกษศาสตร์ระยอง">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel2.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1559305616-3a993a961f68?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">สวนพฤกษศาสตร์</h3>
+                <h3 class="font-bold text-sm">สวนพฤกษศาสตร์</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/18017243849668669343_0" class="w-full h-full object-cover" alt="เกาะเสม็ด">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel3.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">เกาะเสม็ด</h3>
+                <h3 class="font-bold text-sm">เกาะเสม็ด</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/13014262699139298306_0" class="w-full h-full object-cover" alt="หาดสวนสน">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel4.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1533929736472-594e69255fcc?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">หาดสวนสน 3กม</h3>
+                <h3 class="font-bold text-sm">หาดสวนสน 3กม</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/17753781274171224905_0" class="w-full h-full object-cover" alt="เขาแหลมหญ้า">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel5.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1621257322792-628d6895311e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">อุทยานแห่งชาติเขาแหลมหญ้า</h3>
+                <h3 class="font-bold text-sm">อุทยานแห่งชาติเขาแหลมหญ้า</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/8200153324598739406_0" class="w-full h-full object-cover" alt="เขาชะเมา">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel6.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">อุทยานแห่งชาติเขาชะเมา</h3>
+                <h3 class="font-bold text-sm">อุทยานแห่งชาติเขาชะเมา</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/12353263686064827385_0" class="w-full h-full object-cover" alt="น้ำตกเขาชะเมา">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel7.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">น้ำตกเขาชะเมา</h3>
+                <h3 class="font-bold text-sm">น้ำตกเขาชะเมา</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/3635431286968751768_0" class="w-full h-full object-cover" alt="เรือรบประแส">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel8.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">เรือรบประแส อ.แกลง</h3>
+                <h3 class="font-bold text-sm">เรือรบประแส อ.แกลง</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/11664431713883655429_0" class="w-full h-full object-cover" alt="ตลาดบ้านเพ">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel9.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">ตลาดบ้านเพ</h3>
+                <h3 class="font-bold text-sm">ตลาดบ้านเพ</h3>
+            </div>
+
+            <div class="w-64 flex-shrink-0 relative group/item">
+                <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/4262648600581253499_0" class="w-full h-full object-cover" alt="จุดชมวิว">
+                    <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
                 </div>
-                <div class="w-64 flex-shrink-0 relative group/item">
-                    <div class="h-40 rounded-xl overflow-hidden mb-2 relative">
-                        <img src="img/travel10.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073'">
-                        <a href="https://www.tiktok.com/@smilehouserayong/video/7590371496778812692" target="_blank" class="absolute top-2 right-2 bg-black/60 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ff0050] transition shadow-lg z-10">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-bold text-sm">จุดชมวิว</h3>
-                </div>
+                <h3 class="font-bold text-sm">จุดชมวิว</h3>
+            </div>
 
         </div>
-    </section>
+    </div>
+</section>
     
     
     
